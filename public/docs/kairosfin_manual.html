@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - KairosFin</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 100px 40px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 60px;
+        }
+        
+        .cover h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .cover .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cover .version {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+        
+        h2 {
+            color: #1e3a5f;
+            font-size: 32px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        h3 {
+            color: #2c5282;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            color: #374151;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        
+        .feature-box {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip strong {
+            color: #059669;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning strong {
+            color: #d97706;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            counter-increment: step;
+        }
+        
+        .step:before {
+            content: "Paso " counter(step) ": ";
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .field-description {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 15px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+        
+        .field-name {
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+        
+        .toc {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            padding: 8px 0;
+        }
+        
+        .toc a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .button-example {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: 500;
+        }
+        
+        .counter {
+            counter-reset: step;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .cover {
+                page-break-after: always;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PORTADA -->
+    <div class="cover">
+        <h1>📊 KairosFin</h1>
+        <div class="subtitle">Manual de Usuario</div>
+        <p style="font-size: 18px;">Tu Sistema Financiero Personal Profesional</p>
+        <div class="version">Versión 1.0 | 2025</div>
+    </div>
+
+    <!-- Agregar esto justo DESPUÉS del cierre del div "cover" y ANTES del div "toc" -->
+
+    <div style="text-align: center; margin: 30px 0;">
+        <button 
+            onclick="window.print()" 
+            style="
+                background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                color: white;
+                padding: 15px 40px;
+                border: none;
+                border-radius: 8px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+            "
+            onmouseover="this.style.transform='scale(1.05)'"
+            onmouseout="this.style.transform='scale(1)'"
+        >
+            📄 Descargar como PDF
+        </button>
+        <p style="color: #6b7280; margin-top: 15px; font-size: 14px;">
+            Haz clic en el botón y selecciona "Guardar como PDF" en la ventana de impresión
+        </p>
+    </div>
+
+    <!-- ÍNDICE -->
+    <div class="toc">
+        <h2>📑 Índice de Contenidos</h2>
+        <ul>
+            <li><a href="#introduccion">1. Introducción al Sistema</a></li>
+            <li><a href="#inicio">2. Página de Inicio</a></li>
+            <li><a href="#ingresos">3. Gestión de Ingresos</a></li>
+            <li><a href="#egresos">4. Gestión de Egresos</a></li>
+            <li><a href="#deudas">5. Gestión de Deudas</a></li>
+            <li><a href="#descripciones">6. Gestión de Descripciones</a></li>
+            <li><a href="#informes">7. Informes y Reportes</a></li>
+            <li><a href="#navegacion">8. Navegación General</a></li>
+            <li><a href="#contacto">9. Soporte y Contacto</a></li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <div class="section" id="introduccion">
+        <h2>1. Introducción al Sistema</h2>
+        
+        <h3>¿Qué es KairosFin?</h3>
+        <p>KairosFin es tu sistema financiero personal profesional diseñado para ayudarte a gestionar tus finanzas de manera eficiente y organizada. Con KairosFin puedes registrar y monitorear tus ingresos, egresos y deudas, todo en un solo lugar.</p>
+        
+        <div class="feature-box">
+            <h4>✨ Características Principales</h4>
+            <ul>
+                <li><strong>Gestión de Ingresos:</strong> Registra todas tus fuentes de ingreso con descripción, monto y fecha</li>
+                <li><strong>Control de Egresos:</strong> Monitorea tus gastos y asocia pagos a deudas existentes</li>
+                <li><strong>Administración de Deudas:</strong> Lleva el control de deudas con fechas de vencimiento y estado de pago</li>
+                <li><strong>Descripciones Personalizadas:</strong> Crea categorías para organizar mejor tu información financiera</li>
+                <li><strong>Informes Visuales:</strong> Visualiza tu situación financiera con gráficos y reportes detallados</li>
+                <li><strong>Actualizaciones en Tiempo Real:</strong> Todos tus datos se actualizan instantáneamente</li>
+            </ul>
+        </div>
+
+        <h3>Acceso al Sistema</h3>
+        <p>Para acceder a KairosFin, simplemente abre tu navegador web y dirígete a la dirección proporcionada. El sistema está disponible las 24 horas del día, los 7 días de la semana.</p>
+    </div>
+
+    <!-- SECCIÓN 2: PÁGINA DE INICIO -->
+    <div class="section" id="inicio">
+        <h2>2. Página de Inicio</h2>
+        
+        <p>La página de inicio es tu panel de control principal donde puedes visualizar un resumen completo de tu situación financiera.</p>
+
+        <h3>Resumen General 2025</h3>
+        <p>En la parte superior de la página encontrarás el título "Resumen General 2025" con el lema: "Ingresos, egresos y deudas al instante, siempre actualizados."</p>
+
+        <h3>Panel de Ingresos y Egresos - Año Actual</h3>
+        <div class="feature-box">
+            <h4>Gráfico Circular (Izquierda)</h4>
+            <p>Muestra la proporción entre:</p>
+            <ul>
+                <li><strong>Ingresos totales</strong> (en verde)</li>
+                <li><strong>Egresos totales</strong> (en rojo)</li>
+            </ul>
+            <p>Los montos se muestran claramente en el gráfico con formato de moneda (ejemplo: $1.084.200 para ingresos y $1.084.396,09 para egresos).</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>Gráfico de Barras Mensuales (Derecha)</h4>
+            <p>Visualiza mes a mes la comparación de:</p>
+            <ul>
+                <li><strong>Barras verdes:</strong> Ingresos mensuales</li>
+                <li><strong>Barras rojas:</strong> Egresos mensuales</li>
+            </ul>
+            <p>Permite identificar rápidamente los meses con mayor actividad financiera y detectar patrones de ingreso y gasto.</p>
+        </div>
+
+        <h3>Panel de Deudas - Año Actual</h3>
+        <div class="feature-box">
+            <h4>Gráfico Circular de Deudas (Izquierda)</h4>
+            <p>Muestra el estado de tus deudas:</p>
+            <ul>
+                <li><strong>Deudas Pagadas</strong> (en verde): $72.474,89</li>
+                <li><strong>Deudas Pendientes</strong> (en rojo): $0</li>
+            </ul>
+            <p>En el ejemplo mostrado, todas las deudas están pagadas, lo que se refleja en el círculo completamente verde.</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>Gráfico de Barras de Deudas Mensuales (Derecha)</h4>
+            <p>Visualiza el historial mensual de tus deudas pagadas. Las barras verdes indican los meses en los que se realizaron pagos de deudas.</p>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Revisa tu página de inicio regularmente para mantener un control visual rápido de tu salud financiera. Los gráficos te permiten identificar tendencias y tomar decisiones informadas.
+        </div>
+
+        <h3>Botón "Volver al Inicio"</h3>
+        <p>En todas las páginas internas encontrarás un botón azul <span class="button-example">↑ Volver al inicio</span> que te permite regresar rápidamente a esta pantalla principal.</p>
+    </div>
+
+    <!-- SECCIÓN 3: INGRESOS -->
+    <div class="section" id="ingresos">
+        <h2>3. Gestión de Ingresos</h2>
+        
+        <p>La sección de Ingresos te permite registrar y administrar todas tus entradas de dinero. Accede desde el menú superior haciendo clic en <strong>"Ingresos"</strong>.</p>
+
+        <h3>Visualización del Historial</h3>
+        <div class="feature-box">
+            <h4>Tabla de Ingresos</h4>
+            <p>El historial muestra todos tus ingresos registrados con las siguientes columnas:</p>
+            <div class="field-description">
+                <span class="field-name">Descripción:</span>
+                <span>Concepto o fuente del ingreso</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Monto:</span>
+                <span>Cantidad de dinero recibida</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Fecha:</span>
+                <span>Fecha en que se realizó el ingreso</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Acciones:</span>
+                <span>Opciones para editar o eliminar el registro</span>
+            </div>
+        </div>
+
+        <h3>Filtros de Búsqueda</h3>
+        <p>Utiliza los filtros en la parte superior para encontrar ingresos específicos:</p>
+        <ul>
+            <li><strong>De / A:</strong> Rango de fechas (formato dd/mm/aaaa)</li>
+            <li><strong>Desc:</strong> Buscar por descripción específica</li>
+            <li><strong>Botón "Buscar":</strong> Aplica los filtros seleccionados</li>
+            <li><strong>Botón "Limpiar":</strong> Restablece todos los filtros</li>
+        </ul>
+
+        <h3>Agregar un Nuevo Ingreso</h3>
+        <div class="counter">
+            <div class="step">
+                Haz clic en el panel "Alta" ubicado en el lado derecho de la pantalla
+            </div>
+            <div class="step">
+                Completa el campo <strong>"Descripción"</strong>: puedes escribir directamente o seleccionar una descripción existente usando el buscador
+            </div>
+            <div class="step">
+                Ingresa el <strong>"Monto"</strong> del ingreso (ejemplo: 1.000,50)
+            </div>
+            <div class="step">
+                Selecciona la <strong>"Fecha"</strong> en formato dd/mm/aaaa
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Agregar</span>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Utiliza descripciones claras y consistentes para facilitar la búsqueda posterior. Por ejemplo: "Salario Noviembre", "Freelance - Proyecto X", "Venta de producto".
+        </div>
+
+        <h3>Editar un Ingreso Existente</h3>
+        <p>Para modificar un ingreso ya registrado:</p>
+        <div class="counter">
+            <div class="step">
+                Realiza una búsqueda en el panel "Historial" usando los filtros
+            </div>
+            <div class="step">
+                En la tabla de resultados, localiza el ingreso que deseas editar
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Editar</span> en la columna "Acciones"
+            </div>
+            <div class="step">
+                El panel derecho cambiará de "Alta" a <strong>"Editar"</strong> y mostrará los datos del ingreso seleccionado
+            </div>
+            <div class="step">
+                Modifica los campos que necesites: Descripción, Monto o Fecha
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Actualizar</span> para guardar los cambios
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Después de actualizar, el panel volverá al modo "Alta" y la tabla se actualizará automáticamente mostrando los cambios realizados.
+        </div>
+
+        <h3>Eliminar un Ingreso</h3>
+        <p>Para eliminar un ingreso del sistema:</p>
+        <div class="counter">
+            <div class="step">
+                Busca el ingreso en el panel "Historial"
+            </div>
+            <div class="step">
+                Haz clic en el botón rojo <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span> en la columna "Acciones"
+            </div>
+            <div class="step">
+                Aparecerá una ventana de confirmación con el título <strong>"¿Eliminar este ingreso?"</strong>
+            </div>
+            <div class="step">
+                La ventana mostrará los detalles del ingreso (Descripción y Monto)
+            </div>
+            <div class="step">
+                Si estás seguro, haz clic en el botón rojo <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span>
+            </div>
+            <div class="step">
+                Si cambias de opinión, haz clic en <span style="background: #6b7280; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Cancelar</span>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> La eliminación es permanente y no se puede deshacer. Asegúrate de que realmente deseas eliminar el ingreso antes de confirmar.
+        </div>
+
+        <h3>Paginación</h3>
+        <p>Si no ves registros en la tabla, verás el mensaje "No hay registros para mostrar". A medida que agregues ingresos, aparecerán en la tabla con navegación por páginas en la parte inferior.</p>
+
+        <h3>Operaciones Recientes</h3>
+        <p>En la parte inferior de la página aparece una sección de "No hay operaciones recientes" que mostrará tus últimas transacciones una vez que comiences a registrar datos.</p>
+    </div>
+
+    <!-- SECCIÓN 4: EGRESOS -->
+    <div class="section" id="egresos">
+        <h2>4. Gestión de Egresos</h2>
+        
+        <p>La sección de Egresos te permite registrar todos tus gastos y pagos. Accede desde el menú superior haciendo clic en <strong>"Egresos"</strong>.</p>
+
+        <h3>Visualización del Historial</h3>
+        <div class="feature-box">
+            <h4>Tabla de Egresos</h4>
+            <p>El historial muestra todos tus gastos con las siguientes columnas:</p>
+            <div class="field-description">
+                <span class="field-name">Descripción:</span>
+                <span>Concepto del gasto o pago realizado</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Monto:</span>
+                <span>Cantidad de dinero gastada</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Fecha:</span>
+                <span>Fecha en que se realizó el egreso</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Deuda:</span>
+                <span>Indica si el egreso está asociado a una deuda</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Acciones:</span>
+                <span>Opciones para editar o eliminar el registro</span>
+            </div>
+        </div>
+
+        <h3>Filtros de Búsqueda</h3>
+        <p>Similar a la sección de Ingresos, puedes filtrar tus egresos por:</p>
+        <ul>
+            <li><strong>De / A:</strong> Rango de fechas</li>
+            <li><strong>Desc:</strong> Buscar por descripción</li>
+            <li><strong>Botones "Buscar" y "Limpiar":</strong> Para aplicar o restablecer filtros</li>
+        </ul>
+
+        <h3>Agregar un Nuevo Egreso</h3>
+        <div class="counter">
+            <div class="step">
+                Haz clic en el panel "Alta" en el lado derecho
+            </div>
+            <div class="step">
+                Completa el campo <strong>"Descripción"</strong> del gasto
+            </div>
+            <div class="step">
+                Ingresa el <strong>"Monto"</strong> del egreso
+            </div>
+            <div class="step">
+                Selecciona la <strong>"Fecha"</strong> del gasto
+            </div>
+            <div class="step">
+                <strong>(Opcional)</strong> Si el egreso corresponde al pago de una deuda existente, selecciónala en el campo <strong>"Pagar deuda (opcional)"</strong> usando el buscador
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Agregar</span>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Asociar Egresos con Deudas</h4>
+            <p>Una característica importante es la posibilidad de vincular un egreso con una deuda:</p>
+            <ul>
+                <li>Cuando pagas una deuda, selecciónala en el campo "Pagar deuda (opcional)"</li>
+                <li>El sistema actualizará automáticamente el estado de la deuda</li>
+                <li>Podrás ver en el historial qué egresos están asociados a pagos de deudas</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Categoriza tus egresos con descripciones consistentes (ejemplo: "Supermercado", "Servicios - Luz", "Transporte", "Entretenimiento") para generar mejores reportes.
+        </div>
+
+        <h3>Editar un Egreso Existente</h3>
+        <p>Para modificar un egreso ya registrado:</p>
+        <div class="counter">
+            <div class="step">
+                Realiza una búsqueda en el panel "Historial" usando los filtros
+            </div>
+            <div class="step">
+                Localiza el egreso en la tabla de resultados
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Editar</span>
+            </div>
+            <div class="step">
+                El panel derecho cambiará a modo <strong>"Editar"</strong> y mostrará los datos actuales
+            </div>
+            <div class="step">
+                Modifica los campos necesarios: Descripción, Monto, Fecha o Deuda asociada
+            </div>
+            <div class="step">
+                Si el egreso está asociado a una deuda, verás el campo <strong>"Pagar deuda (opcional)"</strong> con el saldo anterior indicado
+            </div>
+            <div class="step">
+                Haz clic en <span class="button-example">Actualizar</span> para guardar
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Información sobre Deudas en Edición</h4>
+            <p>Cuando editas un egreso asociado a una deuda:</p>
+            <ul>
+                <li>Si el egreso ya está vinculado a una deuda, verás el mensaje: <strong>"— Saldo antes: $X,XX"</strong></li>
+                <li>Puedes ver el texto informativo: <em>"* No se puede cambiar la deuda"</em> en algunos casos</li>
+                <li>La columna "Deuda" en la tabla muestra el nombre y monto de la deuda asociada (ejemplo: "Banco Macro — $5.648,25")</li>
+            </ul>
+        </div>
+
+        <h3>Eliminar un Egreso</h3>
+        <p>Para eliminar un egreso del sistema:</p>
+        <div class="counter">
+            <div class="step">
+                Busca el egreso en el panel "Historial"
+            </div>
+            <div class="step">
+                Haz clic en el botón rojo <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span>
+            </div>
+            <div class="step">
+                Aparecerá la ventana de confirmación: <strong>"¿Eliminar este egreso?"</strong>
+            </div>
+            <div class="step">
+                Verás los detalles: Descripción y Monto del egreso
+            </div>
+            <div class="step">
+                Confirma con <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span> o cancela la operación
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Si eliminas un egreso que estaba asociado a una deuda, el saldo de esa deuda se actualizará automáticamente. La eliminación es permanente.
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Si vinculas un egreso a una deuda, asegúrate de que el monto del egreso corresponda al pago que deseas registrar. Una vez asociado, se reflejará en el estado de la deuda.
+        </div>
+    </div>
+
+    <!-- SECCIÓN 5: DEUDAS -->
+    <div class="section" id="deudas">
+        <h2>5. Gestión de Deudas</h2>
+        
+        <p>La sección de Deudas te ayuda a administrar y hacer seguimiento de tus obligaciones financieras. Accede desde el menú superior haciendo clic en <strong>"Deudas"</strong>.</p>
+
+        <h3>Visualización del Historial</h3>
+        <div class="feature-box">
+            <h4>Tabla de Deudas</h4>
+            <p>El historial muestra información completa de tus deudas:</p>
+            <div class="field-description">
+                <span class="field-name">Descripción:</span>
+                <span>Concepto o nombre de la deuda</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Monto:</span>
+                <span>Monto total de la deuda</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Saldo:</span>
+                <span>Cantidad pendiente de pago</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Fecha:</span>
+                <span>Fecha en que se contrajo la deuda</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Vencimiento:</span>
+                <span>Fecha límite de pago</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Estado:</span>
+                <span>Pendiente o Pagada</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Acciones:</span>
+                <span>Opciones para editar o eliminar</span>
+            </div>
+        </div>
+
+        <h3>Filtros de Búsqueda Avanzados</h3>
+        <p>La sección de deudas ofrece filtros adicionales:</p>
+        <ul>
+            <li><strong>De / A:</strong> Rango de fechas de contratación</li>
+            <li><strong>Desc:</strong> Buscar por descripción</li>
+            <li><strong>Est:</strong> Filtrar por estado (Todas / Pendientes / Pagadas)</li>
+            <li><strong>Botones "Buscar" y "Limpiar":</strong> Para aplicar o restablecer filtros</li>
+        </ul>
+
+        <h3>Agregar una Nueva Deuda</h3>
+        <div class="counter">
+            <div class="step">
+                Accede al panel "Alta" en el lado derecho de la pantalla
+            </div>
+            <div class="step">
+                Completa el campo <strong>"Descripción"</strong> con el nombre o concepto de la deuda
+            </div>
+            <div class="step">
+                Ingresa el <strong>"Monto"</strong> total de la deuda
+            </div>
+            <div class="step">
+                Selecciona la <strong>"Fecha"</strong> en que contraíste la deuda
+            </div>
+            <div class="step">
+                Ingresa el <strong>"Vencimiento"</strong>: fecha límite para el pago
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Agregar</span>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Control del Estado de Deudas</h4>
+            <p>El sistema administra automáticamente el estado de tus deudas:</p>
+            <ul>
+                <li><strong>Nueva deuda:</strong> Se crea con estado "Pendiente" y saldo igual al monto total</li>
+                <li><strong>Pago parcial:</strong> Cuando registras un egreso asociado, el saldo se reduce</li>
+                <li><strong>Pago completo:</strong> Cuando el saldo llega a $0, el estado cambia a "Pagada"</li>
+                <li><strong>Alertas de vencimiento:</strong> Mantén atención a las fechas de vencimiento</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Registra tus deudas tan pronto como las contraes para mantener un control preciso. Utiliza la fecha de vencimiento para planificar tus pagos con anticipación.
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> El saldo de una deuda solo se actualiza cuando registras un egreso asociado a ella. No olvides vincular tus pagos en la sección de Egresos.
+        </div>
+
+        <h3>Editar una Deuda Existente</h3>
+        <p>Para modificar una deuda ya registrada:</p>
+        <div class="counter">
+            <div class="step">
+                Realiza una búsqueda en el panel "Historial"
+            </div>
+            <div class="step">
+                Localiza la deuda en la tabla de resultados (verás su estado en la columna "Estado": Pendiente o Pagado)
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Editar</span>
+            </div>
+            <div class="step">
+                El panel derecho mostrará el modo <strong>"Editar"</strong> con todos los datos de la deuda
+            </div>
+            <div class="step">
+                Modifica los campos necesarios: Descripción, Monto, Fecha o Vencimiento
+            </div>
+            <div class="step">
+                Haz clic en <span class="button-example">Actualizar</span> para guardar los cambios
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Estados de las Deudas en la Tabla</h4>
+            <p>En la columna "Estado" verás:</p>
+            <ul>
+                <li><strong style="color: #ef4444;">Pendiente</strong> (en rojo): La deuda aún tiene saldo por pagar</li>
+                <li><strong style="color: #10b981;">Pagado</strong> (en verde): La deuda está completamente saldada</li>
+            </ul>
+            <p>Las deudas con estado "Pagado" tienen deshabilitados los botones Editar y Eliminar (aparecen en gris).</p>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Solo puedes editar o eliminar deudas que estén en estado "Pendiente". Las deudas pagadas quedan como registro histórico.
+        </div>
+
+        <h3>Eliminar una Deuda</h3>
+        <p>Para eliminar una deuda del sistema:</p>
+        <div class="counter">
+            <div class="step">
+                Busca la deuda en estado "Pendiente" en el panel "Historial"
+            </div>
+            <div class="step">
+                Haz clic en el botón rojo <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span>
+            </div>
+            <div class="step">
+                Aparecerá la ventana: <strong>"¿Eliminar esta deuda?"</strong>
+            </div>
+            <div class="step">
+                Verás los detalles: Descripción y Monto de la deuda
+            </div>
+            <div class="step">
+                Confirma con <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span> o cancela
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Solo puedes eliminar deudas en estado "Pendiente" que no tengan pagos asociados. Si una deuda tiene egresos vinculados, primero debes eliminar esos egresos. Las deudas "Pagadas" no se pueden eliminar.
+        </div>
+
+        <h3>Notificaciones en Pantalla</h3>
+        <p>En la parte inferior de la página de Deudas encontrarás notificaciones útiles:</p>
+        <ul>
+            <li><strong style="color: #10b981;">"Deuda agregada: [Descripción] - $[Monto]"</strong>: Confirma que la deuda se creó exitosamente</li>
+            <li><strong>"· Mostrando X-Y de Z"</strong>: Indica cuántas deudas se están mostrando del total</li>
+        </ul>
+
+    </div>
+
+    <!-- SECCIÓN 6: DESCRIPCIONES -->
+    <div class="section" id="descripciones">
+        <h2>6. Gestión de Descripciones</h2>
+        
+        <p>Las Descripciones son categorías personalizadas que puedes crear para organizar mejor tus ingresos, egresos y deudas. Accede desde el menú superior haciendo clic en <strong>"Descripciones"</strong>.</p>
+
+        <h3>¿Para qué sirven las Descripciones?</h3>
+        <div class="feature-box">
+            <p>Las descripciones te permiten:</p>
+            <ul>
+                <li>Categorizar tus transacciones financieras</li>
+                <li>Agrupar registros relacionados</li>
+                <li>Facilitar la búsqueda de operaciones específicas</li>
+                <li>Generar reportes más organizados</li>
+                <li>Mantener consistencia en tus registros</li>
+            </ul>
+        </div>
+
+        <h3>Tipos de Descripciones</h3>
+        <p>Puedes crear diferentes tipos de descripciones según tus necesidades:</p>
+        <ul>
+            <li><strong>Para Ingresos:</strong> "Salario", "Freelance", "Ventas", "Inversiones", etc.</li>
+            <li><strong>Para Egresos:</strong> "Supermercado", "Servicios", "Entretenimiento", "Transporte", etc.</li>
+            <li><strong>Para Deudas:</strong> "Tarjeta de Crédito", "Préstamo Personal", "Crédito Hipotecario", etc.</li>
+            <li><strong>Generales:</strong> Nombres de empresas, proveedores o conceptos específicos como "Banco Macro", "Kiosko Esquina", etc.</li>
+        </ul>
+
+        <h3>Visualización de la Lista</h3>
+        <div class="feature-box">
+            <h4>Tabla de Descripciones</h4>
+            <p>El listado muestra todas tus descripciones con la siguiente información:</p>
+            <div class="field-description">
+                <span class="field-name">Descripción:</span>
+                <span>Nombre de la categoría o concepto</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Tipo:</span>
+                <span>Clasificación (ejemplo: Ingreso, Egreso, Deuda, General)</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Estado:</span>
+                <span>Activa o Inactiva</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Usos:</span>
+                <span>Cantidad de veces que se ha utilizado</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Acciones:</span>
+                <span>Opciones para editar o eliminar</span>
+            </div>
+        </div>
+
+        <h3>Filtros de Búsqueda</h3>
+        <p>Encuentra rápidamente las descripciones que necesitas:</p>
+        <ul>
+            <li><strong>Desc:</strong> Buscar por nombre de descripción</li>
+            <li><strong>Tipo:</strong> Filtrar por tipo de descripción</li>
+            <li><strong>Estado:</strong> Ver solo descripciones activas o inactivas</li>
+        </ul>
+
+        <h3>Crear una Nueva Descripción</h3>
+        <div class="counter">
+            <div class="step">
+                Accede al panel "Alta" ubicado a la derecha
+            </div>
+            <div class="step">
+                Escribe el nombre en el campo <strong>"Descripción"</strong> (ejemplo: "Banco Macro")
+            </div>
+            <div class="step">
+                Selecciona el <strong>"Tipo"</strong> de descripción en el menú desplegable
+            </div>
+            <div class="step">
+                <strong>(Opcional)</strong> Completa los campos adicionales: Teléfono, Email, Dirección, Tipo Entidad
+            </div>
+            <div class="step">
+                Asegúrate de que la casilla <strong>"Activa"</strong> esté marcada (está marcada por defecto)
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Agregar</span>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Crea descripciones desde el inicio para mantener tus registros organizados. Puedes agregar información de contacto a descripciones que representan empresas o proveedores.
+        </div>
+
+        <h3>Estado de las Descripciones</h3>
+        <p>Las descripciones pueden estar <strong>Activas</strong> o <strong>Inactivas</strong>:</p>
+        <ul>
+            <li><strong>Activa:</strong> Aparece en los buscadores al registrar ingresos, egresos o deudas</li>
+            <li><strong>Inactiva:</strong> Se oculta de los buscadores pero no se elimina, conservando el historial de usos</li>
+        </ul>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> No puedes eliminar una descripción que está siendo utilizada en registros existentes. Si deseas dejar de usarla, márcala como "Inactiva".
+        </div>
+
+        <h3>Editar una Descripción</h3>
+        <p>Para modificar una descripción existente:</p>
+        <div class="counter">
+            <div class="step">
+                Busca la descripción en el panel "Lista" usando los filtros
+            </div>
+            <div class="step">
+                Localiza la descripción en la tabla (verás sus "Usos" y "Estado")
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Editar</span>
+            </div>
+            <div class="step">
+                El panel derecho cambiará a modo <strong>"Editar"</strong> mostrando todos los datos
+            </div>
+            <div class="step">
+                Modifica los campos que necesites: Descripción, Tipo, Teléfono, Email, Dirección, Tipo Entidad
+            </div>
+            <div class="step">
+                Puedes cambiar el estado usando la casilla <strong>"Activa"</strong>
+            </div>
+            <div class="step">
+                Haz clic en <span class="button-example">Actualizar</span> para guardar
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Columna "Usos" en la Tabla</h4>
+            <p>La columna "Usos" muestra cuántas veces se ha utilizado cada descripción en ingresos, egresos o deudas:</p>
+            <ul>
+                <li><strong>0 usos:</strong> La descripción nunca se ha utilizado (se puede eliminar sin problemas)</li>
+                <li><strong>1+ usos:</strong> La descripción está en uso (ejemplo: "45" indica que se usó 45 veces)</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Si una descripción tiene muchos usos y quieres dejar de usarla, en lugar de eliminarla, márcala como "Inactiva". Así mantendrás el historial intacto pero no aparecerá en los buscadores.
+        </div>
+
+        <h3>Eliminar una Descripción</h3>
+        <p>Para eliminar una descripción del sistema:</p>
+        <div class="counter">
+            <div class="step">
+                Verifica en la columna "Usos" que la descripción tenga <strong>0 usos</strong>
+            </div>
+            <div class="step">
+                Haz clic en el botón rojo <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span>
+            </div>
+            <div class="step">
+                Aparecerá la ventana: <strong>"¿Eliminar esta descripción?"</strong>
+            </div>
+            <div class="step">
+                Verás el nombre de la descripción a eliminar
+            </div>
+            <div class="step">
+                Confirma con <span style="background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">Eliminar</span>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Restricción Importante:</strong> NO puedes eliminar descripciones que estén siendo utilizadas (con 1 o más usos). Si intentas hacerlo, el sistema te mostrará un mensaje de error. Solo las descripciones con 0 usos pueden ser eliminadas permanentemente.
+        </div>
+
+        <h3>Búsqueda Total en Descripciones</h3>
+        <p>En la parte inferior de la página verás un indicador útil:</p>
+        <p style="font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 5px;">
+            📋 <strong style="color: #10b981;">Búsqueda total</strong> · Mostrando 5-8 de 24
+        </p>
+        <p>Este indicador te informa cuántas descripciones se están mostrando del total de registros encontrados en tu búsqueda.</p>
+
+    </div>
+
+    <!-- SECCIÓN 7: INFORMES -->
+    <div class="section" id="informes">
+        <h2>7. Informes y Reportes</h2>
+        
+        <p>La sección de Informes te permite generar reportes detallados de tu actividad financiera. Accede desde el menú superior haciendo clic en <strong>"Informes"</strong>.</p>
+
+        <h3>Panel de Generación de Informes</h3>
+        <p>Al ingresar a esta sección verás un panel con múltiples filtros que te permiten personalizar tu reporte:</p>
+
+        <div class="feature-box">
+            <h4>Filtros Disponibles</h4>
+            <div class="field-description">
+                <span class="field-name">Tipo de informe:</span>
+                <span>Selecciona el tipo de reporte que deseas generar</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">De / A:</span>
+                <span>Define el rango de fechas para el informe (formato dd/mm/aaaa)</span>
+            </div>
+            <div class="field-description">
+                <span class="field-name">Desc:</span>
+                <span>Filtra por descripción específica</span>
+            </div>
+        </div>
+
+        <h3>Generar un Informe</h3>
+        <div class="counter">
+            <div class="step">
+                Selecciona el <strong>"Tipo de informe"</strong> en el menú desplegable
+            </div>
+            <div class="step">
+                Ingresa las fechas <strong>"De"</strong> y <strong>"A"</strong> para definir el período
+            </div>
+            <div class="step">
+                <strong>(Opcional)</strong> Filtra por descripción específica si lo necesitas
+            </div>
+            <div class="step">
+                Haz clic en el botón azul <span class="button-example">Consultar</span>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Antes de hacer clic en "Consultar", verás el mensaje: "Seleccioná los parámetros y hacé clic en 'Consultar' para generar el informe."
+        </div>
+
+        <h3>Visualización del Informe Generado</h3>
+        <p>Una vez generado, el informe mostrará:</p>
+
+        <div class="feature-box">
+            <h4>Tabla de Transacciones</h4>
+            <p>En el lado izquierdo aparece una tabla detallada con todas las operaciones del período seleccionado, mostrando:</p>
+            <ul>
+                <li><strong>Tipo:</strong> Ingreso o Egreso</li>
+                <li><strong>Fecha:</strong> Fecha de la operación</li>
+                <li><strong>Descripción:</strong> Concepto de la transacción</li>
+                <li><strong>Monto:</strong> Cantidad en pesos</li>
+                <li><strong>F. Deuda:</strong> Fecha asociada si corresponde a una deuda</li>
+            </ul>
+            <p>La tabla incluye paginación en la parte inferior para navegar entre registros.</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>Gráficos Visuales</h4>
+            <p>En el lado derecho se muestran dos gráficos:</p>
+            
+            <h4>1. Comparativa por Mes - Barras</h4>
+            <ul>
+                <li>Muestra ingresos y egresos mes a mes en formato de barras</li>
+                <li>Barras verdes: Ingresos</li>
+                <li>Barras rojas: Egresos</li>
+                <li>Permite identificar visualmente los meses de mayor actividad</li>
+            </ul>
+
+            <h4>2. Tendencia por Mes - Líneas</h4>
+            <ul>
+                <li>Gráfico de líneas que muestra la evolución temporal</li>
+                <li>Línea verde: Tendencia de ingresos</li>
+                <li>Línea roja: Tendencia de egresos</li>
+                <li>Ideal para detectar patrones y proyectar comportamientos futuros</li>
+            </ul>
+        </div>
+
+        <h3>Resumen Financiero</h3>
+        <p>En la parte inferior del informe encontrarás un resumen consolidado:</p>
+        <div class="feature-box">
+            <p><strong>Ejemplo de resumen:</strong></p>
+            <p style="font-size: 14px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 5px;">
+                1-9 de 121 • Ingresos y Egresos • Desde: 16/12/2024 • Hasta: 16/12/2025<br>
+                Ingresos: <span style="color: #10b981;">$1.084.200,00</span> • 
+                Egresos: <span style="color: #ef4444;">$1.084.396,09</span> • 
+                Saldo: <span style="color: #ef4444;">-$196,09</span>
+            </p>
+        </div>
+
+        <h3>Exportar Informe a PDF</h3>
+        <p>Para guardar o imprimir tu informe:</p>
+        <div class="counter">
+            <div class="step">
+                Una vez generado el informe con el botón "Consultar", verás aparecer el botón <span style="background: #3b82f6; color: white; padding: 8px 20px; border-radius: 5px; font-weight: 500; display: inline-block; margin: 3px;">📄 PDF</span> en la parte superior derecha
+            </div>
+            <div class="step">
+                Haz clic en el botón PDF (está junto al botón "Consultar")
+            </div>
+            <div class="step">
+                El sistema generará automáticamente un archivo PDF profesional con:
+                <ul style="margin-top: 10px;">
+                    <li>Encabezado con título "KairosFin"</li>
+                    <li>Tipo de informe (ejemplo: "Informe: Ingresos y Egresos")</li>
+                    <li>Período consultado</li>
+                    <li>Totales de Ingresos, Egresos y Saldo</li>
+                    <li>Fecha de emisión</li>
+                    <li>Tabla completa con todos los datos</li>
+                </ul>
+            </div>
+            <div class="step">
+                El PDF se abrirá en una nueva pestaña de tu navegador
+            </div>
+            <div class="step">
+                Desde allí puedes descargarlo (💾) o imprimirlo (🖨️) usando los controles del navegador
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h4>Contenido del PDF Generado</h4>
+            <p>El PDF incluye una tabla profesional con las siguientes columnas:</p>
+            <ul>
+                <li><strong>Tipo:</strong> "ingreso" o "egreso"</li>
+                <li><strong>Fecha:</strong> Fecha de la transacción</li>
+                <li><strong>Descripción:</strong> Concepto</li>
+                <li><strong>Monto:</strong> Cantidad en formato de moneda</li>
+                <li><strong>F. Deuda:</strong> Fecha de deuda asociada (si aplica)</li>
+            </ul>
+            <p>El encabezado muestra claramente el resumen financiero con los totales en negrita.</p>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Consejo:</strong> Genera y descarga informes PDF mensualmente para mantener un respaldo físico o digital de tu actividad financiera. Los PDF son ideales para compartir con contadores o para tu archivo personal.
+        </div>
+
+        <h3>Botón "Filtros"</h3>
+        <p>En la esquina superior derecha encontrarás un botón <span class="button-example">▲ Filtros</span> que te permite mostrar u ocultar el panel de filtros, dándote más espacio para visualizar los resultados.</p>
+    </div>
+
+    <!-- SECCIÓN 8: NAVEGACIÓN GENERAL -->
+    <div class="section" id="navegacion">
+        <h2>8. Navegación General</h2>
+        
+        <h3>Menú Principal</h3>
+        <p>El menú de navegación se encuentra en la parte superior de todas las páginas y contiene las siguientes opciones:</p>
+
+        <div class="feature-box">
+            <ul>
+                <li><strong>Inicio:</strong> Volver a la página principal con el resumen general</li>
+                <li><strong>Ingresos:</strong> Acceder a la gestión de ingresos</li>
+                <li><strong>Egresos:</strong> Acceder a la gestión de egresos</li>
+                <li><strong>Deudas:</strong> Acceder a la gestión de deudas</li>
+                <li><strong>Descripciones:</strong> Administrar las categorías</li>
+                <li><strong>Informes:</strong> Generar reportes y estadísticas</li>
+            </ul>
+        </div>
+
+        <h3>Menú Lateral (Solo en Inicio)</h3>
+        <p>En la página de inicio, encontrarás un menú lateral con accesos directos:</p>
+        <ul>
+            <li><strong>Ing/Egr (📊):</strong> Acceso rápido a ingresos y egresos</li>
+            <li><strong>Deudas (💰):</strong> Acceso rápido a deudas</li>
+            <li><strong>Contacto (📞):</strong> Información de contacto</li>
+        </ul>
+
+        <h3>Pie de Página</h3>
+        <p>En todas las páginas encontrarás el pie de página con información importante:</p>
+
+        <div class="feature-box">
+            <h4>Secciones del Footer</h4>
+            
+            <h4>NAVEGACIÓN</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Ingresos/Egresos</li>
+                <li>Deudas</li>
+                <li>Informes</li>
+            </ul>
+
+            <h4>RECURSOS</h4>
+            <ul>
+                <li>Ayuda (este documento)</li>
+                <li>Documentación</li>
+                <li>Tutoriales</li>
+                <li>Preguntas Frecuentes</li>
+            </ul>
+
+            <h4>CONTACTO</h4>
+            <ul>
+                <li>📧 info@kairosfin.com</li>
+                <li>📱 +54 9 11 1234-5678</li>
+                <li>🌐 www.kairosfin.com</li>
+                <li>📍 Buenos Aires, Argentina</li>
+            </ul>
+        </div>
+
+        <h3>Información de Versión</h3>
+        <p>Al final del pie de página encontrarás:</p>
+        <p style="text-align: center; font-style: italic; color: #6b7280;">
+            © 2025 KairosFin. Todos los derechos reservados.<br>
+            Versión 1.0 | Desarrollado por Pablo Almada
+        </p>
+    </div>
+
+    <!-- SECCIÓN 9: CONTACTO -->
+    <div class="section" id="contacto">
+        <h2>9. Soporte y Contacto</h2>
+        
+        <h3>¿Necesitas Ayuda?</h3>
+        <p>Si tienes dudas o problemas con el sistema, estamos aquí para ayudarte:</p>
+
+        <div class="feature-box">
+            <h4>📧 Email</h4>
+            <p>info@kairosfin.com</p>
+            <p style="font-size: 14px; color: #6b7280;">Responderemos tu consulta en un plazo máximo de 24 horas hábiles.</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>📱 Teléfono</h4>
+            <p>+54 9 11 1234-5678</p>
+            <p style="font-size: 14px; color: #6b7280;">Horario de atención: Lunes a Viernes de 9:00 a 18:00 hs (hora Argentina)</p>
+        </div>
+
+        <div class="feature-box">
+            <h4>🌐 Sitio Web</h4>
+            <p>www.kairosfin.com</p>
+            <p style="font-size: 14px; color: #6b7280;">Visita nuestro sitio para más información y recursos adicionales.</p>
+        </div>
+
+        <h3>Recursos Adicionales</h3>
+        <p>En la sección "RECURSOS" del pie de página encontrarás:</p>
+        <ul>
+            <li><strong>Documentación:</strong> Guías técnicas y manuales detallados</li>
+            <li><strong>Tutoriales:</strong> Videos y guías paso a paso</li>
+            <li><strong>Preguntas Frecuentes:</strong> Respuestas a las dudas más comunes</li>
+        </ul>
+
+        <h3>Reportar un Problema</h3>
+        <p>Si encuentras un error o problema técnico:</p>
+        <div class="counter">
+            <div class="step">
+                Anota la descripción del problema y los pasos que seguiste
+            </div>
+            <div class="step">
+                Toma una captura de pantalla si es posible
+            </div>
+            <div class="step">
+                Envía un email a info@kairosfin.com con toda la información
+            </div>
+            <div class="step">
+                Nuestro equipo técnico investigará y te responderá a la brevedad
+            </div>
+        </div>
+
+        <h3>Sugerencias y Mejoras</h3>
+        <p>¡Valoramos tu opinión! Si tienes ideas para mejorar KairosFin, no dudes en compartirlas con nosotros a través de cualquiera de nuestros canales de contacto.</p>
+    </div>
+
+    <!-- FOOTER DEL MANUAL -->
+    <div class="footer">
+        <h3 style="color: #1e3a5f; margin-bottom: 20px;">¡Gracias por usar KairosFin! 📊</h3>
+        <p>Este manual está diseñado para ayudarte a aprovechar al máximo tu sistema financiero personal.</p>
+        <p>Mantén tus finanzas organizadas y toma decisiones informadas con KairosFin.</p>
+        <p style="margin-top: 30px;">
+            <strong>KairosFin</strong> - Tu Sistema Financiero Personal Profesional<br>
+            Versión 1.0 | © 2025 | Todos los derechos reservados<br>
+            Desarrollado por Pablo Almada
+        </p>
+    </div>
+
+</body>
+</html>

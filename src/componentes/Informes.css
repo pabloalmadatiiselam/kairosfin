@@ -1,0 +1,846 @@
+/* Contenedor principal */
+.contenedor-informes {
+  width: 95%;
+  max-width: 1400px;
+  margin: 10px auto;  
+  padding: 3px 0px 0px 0px;
+  font-family: Arial, sans-serif;   
+}
+
+/* Título principal - MÁS SEPARADO DE LA BARRA */
+.informes-titulo {
+  text-align: center;
+  margin-top: 50px;      /* ← REDUCIDO de 75px */
+  margin-bottom: 3px !important;    /* ← REDUCIDO de 10px */
+  font-size: 2.2rem;     /* ← REDUCIDO de 1.85rem */
+  /*font-weight: bold;*/
+  font-family: 'Impact', 'Haettenschweiler', 'Arial Black', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(29, 40, 58, 0.2);
+  color: #1D283A;
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+/* Filtros iniciales (cuando no hay datos) */
+.mensaje-inicial {
+  text-align: center;
+  margin: 95px auto;  
+  padding: 40px;
+  max-width: 600px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 6px;/* ← REDUCIDO de 12px a 6x */
+  /*border: 2px dashed #ccc;*/
+}
+
+.mensaje-inicial p {
+  font-size: 1.1rem;
+  color: #ffffff;/*cambiamos de #666 a #ffffff*/
+  margin: 0;
+}
+
+/* Filtros - SIEMPRE VISIBLES arriba */
+.filtros-informe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;           /* ← REDUCIDO de 0.6rem */
+  margin: 0px auto 10px !important;   /* ← REDUCIDO de 25px */
+  justify-content: center;
+  max-width: 1600px;
+  padding: 10px 18px;    /* ← REDUCIDO de 12px */
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.08) 0%, rgba(15, 23, 42, 0.12) 100%);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(30, 41, 59, 0.20);
+  position: relative;
+  z-index: 10;
+}
+
+.filtros-informe label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+  gap: 0.35rem;  /* ← REDUCIDO de 0.4rem */
+  font-size: 0.9rem;
+  color: #1D283A;
+}
+
+/* Ajuste para react-select en filtros de informes */
+.filtros-informe label .react-select-container {
+  min-width: 200px;
+}
+
+.filtros-informe select,
+.filtros-informe input[type="date"] {
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: 38px;
+  background-color: white;
+}
+
+.filtros-informe select {
+  min-width: 180px;
+}
+
+.filtros-informe button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  height: 38px;
+  white-space: nowrap;
+  align-self: center;  /* ← AGREGAR ESTA LÍNEA */
+}
+
+.filtros-informe button:hover {
+  background-color: #0056b3;
+}
+
+/* Botón PDF en filtros */
+.btn-pdf-filtros {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  height: 38px;
+  white-space: nowrap;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-pdf-filtros:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-pdf-filtros:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-pdf-filtros:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Contenido: Layout de 2 columnas */
+.contenido-informes {
+  display: flex;
+  gap: 18px; /* MANTENEMOS EL GAP */
+  margin-top: 8px;
+  width: 100%; /* Aseguramos que el contenedor padre tenga 100% de ancho */
+  box-sizing: border-box; /* Aseguramos que el padding y borde no se sumen al ancho */
+}
+
+/* Columna izquierda: Tabla (45% del ancho) */
+.tabla-wrapper {
+  flex: 0 0 calc(45% - 9px); /* Restamos la mitad del gap (18px / 2) */
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.08) 0%, rgba(15, 23, 42, 0.12) 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(30, 41, 59, 0.20);
+  padding: 10px 18px;
+  box-sizing: border-box;
+  min-height: 385px;
+  position: relative;
+}
+
+/* Columna derecha: Gráficos (55% del ancho) */
+.graficos-wrapper {
+  flex: 0 0 calc(55% - 9px); /* Restamos la mitad del gap (18px / 2) */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.08) 0%, rgba(15, 23, 42, 0.12) 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(30, 41, 59, 0.20);
+  padding: 10px 18px 10px 18px;
+  box-sizing: border-box;
+  min-height: 385px;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+
+/* Subtítulos de secciones */
+.subtitulo-seccion {
+  margin: 0 0 10px 0; /* Reducido de 12px a 10px */
+  font-size: 1.15rem; /* Reducido de 1.2rem */
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px; /* Reducido de 6px a 5px */
+}
+
+/* Contenedor de tabla sin scroll */
+.tabla-contenido {
+  flex: 1;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
+}
+
+/* Estilos de la tabla */
+.tabla-contenido table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem; /* Aumentado ligeramente de 0.75rem */
+  table-layout: fixed;
+}
+
+.tabla-contenido th,
+.tabla-contenido td {
+  padding: 5px 5px; /* Padding horizontal aumentado */
+  border: 1px solid #94a3b8;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Anchos específicos para el nuevo orden: Tipo, Fecha, Descripción, Monto, F. Deuda */
+.tabla-contenido th:nth-child(1),
+.tabla-contenido td:nth-child(1) {
+  width: 12%; /* Tipo */
+  text-align: center;
+}
+
+.tabla-contenido th:nth-child(2),
+.tabla-contenido td:nth-child(2) {
+  width: 16%; /* Fecha */
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.tabla-contenido th:nth-child(3),
+.tabla-contenido td:nth-child(3) {
+  width: 38%; /* Descripción */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabla-contenido th:nth-child(4),
+.tabla-contenido td:nth-child(4) {
+  width: 18% !important; /* Monto - AUMENTADO de 14% a 20% */
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabla-contenido th:nth-child(5),
+.tabla-contenido td:nth-child(5) {
+  width: 16% !important; /* F. Deuda - REDUCIDO de 18% a 14% */
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.72rem;
+}
+
+.tabla-contenido th {
+  /*background-color: #f8f9fa;*/
+  background-color: #1D283A;
+  /*background-color: #e0f2fe;  /* Azul suave corporativo */
+  font-weight: bold;
+  font-size: 0.76rem; /* Aumentado de 0.72rem */
+  text-transform: none;
+  line-height: 1.2;
+  color: #ffffff;/* antes no estaba esta declaracion*/
+  /*color: #0c4a6e;  /* Texto azul oscuro para contraste */
+}
+
+.tabla-contenido tr:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.tabla-contenido tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Paginación */
+.paginacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;    /* ← REDUCIDO de 10px */
+  gap: 8px;           /* ← REDUCIDO de 10px */
+}
+
+.paginacion button {
+  flex: 1;
+  padding: 6px;       /* ← REDUCIDO de 8px */
+  border: none;
+  border-radius: 6px;
+  background-color: #0088fe;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;  /* ← REDUCIDO de 0.9rem */
+}
+
+.paginacion button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginacion button:hover:not(:disabled) {
+  background-color: #006fcb;
+}
+
+/* Contenedores de gráficos individuales */
+.grafico-container {
+  flex: 1;
+  min-height: 155px;   /* ← REDUCIDO de 170px */
+  max-height: 170px;   /* ← REDUCIDO de 185px */
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 5px;        /* ← REDUCIDO de 6px */
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.titulo-grafico {
+  margin: 0 0 2px 0;    /* ← REDUCIDO de 3px */
+  font-size: 0.82rem;   /* ← REDUCIDO de 0.88rem */
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Ajuste para que ResponsiveContainer ocupe el espacio restante */
+.grafico-container > div {
+  flex: 1;
+}
+
+/* ============================================ */
+/* ANCHOS PARA TABLA DE DEUDAS (5 columnas) */
+/* ============================================ */
+.tabla-deudas th:nth-child(1),
+.tabla-deudas td:nth-child(1) {
+  width: 14%; /* Estado - Aumentado para "Pendiente" */
+  text-align: center;
+}
+
+.tabla-deudas th:nth-child(2),
+.tabla-deudas td:nth-child(2) {
+  width: 18%; /* Fecha */
+  white-space: nowrap;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.tabla-deudas th:nth-child(3),
+.tabla-deudas td:nth-child(3) {
+  width: 38%; /* Descripción - Reducido 2% */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabla-deudas th:nth-child(4),
+.tabla-deudas td:nth-child(4) {
+  width: 12%; /* Monto */
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabla-deudas th:nth-child(5),
+.tabla-deudas td:nth-child(5) {
+  width: 18%; /* Vencimiento */
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+/* ================================================= */
+/* ANCHOS PARA TABLA DE MOVIMIENTOS (5 columnas) */
+/* ================================================= */
+.tabla-movimientos th:nth-child(1),
+.tabla-movimientos td:nth-child(1) {
+  width: 12%; /* Tipo */
+  text-align: center;
+}
+
+.tabla-movimientos th:nth-child(2),
+.tabla-movimientos td:nth-child(2) {
+  width: 16%; /* Fecha */
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.tabla-movimientos th:nth-child(3),
+.tabla-movimientos td:nth-child(3) {
+  width: 40%; /* Descripción */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabla-movimientos th:nth-child(4),
+.tabla-movimientos td:nth-child(4) {
+  width: 14%; /* Monto */
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabla-movimientos th:nth-child(5),
+.tabla-movimientos td:nth-child(5) {
+  width: 18%; /* F. Deuda */
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0.75rem;/*cambio 0.72 por 0.75*/
+}
+
+
+/* NUEVA: Barra de estado para informes */
+.barra-estado {
+  width: 100%;
+  padding: 5px 10px;        /* ← REDUCIDO más: de 6px 12px a 5px 10px */
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.06) 0%, rgba(15, 23, 42, 0.09) 100%);
+  color: #111827;
+  font-size: 0.72rem;       /* ← REDUCIDO: de 0.75rem a 0.72rem */
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(30, 41, 59, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;                 /* ← REDUCIDO: de 4px a 3px */
+  box-sizing: border-box;
+  margin-top: 7px !important;
+  margin-bottom: 0px;
+  flex-wrap: wrap;          /* ← VOLVER a wrap para permitir 2 líneas si es muy necesario */
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+.barra-estado .mensaje-neutro {
+  color: #4b5563;
+}
+
+.barra-estado strong {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 0.70rem;       /* ← REDUCIDO: de 0.73rem a 0.70rem */
+}
+
+/* Clases para los elementos de la barra */
+.barra-contador {
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.70rem;       /* ← NUEVO: más pequeño que el resto */
+}
+
+.barra-separador {
+  color: #9ca3af;
+  font-weight: 400;
+  margin: 0 1px;
+  font-size: 0.70rem;       /* ← NUEVO: separadores más pequeños */
+}
+
+.barra-separador-mini {
+  color: #d1d5db;
+  font-weight: 300;
+  margin: 0 2px;            /* ← REDUCIDO de 3px a 2px */
+  font-size: 0.70rem;       /* ← NUEVO */
+}
+
+.barra-monto {
+  font-weight: 800;
+  font-size: 0.77rem;       /* ← REDUCIDO: de 0.80rem a 0.77rem */
+}
+
+.barra-monto-positivo {
+  color: #059669;
+}
+
+.barra-monto-negativo {
+  color: #dc2626;
+}
+
+.barra-descripcion-valor {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 0.74rem;       /* ← REDUCIDO: de 0.77rem a 0.74rem */
+  background-color: #e5e7eb;
+  padding: 1px 4px;         /* ← REDUCIDO: de 2px 5px a 1px 4px */
+  border-radius: 3px;       /* ← REDUCIDO: de 4px a 3px */
+}
+/* ========================================
+   ESTILOS PARA DATEPICKER EN INFORMES
+   ======================================== */
+
+.filtro-fecha-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+   
+.filtro-input-fecha-informe {
+  width: 130px !important;  /* ← REDUCIDO de 140px a 130px */
+  height: 38px !important;
+  padding: 0.6rem !important;
+  font-size: 0.95rem !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+  background-color: white !important;
+}
+
+.filtro-input-fecha-informe:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+
+/* ========================================
+   HEADER CON TÍTULO Y BOTÓN COLAPSAR
+   ======================================== */
+.header-informes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 0 20px;
+  position: relative;  /* ← AGREGAR */
+  z-index: 1;          /* ← AGREGAR (bajo para que el dropdown esté arriba) */
+}
+
+.header-informes .informes-titulo {
+  margin-bottom: 0;
+  margin-top: 75px;
+}
+
+/* Botón para colapsar/expandir filtros */
+.btn-colapsar-filtros {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #007bff;
+  background-color: transparent;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 75px;
+  white-space: nowrap;
+}
+
+.btn-colapsar-filtros:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-colapsar-filtros:active {
+  transform: translateY(0);
+}
+
+/* Animación para colapsar/expandir filtros */
+.filtros-informe {
+  /* ... estilos existentes ... */
+  max-height: 500px;  /* ← AGREGAR ESTA LÍNEA */
+  overflow: hidden;   /* ← AGREGAR ESTA LÍNEA */
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease;  /* ← AGREGAR */
+  opacity: 1;         /* ← AGREGAR ESTA LÍNEA */
+  margin: 0 auto 25px; /* Ya existe, dejar igual */
+}
+
+/* Estado colapsado de filtros */
+.filtros-informe.colapsado {
+  max-height: 0;
+  opacity: 0;
+  margin: 0 auto 0px;
+  padding: 0 18px;
+}
+
+/* Mejorar jerarquía en barra de estado */
+.barra-estado strong {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+/* ✅ NUEVO: Destacar valores importantes */
+.barra-descripcion-valor {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 0.82rem;
+  background-color: #e5e7eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.barra-monto {
+  font-weight: 800;  /* ← Cambiar de 700 a 800 */
+  font-size: 0.85rem; /* ← Aumentar de 0.82rem a 0.85rem */
+}
+
+
+/* ============================================
+   RESPONSIVE DESIGN - INFORMES
+   ============================================ */
+
+/* 📱 TABLET VERTICAL (768px - 1023px) */
+@media (max-width: 1023px) {
+  .contenedor-informes {
+    width: 98%;
+    padding: 5px;
+  }
+
+  .informes-titulo {
+    font-size: 1.8rem;
+    margin-top: 80px !important;  /* ← CAMBIO: de 60px a 80px */
+    margin-bottom: 20px !important;  /* ← CAMBIO: de 15px a 20px */
+  }
+
+  .header-informes {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .header-informes .informes-titulo,
+  .btn-colapsar-filtros {
+    margin-top: 50px;
+  }
+
+  .filtros-informe {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 15px;
+    margin-top: 0 !important;  /* ← AGREGAR esta línea */
+    padding-top: 15px;  /* ← AGREGAR padding superior */
+  }
+
+  .filtros-informe label {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .filtro-fecha-wrapper {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filtro-input-fecha-informe {
+    width: 100% !important;
+  }
+
+  .filtros-informe button {
+    width: 100%;
+  }
+
+  .contenido-informes {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .tabla-wrapper,
+  .graficos-wrapper {
+    flex: 1 1 100%;
+    min-height: auto;
+  }
+
+  .grafico-container {
+    min-height: 200px;
+    max-height: 250px;
+  }
+}
+
+/* 📱 MÓVIL (375px - 767px) */
+@media (max-width: 767px) {
+  .contenedor-informes {
+    width: 100%;
+    padding: 0;
+    margin: 5px auto;
+  }
+
+  .informes-titulo {
+    font-size: 2.3rem;
+    margin-top: 50px !important;  /* ← CAMBIO: de 40px a 50px */
+    margin-bottom: 20px !important;  /* ← CAMBIO: de 15px a 20px */
+    letter-spacing: 1px;
+    display: block !important;  /* ← AGREGAR esta línea */
+    visibility: visible !important;  /* ← AGREGAR esta línea */
+  }
+
+  .header-informes {
+    padding: 0 5px;
+    margin-bottom: 15px;  /* ← CAMBIO: de 10px a 15px */
+  }
+
+  .header-informes .informes-titulo{    
+    margin-top: 77px !important;  /* ← AGREGAR esta línea específica */
+  }
+
+  .btn-colapsar-filtros {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;  /* ← AGREGAR esta línea */
+  }
+
+  .filtros-informe {
+    padding: 15px 10px 10px 10px;  /* ← CAMBIO: agregar padding superior */    
+    gap: 8px;
+    margin-top: 0 !important;  /* ← AGREGAR esta línea */
+  }
+
+  .filtros-informe label {
+    font-size: 0.85rem;
+  }
+
+  .filtro-input-fecha-informe {
+    height: 44px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .filtros-informe button {
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  /* Tabla con scroll horizontal */
+  .tabla-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px;
+  }
+
+  .tabla-contenido {
+    overflow-x: visible;
+  }
+
+  .tabla-contenido table {
+    min-width: 550px;
+    width: 550px;
+    font-size: 0.72rem;
+  }
+
+  .tabla-contenido th,
+  .tabla-contenido td {
+    padding: 4px;
+    font-size: 0.7rem;
+  }
+
+  /* Scroll más visible en móvil */
+  .tabla-wrapper::-webkit-scrollbar {
+    height: 12px;
+  }
+
+  .tabla-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .tabla-wrapper::-webkit-scrollbar-thumb {
+    background: #0088fe;
+    border-radius: 10px;
+  }
+
+  /* Gráficos apilados */
+  .graficos-wrapper {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .grafico-container {
+    min-height: 180px;
+    max-height: 220px;
+  }
+
+  .titulo-grafico {
+    font-size: 0.75rem;
+  }
+
+  /* Paginación compacta */
+  .paginacion {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .paginacion button {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+
+  /* Barra de estado responsive */
+  .barra-estado {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .barra-monto {
+    font-size: 0.7rem;
+  }
+
+  .barra-contador,
+  .barra-separador {
+    font-size: 0.65rem;
+  }
+
+  /* Mensaje inicial más compacto */
+  .mensaje-inicial {
+    margin: 50px auto;
+    padding: 20px;
+  }
+
+  .mensaje-inicial p {
+    font-size: 0.95rem;
+  }
+}
+
+/* 📱 MÓVIL MUY PEQUEÑO (menos de 375px) */
+@media (max-width: 374px) {
+  .informes-titulo {
+    font-size: 1.1rem;
+  }
+
+  .tabla-contenido table {
+    min-width: 500px;
+  }
+
+  .filtros-informe button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+

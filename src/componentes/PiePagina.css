@@ -1,0 +1,233 @@
+/* ============================================
+   PIE DE PÁGINA COMPLETO (100vh) - COMPACTO
+   ============================================ */
+
+.pie-pagina-completo {
+  min-height: 90vh;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  display: flex;
+  align-items: center;  /* ← VOLVER a center */
+  justify-content: center;
+  padding: 20px 40px;  /* ← REDUCIDO drásticamente */
+  box-sizing: border-box;
+  margin-top: 40px;    /* ← REDUCIDO de 130px a 40px */
+  position: relative;
+}
+
+.pie-contenido {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ============================================
+   HEADER DEL PIE (Logo + Título) - MÁS PEQUEÑO
+   ============================================ */
+
+.pie-header {
+  margin-bottom: 0px;  /* ← AUMENTADO de 25px a 32px */
+}
+
+.pie-logo-grande {
+  margin: 0 auto 0px;  /* ← AUMENTADO de 12px a 16px */
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.pie-logo-grande svg {
+  width: 65px;   /* ← AUMENTADO de 50px a 65px */
+  height: 65px;
+}
+
+.pie-titulo {
+  font-size: 38px;  /* ← AUMENTADO de 32px a 38px */
+  font-weight: 800;
+  margin: 0 0 10px 0;  /* ← Aumentado de 8px a 10px */
+  letter-spacing: -1px;
+  color: white;
+}
+
+.pie-subtitulo {
+  font-size: 15px;  /* ← AUMENTADO de 14px a 15px */
+  font-weight: 400;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ============================================
+   SECCIONES DE INFORMACIÓN - MÁS COMPACTAS
+   ============================================ */
+
+.pie-secciones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;  /* ← AUMENTADO de 30px a 35px */
+  margin-bottom: 40px;  /* ← AUMENTADO de 25px a 30px */
+  margin-top: 20px;
+  text-align: left;
+}
+
+.pie-seccion h3 {
+  font-size: 15px;  /* ← AUMENTADO de 14px a 15px */
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 0 0 14px 0;  /* ← AUMENTADO de 12px a 14px */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pie-seccion ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pie-seccion li {
+  margin-bottom: 9px;  /* ← AUMENTADO de 8px a 9px */
+  font-size: 14px;  /* ← AUMENTADO de 13px a 14px */
+  color: #cbd5e1;
+  transition: color 0.3s ease;
+}
+
+.pie-seccion a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.pie-seccion a:hover {
+  color: #3b82f6;
+  padding-left: 8px;
+}
+
+/* ============================================
+   FOOTER (Copyright) - MÁS COMPACTO
+   ============================================ */
+
+.pie-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;  /* ← AUMENTADO de 15px a 20px */
+  text-align: center;
+}
+
+.pie-footer p {
+  margin: 5px 0;  /* ← AUMENTADO de 4px a 5px */
+  font-size: 13px;  /* ← AUMENTADO de 12px a 13px */
+  color: #94a3b8;
+}
+
+.pie-version {
+  font-size: 12px;  /* ← AUMENTADO de 11px a 12px */
+  color: #64748b;
+}
+
+/* Enlace deshabilitado cuando ya estás en esa página */
+.enlace-deshabilitado {
+  color: #64748b !important;
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.enlace-deshabilitado:hover {
+  color: #64748b !important;
+  padding-left: 0 !important;
+}
+
+/* Enlace deshabilitado en el pie de página */
+.pie-link-disabled {
+  color: #6b7280;
+  cursor: default;
+  text-decoration: none;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.pie-seccion ul li span.pie-link-disabled:hover {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .pie-secciones {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .pie-titulo {
+    font-size: 28px;
+  }
+  
+  .pie-subtitulo {
+    font-size: 13px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE FOOTER
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .pie-secciones {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .pie-seccion:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .pie-contenido {
+    padding: 40px 20px;
+  }
+
+  .pie-logo-grande svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .pie-titulo {
+    font-size: 1.8rem;
+  }
+
+  .pie-subtitulo {
+    font-size: 0.9rem;
+  }
+
+  .pie-secciones {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .pie-seccion:last-child {
+    grid-column: span 1;
+  }
+
+  .pie-seccion h3 {
+    font-size: 1.1rem;
+  }
+
+  .pie-seccion ul li {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .pie-titulo {
+    font-size: 1.5rem;
+  }
+
+  .pie-subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .pie-footer p {
+    font-size: 0.85rem;
+  }
+}

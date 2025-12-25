@@ -1,0 +1,242 @@
+/* ============================================
+   BARRA DE NAVEGACIÓN - KAIROSFIN
+   Estilos base (Desktop) + Responsive
+   ============================================ */
+
+/* ============================================
+   ESTILOS BASE (DESKTOP)
+   ============================================ */
+
+/* Contenedor principal de la barra */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2c2c2c;
+  color: white;
+  width: 100%;  /* ← CORREGIDO */
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;  /* ← AGREGADO */
+  z-index: 1000;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+}
+
+/* Contenedor de enlaces */
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Estilo de cada enlace */
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+  display: inline-block;
+}
+
+.navbar-links a:hover {
+  color: #00bfff;
+}
+
+.navbar-links a.active {
+  color: #00bfff;
+  font-weight: 600;
+}
+
+/* Enlace de Contacto (si existe) */
+.navbar-contacto-link {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+  display: inline-block;
+}
+
+.navbar-contacto-link:hover {
+  color: #00bfff;
+}
+
+/* ============================================
+   BOTÓN HAMBURGUESA (Oculto en desktop)
+   ============================================ */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2000;
+  margin-right: 0;  /* ← AGREGADO: asegurar que no tenga margen */
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Animación cuando está abierto (X) */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (768px - 1023px)
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .navbar {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVIL (hasta 767px)
+   ============================================ */
+
+@media (max-width: 767px) {
+  /* Navbar con hamburguesa */
+  .navbar {
+    padding: 0.8rem 1rem;  /* ← Padding más pequeño en móvil */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;  /* ← Asegurar que sea 100% */
+    overflow-x: hidden;  /* ← AGREGADO: evitar scroll horizontal */
+  }
+
+  /* Logo alineado a la izquierda */
+  .navbar-logo {
+    order: 1;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: 42px;
+  }
+
+  /* Botón hamburguesa alineado a la derecha */
+  .hamburger {
+    display: flex;
+    order: 2;
+    flex-shrink: 0;
+    margin-right: 0;  /* ← IMPORTANTE: sin margen derecho */
+  }
+
+  /* Menú desplegable (oculto por defecto) */
+  .navbar-links {
+    position: fixed;
+    top: 58px;  /* ← AJUSTADO: altura del navbar en móvil */
+    left: 0;
+    right: 0;
+    background: #2c2c2c;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1500;
+    order: 3;
+    width: 100%;
+  }
+
+  /* Menú abierto */
+  .navbar-links.open {
+    max-height: 400px;
+  }
+
+  /* Enlaces en móvil */
+  .navbar-links a {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    font-size: 0.95rem;
+  }
+
+  .navbar-links a:hover,
+  .navbar-links a.active {
+    background: rgba(0, 191, 255, 0.1);
+    color: #00bfff;
+  }
+
+  .navbar-links a:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVIL PEQUEÑO (hasta 639px)
+   ============================================ */
+
+@media (max-width: 639px) {
+  .navbar {
+    padding: 0.6rem 0.8rem;  /* ← Padding aún más pequeño */
+  }
+
+  .logo-img {
+    height: 38px;
+  }
+
+  .hamburger {
+    width: 28px;
+    height: 23px;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+    padding: 0.9rem 1.2rem;
+  }
+}

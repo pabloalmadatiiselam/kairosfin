@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - KairosFin</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 100px 40px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 60px;
+        }
+        
+        .cover h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .cover .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cover .version {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+
+        .download-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .download-note {
+            color: #6b7280;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        h2 {
+            color: #1e3a5f;
+            font-size: 32px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        h3 {
+            color: #2c5282;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .category {
+            margin-bottom: 50px;
+        }
+        
+        .faq-item {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .question {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .question:before {
+            content: "❓";
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .answer {
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.7;
+            padding-left: 34px;
+        }
+        
+        .answer p {
+            margin-bottom: 10px;
+        }
+        
+        .answer ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .answer li {
+            margin-bottom: 8px;
+        }
+        
+        .tip {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip strong {
+            color: #059669;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning strong {
+            color: #d97706;
+        }
+        
+        .toc {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            padding: 8px 0;
+        }
+        
+        .toc a {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ef4444;
+            font-size: 14px;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .cover {
+                page-break-after: always;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+            
+            .faq-item {
+                page-break-inside: avoid;
+            }
+
+            .download-btn-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PORTADA -->
+    <div class="cover">
+        <h1>📊 KairosFin</h1>
+        <div class="subtitle">Preguntas Frecuentes</div>
+        <p style="font-size: 18px;">Respuestas rápidas a las dudas más comunes</p>
+        <div class="version">Versión 1.0 | 2025</div>
+    </div>
+
+    <!-- BOTÓN DE DESCARGA PDF -->
+    <div class="download-btn-container">
+        <button onclick="window.print()" class="download-btn">
+            📄 Descargar como PDF
+        </button>
+        <p class="download-note">
+            Haz clic en el botón y selecciona "Guardar como PDF" en la ventana de impresión
+        </p>
+    </div>
+
+    <!-- ÍNDICE -->
+    <div class="toc">
+        <h2>📑 Índice de Categorías</h2>
+        <ul>
+            <li><a href="#general">1. Preguntas Generales</a></li>
+            <li><a href="#inicio">2. Primeros Pasos</a></li>
+            <li><a href="#ingresos">3. Ingresos</a></li>
+            <li><a href="#egresos">4. Egresos</a></li>
+            <li><a href="#deudas">5. Deudas</a></li>
+            <li><a href="#descripciones">6. Descripciones</a></li>
+            <li><a href="#informes">7. Informes</a></li>
+            <li><a href="#problemas">8. Solución de Problemas</a></li>
+            <li><a href="#seguridad">9. Seguridad y Privacidad</a></li>
+        </ul>
+    </div>
+
+    <!-- CATEGORÍA 1: GENERAL -->
+    <div class="category" id="general">
+        <h2>1. Preguntas Generales</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Qué es KairosFin?</div>
+            <div class="answer">
+                <p>KairosFin es tu sistema financiero personal profesional que te permite gestionar tus ingresos, egresos y deudas de manera organizada. Puedes registrar todas tus transacciones, hacer seguimiento de tus obligaciones financieras y generar informes detallados para tener un control completo de tu situación económica.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Necesito instalar algo para usar KairosFin?</div>
+            <div class="answer">
+                <p>No, KairosFin es una aplicación web que funciona directamente desde tu navegador. Solo necesitas una conexión a internet y un navegador moderno (Chrome, Firefox, Safari, Edge).</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo usar KairosFin desde mi celular o tablet?</div>
+            <div class="answer">
+                <p>Sí, KairosFin es completamente responsivo y se adapta a cualquier dispositivo. Puedes acceder desde tu computadora, tablet o teléfono móvil sin problemas.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿KairosFin es gratuito?</div>
+            <div class="answer">
+                <p>Consulta con el administrador del sistema sobre el modelo de licenciamiento y costos. Para más información, contacta a través de info@kairosfin.com</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Mis datos están seguros?</div>
+            <div class="answer">
+                <p>Sí, KairosFin utiliza protocolos de seguridad estándar para proteger tu información financiera. Tus datos son privados y solo tú tienes acceso a ellos. Para más detalles, consulta la sección de <a href="#seguridad">Seguridad y Privacidad</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 2: PRIMEROS PASOS -->
+    <div class="category" id="inicio">
+        <h2>2. Primeros Pasos</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Por dónde empiezo a usar KairosFin?</div>
+            <div class="answer">
+                <p>Te recomendamos seguir estos pasos:</p>
+                <ul>
+                    <li><strong>Paso 1:</strong> Crea tus descripciones más comunes (categorías como "Salario", "Supermercado", "Servicios", etc.)</li>
+                    <li><strong>Paso 2:</strong> Registra tus deudas actuales si tienes alguna</li>
+                    <li><strong>Paso 3:</strong> Comienza a registrar tus ingresos y egresos diarios</li>
+                    <li><strong>Paso 4:</strong> Revisa tu página de Inicio para ver tu resumen financiero</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Debo registrar todas mis transacciones antiguas?</div>
+            <div class="answer">
+                <p>No es obligatorio. Puedes empezar a registrar desde hoy en adelante. Sin embargo, si quieres tener un historial completo, puedes registrar transacciones anteriores ingresando las fechas correspondientes.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué formato de fecha debo usar?</div>
+            <div class="answer">
+                <p>KairosFin usa el formato <code>dd/mm/aaaa</code> (día/mes/año). Por ejemplo: 15/12/2025. Los campos de fecha tienen este formato preestablecido.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo cambiar la moneda del sistema?</div>
+            <div class="answer">
+                <p>Actualmente KairosFin muestra los montos en pesos argentinos ($). Si necesitas usar otra moneda, contacta al soporte técnico.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 3: INGRESOS -->
+    <div class="category" id="ingresos">
+        <h2>3. Ingresos</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Qué tipos de ingresos puedo registrar?</div>
+            <div class="answer">
+                <p>Puedes registrar cualquier tipo de ingreso: salarios, trabajos freelance, ventas, inversiones, préstamos recibidos, regalos, alquileres, etc. Simplemente crea una descripción apropiada para cada tipo.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo registrar un ingreso con fecha futura?</div>
+            <div class="answer">
+                <p>Sí, puedes ingresar fechas futuras si esperas un ingreso próximo. Esto te ayuda a planificar tu flujo de caja.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo registro ingresos recurrentes como mi salario?</div>
+            <div class="answer">
+                <p>Debes registrar cada ingreso individualmente con su fecha correspondiente. Por ejemplo, si cobras tu salario mensualmente, registra un ingreso cada mes con la descripción "Salario" y la fecha de cobro.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo editar un ingreso después de agregarlo?</div>
+            <div class="answer">
+                <p>Sí, puedes editar cualquier ingreso. Búscalo en el historial, haz clic en el botón "Editar", modifica los campos que necesites y haz clic en "Actualizar".</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué pasa si elimino un ingreso por error?</div>
+            <div class="answer">
+                <p>Una vez eliminado, el ingreso no se puede recuperar. Por eso el sistema te pide confirmación antes de eliminar. Si eliminas algo por error, deberás volver a registrarlo manualmente.</p>
+                <div class="warning">
+                    <strong>⚠️ Importante:</strong> Siempre verifica los datos antes de confirmar una eliminación.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 4: EGRESOS -->
+    <div class="category" id="egresos">
+        <h2>4. Egresos</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Cuál es la diferencia entre un egreso y una deuda?</div>
+            <div class="answer">
+                <p>Un <strong>egreso</strong> es un gasto o pago que realizas (dinero que sale de tu bolsillo). Una <strong>deuda</strong> es una obligación que tienes pendiente de pagar. Cuando pagas una deuda, registras un egreso y lo asocias a esa deuda.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo registro el pago de una deuda?</div>
+            <div class="answer">
+                <p>Cuando registras un egreso, usa el campo "Pagar deuda (opcional)" para seleccionar la deuda que estás pagando. El sistema actualizará automáticamente el saldo de esa deuda.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo registrar pagos parciales de una deuda?</div>
+            <div class="answer">
+                <p>Sí, puedes hacer múltiples pagos parciales. Cada vez que registres un egreso asociado a la deuda, el saldo se reducirá automáticamente.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué pasa si edito un egreso que estaba asociado a una deuda?</div>
+            <div class="answer">
+                <p>Al editar un egreso vinculado a una deuda, verás el campo "Pagar deuda (opcional)" con el saldo anterior. En algunos casos, no podrás cambiar la deuda asociada. Si necesitas cambiarla, deberás eliminar el egreso y crear uno nuevo.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo organizo mejor mis gastos?</div>
+            <div class="answer">
+                <p>Te recomendamos crear descripciones por categorías:</p>
+                <ul>
+                    <li><strong>Esenciales:</strong> Supermercado, Servicios (luz, agua, gas, internet), Alquiler</li>
+                    <li><strong>Transporte:</strong> Combustible, Transporte Público, Uber/Taxi</li>
+                    <li><strong>Salud:</strong> Medicamentos, Consultas Médicas, Obra Social</li>
+                    <li><strong>Entretenimiento:</strong> Cine, Restaurantes, Streaming, Gimnasio</li>
+                    <li><strong>Educación:</strong> Cursos, Libros, Materiales</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 5: DEUDAS -->
+    <div class="category" id="deudas">
+        <h2>5. Deudas</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Qué tipos de deudas puedo registrar?</div>
+            <div class="answer">
+                <p>Puedes registrar cualquier tipo de obligación financiera: tarjetas de crédito, préstamos personales, créditos hipotecarios, préstamos de amigos/familia, cuotas de compras, etc.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo funciona el campo "Saldo" en las deudas?</div>
+            <div class="answer">
+                <p>El "Saldo" es la cantidad que aún debes. Cuando creas una deuda, el saldo es igual al monto total. A medida que registras egresos asociados a esa deuda (pagos), el saldo disminuye automáticamente.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué significa que una deuda esté en estado "Pagado"?</div>
+            <div class="answer">
+                <p>Cuando el saldo de una deuda llega a $0 (cero), el sistema cambia automáticamente su estado a "Pagado" (color verde). Las deudas pagadas no se pueden editar ni eliminar, quedan como registro histórico.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Por qué no puedo editar o eliminar una deuda pagada?</div>
+            <div class="answer">
+                <p>Las deudas pagadas se bloquean para mantener la integridad de tu historial financiero. Si necesitas modificar algo, deberás ajustar los egresos asociados a esa deuda.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo eliminar una deuda que tiene pagos asociados?</div>
+            <div class="answer">
+                <p>No directamente. Si una deuda tiene egresos vinculados, primero debes eliminar esos egresos. Una vez que no tenga pagos asociados, podrás eliminar la deuda.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo puedo ver qué pagos hice de una deuda específica?</div>
+            <div class="answer">
+                <p>Ve a la sección "Egresos" y usa los filtros de búsqueda. En la columna "Deuda" verás qué egresos están asociados a cada deuda (ejemplo: "Banco Macro — $5.648,25").</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué pasa si paso la fecha de vencimiento de una deuda?</div>
+            <div class="answer">
+                <p>El sistema muestra la fecha de vencimiento pero no genera alertas automáticas. Es tu responsabilidad revisar regularmente las fechas de vencimiento en la sección de Deudas.</p>
+                <div class="tip">
+                    <strong>💡 Consejo:</strong> Revisa semanalmente tu sección de Deudas para no olvidar ningún vencimiento.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 6: DESCRIPCIONES -->
+    <div class="category" id="descripciones">
+        <h2>6. Descripciones</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Para qué sirven las descripciones?</div>
+            <div class="answer">
+                <p>Las descripciones son categorías personalizadas que te ayudan a organizar tus transacciones. En lugar de escribir "Supermercado Día" cada vez, creas una descripción "Supermercado Día" y la seleccionas rápidamente desde el buscador.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cuál es la diferencia entre los tipos de descripción?</div>
+            <div class="answer">
+                <p>Los tipos (Ingreso, Egreso, Deuda, General) te ayudan a clasificar tus descripciones. Esto facilita encontrarlas cuando las necesitas. Por ejemplo, si creas una descripción tipo "Ingreso" para "Salario", solo aparecerá en el buscador cuando registres ingresos.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué significa el número en la columna "Usos"?</div>
+            <div class="answer">
+                <p>El número de "Usos" indica cuántas veces has utilizado esa descripción en ingresos, egresos o deudas. Una descripción con "45 usos" significa que la has usado 45 veces en total.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Por qué no puedo eliminar una descripción?</div>
+            <div class="answer">
+                <p>Solo puedes eliminar descripciones con "0 usos". Si tiene 1 o más usos, está vinculada a registros existentes y no se puede eliminar. En su lugar, márcala como "Inactiva" para que no aparezca en los buscadores.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué diferencia hay entre "Activa" e "Inactiva"?</div>
+            <div class="answer">
+                <p>Las descripciones <strong>Activas</strong> aparecen en los buscadores cuando registras transacciones. Las <strong>Inactivas</strong> se ocultan pero no se borran, manteniendo el historial de usos intacto.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Para qué sirven los campos adicionales (Teléfono, Email, Dirección)?</div>
+            <div class="answer">
+                <p>Estos campos son opcionales y útiles si la descripción representa una empresa o proveedor. Por ejemplo, para "Banco Macro" podrías agregar el teléfono de atención al cliente y la dirección de la sucursal.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cuántas descripciones puedo crear?</div>
+            <div class="answer">
+                <p>No hay un límite establecido. Puedes crear tantas descripciones como necesites para organizar tu información financiera.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 7: INFORMES -->
+    <div class="category" id="informes">
+        <h2>7. Informes</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Qué tipos de informes puedo generar?</div>
+            <div class="answer">
+                <p>Puedes generar informes de "Ingresos y Egresos" seleccionando el período que desees consultar. El sistema mostrará tablas detalladas y gráficos visuales de tu actividad financiera.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo interpreto los gráficos del informe?</div>
+            <div class="answer">
+                <p>El informe incluye dos gráficos:</p>
+                <ul>
+                    <li><strong>Comparativa por Mes - Barras:</strong> Muestra ingresos (verde) vs egresos (rojo) mes a mes, ideal para ver en qué meses gastaste más o menos</li>
+                    <li><strong>Tendencia por Mes - Líneas:</strong> Muestra la evolución temporal, útil para detectar patrones y tendencias</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo filtrar el informe por una descripción específica?</div>
+            <div class="answer">
+                <p>Sí, usa el campo "Desc" para filtrar por una descripción particular. Por ejemplo, puedes generar un informe solo de gastos en "Supermercado" durante el último año.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo descargo el informe en PDF?</div>
+            <div class="answer">
+                <p>Una vez generado el informe, haz clic en el botón "PDF" en la esquina superior derecha. El sistema generará un archivo PDF profesional con todos los datos, tablas y el resumen financiero que podrás descargar o imprimir.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿El PDF incluye los gráficos?</div>
+            <div class="answer">
+                <p>El PDF generado incluye la tabla detallada con todas las transacciones y el resumen financiero (totales de ingresos, egresos y saldo). Los gráficos interactivos solo están disponibles en la versión web.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Con qué frecuencia debo generar informes?</div>
+            <div class="answer">
+                <p>Se recomienda generar informes al menos una vez al mes para revisar tu situación financiera. También puedes generarlos antes de tomar decisiones importantes o cuando necesites analizar tus patrones de gasto.</p>
+                <div class="tip">
+                    <strong>💡 Consejo:</strong> Descarga el PDF mensual y guárdalo como respaldo de tu actividad financiera.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 8: PROBLEMAS -->
+    <div class="category" id="problemas">
+        <h2>8. Solución de Problemas</h2>
+        
+        <div class="faq-item">
+            <div class="question">No aparecen mis registros en la tabla, ¿qué hago?</div>
+            <div class="answer">
+                <p>Verifica lo siguiente:</p>
+                <ul>
+                    <li>¿Tienes filtros aplicados? Haz clic en "Limpiar" para resetear los filtros</li>
+                    <li>¿Estás buscando en el rango de fechas correcto? Ajusta las fechas "De" y "A"</li>
+                    <li>¿Hiciste clic en "Buscar"? Los registros no se muestran automáticamente</li>
+                    <li>¿Estás en la página correcta? Verifica la paginación en la parte inferior</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">El saldo de mi deuda no se actualiza, ¿por qué?</div>
+            <div class="answer">
+                <p>El saldo de una deuda solo se actualiza cuando registras un egreso Y lo asocias a esa deuda usando el campo "Pagar deuda (opcional)". Si registraste un egreso sin vincularlo, la deuda no se actualizará. Edita el egreso y asocia la deuda correcta.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Eliminé un registro por error, ¿puedo recuperarlo?</div>
+            <div class="answer">
+                <p>No, las eliminaciones son permanentes y no se pueden deshacer. Deberás volver a registrar la información manualmente. Por eso el sistema siempre pide confirmación antes de eliminar.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Los gráficos de la página de Inicio no muestran información</div>
+            <div class="answer">
+                <p>Los gráficos se generan automáticamente basándose en tus registros del año actual. Si acabas de empezar a usar KairosFin, los gráficos estarán vacíos hasta que registres ingresos, egresos o deudas.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">No puedo editar ni eliminar una deuda pagada</div>
+            <div class="answer">
+                <p>Esto es normal. Las deudas con estado "Pagado" se bloquean automáticamente para proteger tu historial financiero. Los botones Editar y Eliminar aparecen deshabilitados (en gris) para estas deudas.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">El botón "Agregar" no funciona</div>
+            <div class="answer">
+                <p>Asegúrate de completar todos los campos obligatorios:</p>
+                <ul>
+                    <li><strong>Ingresos/Egresos:</strong> Descripción, Monto y Fecha</li>
+                    <li><strong>Deudas:</strong> Descripción, Monto, Fecha y Vencimiento</li>
+                    <li><strong>Descripciones:</strong> Descripción y Tipo</li>
+                </ul>
+                <p>Si algún campo obligatorio está vacío o tiene un formato incorrecto, el botón podría no responder.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">El formato de fecha no es aceptado</div>
+            <div class="answer">
+                <p>KairosFin requiere el formato <code>dd/mm/aaaa</code>. Por ejemplo:</p>
+                <ul>
+                    <li>✅ Correcto: 15/12/2025</li>
+                    <li>❌ Incorrecto: 12/15/2025 (formato americano)</li>
+                    <li>❌ Incorrecto: 15-12-2025 (guiones en lugar de barras)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">La página se ve mal en mi celular</div>
+            <div class="answer">
+                <p>KairosFin está optimizado para dispositivos móviles. Si ves algo raro:</p>
+                <ul>
+                    <li>Intenta rotar la pantalla a horizontal para ver tablas completas</li>
+                    <li>Actualiza la página (F5 o deslizar hacia abajo)</li>
+                    <li>Verifica que tu navegador esté actualizado</li>
+                    <li>Prueba con otro navegador (Chrome, Firefox, Safari)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORÍA 9: SEGURIDAD -->
+    <div class="category" id="seguridad">
+        <h2>9. Seguridad y Privacidad</h2>
+        
+        <div class="faq-item">
+            <div class="question">¿Quién puede ver mi información financiera?</div>
+            <div class="answer">
+                <p>Solo tú tienes acceso a tu información. KairosFin es un sistema personal y privado. Nadie más puede ver tus registros a menos que compartas tu acceso.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿KairosFin guarda mi información bancaria?</div>
+            <div class="answer">
+                <p>No. KairosFin solo registra la información que TÚ ingresas manualmente (montos, descripciones, fechas). NO solicita ni almacena números de tarjetas, contraseñas bancarias, ni datos sensibles.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo hacer una copia de seguridad de mis datos?</div>
+            <div class="answer">
+                <p>Actualmente, puedes generar informes en PDF para respaldar tu información. Para una copia de seguridad completa de tu base de datos, contacta al soporte técnico en info@kairosfin.com</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué pasa si olvido mi contraseña?</div>
+            <div class="answer">
+                <p>Si KairosFin tiene un sistema de autenticación con contraseña, busca la opción "¿Olvidaste tu contraseña?" en la página de inicio de sesión. Si no existe esta opción, contacta al administrador del sistema.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Puedo compartir mi cuenta con otra persona?</div>
+            <div class="answer">
+                <p>No es recomendable por razones de seguridad y privacidad. Si necesitas que otra persona tenga acceso (como tu contador), consulta con el administrador sobre la posibilidad de crear cuentas adicionales o permisos especiales.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Cómo protejo mi cuenta?</div>
+            <div class="answer">
+                <p>Recomendaciones de seguridad:</p>
+                <ul>
+                    <li>Usa una contraseña fuerte y única</li>
+                    <li>No compartas tu contraseña con nadie</li>
+                    <li>Cierra sesión cuando uses computadoras públicas</li>
+                    <li>Mantén tu navegador actualizado</li>
+                    <li>No accedas desde redes WiFi públicas sin VPN</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">¿Qué hago si detecto actividad sospechosa en mi cuenta?</div>
+            <div class="answer">
+                <p>Si notas registros que no creaste o cambios no autorizados:</p>
+                <ol>
+                    <li>Cambia tu contraseña inmediatamente</li>
+                    <li>Revisa tu historial de operaciones</li>
+                    <li>Contacta al soporte técnico: info@kairosfin.com</li>
+                    <li>Reporta cualquier anomalía detalladamente</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <h3 style="color: #1e3a5f; margin-bottom: 20px;">¿Tienes más preguntas? 💬</h3>
+        <p>Si no encontraste la respuesta que buscabas, no dudes en contactarnos:</p>
+        <p style="margin-top: 20px;">
+            📧 <strong>Email:</strong> info@kairosfin.com<br>
+            📱 <strong>Teléfono:</strong> +54 9 11 1234-5678<br>
+            🌐 <strong>Web:</strong> www.kairosfin.com
+        </p>
+        <p style="margin-top: 30px;">
+            <strong>KairosFin</strong> - Tu Sistema Financiero Personal Profesional<br>
+            Versión 1.0 | © 2025 | Todos los derechos reservados<br>
+            Desarrollado por Pablo Almada
+        </p>
+    </div>
+
+</body>
+</html>

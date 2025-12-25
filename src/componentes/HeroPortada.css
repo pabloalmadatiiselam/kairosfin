@@ -1,0 +1,266 @@
+/* ============================================
+   HERO PORTADA - KairosFin
+   ============================================ */
+
+.hero-portada {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 50%, #dce4ec 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============================================
+   BARRA LATERAL IZQUIERDA
+   ============================================ */
+
+.hero-sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;  
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);  /* ← Azul oscuro unificado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 137px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  
+  /* Borde suave y redondeado */
+  border-right: 1px solid rgba(200, 210, 220, 0.4);
+  border-radius: 0 16px 16px 0;
+}
+
+.hero-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.hero-sidebar-link {
+  /* Eliminar estilos de botón por defecto */
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+  padding: 16px 12px;
+  border-radius: 12px;
+}
+
+.hero-sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+  color: #ffffff;
+}
+
+.sidebar-icon {
+  font-size: 36px;
+  filter: grayscale(20%);
+}
+
+.sidebar-text {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   CONTENIDO PRINCIPAL
+   ============================================ */
+
+.hero-content {
+  text-align: center;
+  z-index: 20;
+  max-width: 900px;
+  padding: 40px 20px;
+  animation: fadeInUp 1s ease-out;
+  margin-left: 140px; /* Espacio para la barra lateral */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LOGO */
+.hero-logo {
+  margin: 0 auto 32px;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+/* TÍTULO PRINCIPAL */
+.hero-title {
+  font-size: 80px;
+  font-weight: 800;
+  margin: 0 0 24px 0;
+  letter-spacing: -2px;
+  color: #1e293b;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* SUBTÍTULO */
+.hero-subtitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: #334155;
+  letter-spacing: -0.5px;
+}
+
+/* DESCRIPCIÓN */
+.hero-description {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE HERO - MEJORADO
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .hero-sidebar {
+    width: 100px;
+    padding-top: 120px;
+  }
+
+  .hero-content {
+    margin-left: 100px;
+  }
+
+  .hero-title {
+    font-size: 60px;
+  }
+
+  .hero-subtitle {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-sidebar {
+    width: 70px;
+    padding-top: 100px;
+  }
+  
+  .hero-sidebar-nav {
+    gap: 20px;
+    padding: 0 6px;
+  }
+  
+  .sidebar-icon {
+    font-size: 24px;
+  }
+  
+  .sidebar-text {
+    font-size: 10px;
+  }
+  
+  .hero-content {
+    margin-left: 70px;
+    padding: 20px 15px;
+  }
+  
+  .hero-title {
+    font-size: 40px;
+  }
+  
+  .hero-subtitle {
+    font-size: 22px;
+  }
+  
+  .hero-description {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-sidebar {
+    width: 55px;
+    padding-top: 80px;
+  }
+  
+  .sidebar-text {
+    display: none;
+  }
+
+  .sidebar-icon {
+    font-size: 20px;
+  }
+
+  .hero-sidebar-link {
+    padding: 12px 8px;
+  }
+  
+  .hero-content {
+    margin-left: 55px;
+    padding: 15px 10px;
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-sidebar {
+    width: 50px;
+  }
+  
+  .hero-content {
+    margin-left: 50px;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+}

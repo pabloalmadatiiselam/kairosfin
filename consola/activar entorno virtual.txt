@@ -1,0 +1,10 @@
+ACTIVAR EL ENTORNO VIRTUAL
+venv\Scripts\activate
+
+INICIAR EL SERVIDOR BAKEND DE FASTAPI
+uvicorn src.main:app --reload
+
+INICIAR REACT CON VITE
+npm run dev
+
+

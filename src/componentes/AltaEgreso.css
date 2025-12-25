@@ -1,0 +1,1351 @@
+/* Contenedor principal: dos columnas (tabla izquierda + formulario derecha) */
+.egreso-container {
+  display: flex;
+  gap: 10px;  
+  padding: 3px 0px 0px 0px;  /* ← Reducido de 18 px a 3px en el padding superior */
+  max-width: 1200px;  
+  margin: 10px auto;   /* 🔹 antes 20px → lo reducimosa 10px*/
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+/* Título principal centrado */
+.titulo-principal,
+h1.titulo-principal {
+  width: 100%;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-family: 'Impact', 'Haettenschweiler', 'Arial Black', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 75px 0px 20px 0px;
+  color: #1D283A !important;
+  text-shadow: 2px 2px 4px rgba(29, 40, 58, 0.2);
+}
+
+.titulo-principal h1{
+  margin: 0;  
+}
+
+
+/* Columna izquierda: lista de egresos */
+.tabla-filtros {
+  flex: 1;
+  min-width: 300px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.08) 0%, rgba(15, 23, 42, 0.12) 100%);
+  padding: 8.7px 18px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(30, 41, 59, 0.20);
+  height: auto;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box; 
+}
+
+/* Subtítulo Lista */
+.tabla-filtros h2 {
+  margin-bottom: 6px;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #1D283A;
+  border-bottom: 2px solid rgba(29, 40, 58, 0.25);
+  padding-bottom: 4px;
+}
+
+/* Tabla de egresos */
+.tabla-egresos {
+  flex: 1;
+  overflow: visible;
+  margin-bottom: 6px;
+}
+
+.tabla-egresos table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Cabecera de tabla */
+.tabla-egresos th {
+  padding: 10px;
+  border: 1px solid #94a3b8;
+  background-color: #f8fafc;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+/* Filas de registros */
+.tabla-egresos td {
+  padding: 10px;
+  border: 1px solid #94a3b8;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+/* Botones dentro de la tabla */
+.acciones button {
+  margin: 2px;
+  padding: 4px 8px; /* Reducido de 6px 10px */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem; /* Reducido de 0.82rem */
+  color: #fff;
+  white-space: nowrap; /*← Esto evita que el texto se rompa */
+}
+
+/* Botón Editar: azul */
+.acciones button:first-child {
+  background-color: #3399ff;
+}
+.acciones button:first-child:hover { background-color: #0077cc; }
+
+/* Botón Eliminar: rojo */
+.acciones button:last-child {
+  background-color: #ff4d4d;
+}
+.acciones button:last-child:hover { background-color: #cc0000; }
+
+/* Sección de paginación */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.paginacion button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0088fe;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.paginacion button:disabled { background-color: #ccc; cursor: not-allowed; }
+.paginacion button:hover:not(:disabled) { background-color: #006fcb; }
+
+/* Filtro por fechas y descripcion: etiquetas a la izquierda */
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+}
+
+/* labels con layout horizontal */
+.filtros label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Inputs de fecha en filtros */
+.filtro-input-fecha {
+  width: 120px !important;
+  height: 30px !important;
+  padding: 6px 8px !important;
+  border: 1px solid #d0d7dd !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  box-sizing: border-box !important;
+  line-height: normal !important;
+}
+/*
+.botones-filtro {
+  display: flex;
+  gap: 6px;  /* ✅ AGREGAR: Separación entre botones 
+}
+*/
+/* Botones Buscar y Limpiar */
+/*
+.botones-filtro button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0088fe;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 100px;  /* ✅ CAMBIO: de 85px a 100px para igualar Ingresos 
+}
+*/
+/*
+.botones-filtro button:hover {
+  background-color: #006fcb;
+}
+*/
+
+.botones-filtro {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0; /* ← Evita que se encogian */
+  white-space: nowrap; /* ← Evita saltos de línea */
+  margin: 0 5px;  /* ← NUEVA LÍNEA */
+}
+
+.botones-filtro button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0088fe;
+  color: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 100px;
+  height: 38px;  /* ← AGREGAR ESTA LÍNEA (igual que Ingresos) */
+}
+
+.botones-filtro button:hover {
+  background-color: #006fcb;
+}
+
+/* Opcional: Si aún se rompe, fuerza el ancho mínimo */
+.filtros .botones-filtro {
+  min-width: 220px; /* Ajusta según necesidad */
+}
+
+.botones-filtro button:active {
+  transform: scale(0.98);
+}
+
+/* Columna derecha: formulario */
+.formulario-egreso {
+  flex: 0.5;
+  min-width: 250px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  padding: 8.7px 18px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: none;
+  height: 360px;
+  box-sizing: border-box;
+}
+
+/* Subtítulo Alta / Editar */
+.formulario-egreso h2 {
+  margin-bottom: 6px;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffffff;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 4px;
+}
+
+/* Campos del formulario */
+.formulario-egreso label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.formulario-egreso input[type="text"],
+.formulario-egreso input[type="number"],
+.formulario-egreso input[type="date"],
+.formulario-egreso select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  box-sizing: border-box;
+}
+
+.formulario-egreso input:focus,
+.formulario-egreso select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Botón principal del formulario */
+.formulario-egreso button {
+  margin-top: 6px;
+  padding: 12px;
+  width: 100%;
+  background-color: #0088fe;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.formulario-egreso button:hover { background-color: #006fcb; }
+
+/* Mensajes (si se usan en el form) */
+.error { color: #c53030; margin-top: 6px; font-size: 0.92rem; }
+.success { color: #1a7f2e; margin-top: 6px; font-size: 0.92rem; }
+
+
+/* === Barra de estado (fija dentro del contenedor, abajo) === */
+.barra-estado {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.06) 0%, rgba(15, 23, 42, 0.09) 100%);
+  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(30, 41, 59, 0.15);
+  box-sizing: border-box;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Contenedor interior: distribuye en 3 zonas */
+.estado-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+/* 🔹 IZQUIERDA: Contador + mensajes de tabla */
+.estado-izquierda {
+  text-align: left;
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1; /* ← AGREGAR: Ocupa espacio disponible */
+  min-width: 0; /* ← AGREGAR: Permite que se encoja si hace falta */
+}
+
+.estado-contador {
+  color: #374151;
+}
+
+/* 🔹 CENTRO: Mensaje neutro */
+.estado-centro {
+  text-align: center;
+  flex-shrink: 0; /* ← AGREGAR: No se encoge */
+}
+
+/* 🔹 DERECHA: Mensajes de formulario */
+.estado-derecha {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  flex: 1; /* ← AGREGAR: Ocupa espacio disponible */
+  min-width: 0; /* ← AGREGAR: Permite que se encoja si hace falta */
+}
+
+
+/* 🔹 Colores de mensajes */
+.barra-estado .mensaje-exito {
+  color: #1a7f2e;
+}
+
+.barra-estado .mensaje-error {
+  color: #c53030;
+}
+
+.barra-estado .mensaje-neutro {
+  color: #4b5563;
+}
+
+/* Compactar filas y celdas (más espacio para filas) */
+.egreso-container .tabla-filtros table th,
+.egreso-container .tabla-filtros table td {
+  padding: 4px 8px !important;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+/* Forzar altura de fila (opcional: ajustá si hace falta) */
+.egreso-container .tabla-filtros table tbody tr {
+  height: 46px;
+}
+
+/* Ajustes menores: reducir espacios arriba/abajo */
+.egreso-container .tabla-filtros h2 { margin-bottom: 6px; }
+.egreso-container .filtros { margin-bottom: 6px; gap: 8px; }
+
+
+/* AGREGAR: Estilos para fechas en línea */
+.fecha-deuda-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.fecha-input-egreso {
+  flex: 1;
+}
+
+.fecha-input-egreso label,
+.deuda-input-egreso label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #ffffff;  /* ← CAMBIO: de #333 a #ffffff */
+}
+
+/* Input de fecha - se mantiene igual */
+.fecha-input-egreso input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d7dd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+/* Select de deuda - uniforme con los demás */
+.formulario-egreso select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);  /* ← CAMBIO */
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.95);  /* ← CAMBIO */
+  color: #ffffff;  /* ← Mantener texto oscuro */
+  cursor: pointer;
+  height: 42px;
+}
+
+.formulario-egreso select:hover {
+  border-color: #0088fe;
+}
+
+.formulario-egreso select:focus {
+  outline: none;
+  border-color: #0088fe;
+  box-shadow: 0 0 0 2px rgba(0, 136, 254, 0.1);
+}
+
+.formulario-egreso select:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+  border-color: #dee2e6;
+}
+
+.formulario-egreso select option {
+  padding: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+}
+
+
+.deuda-input-egreso {
+  flex: 1;
+}
+
+
+/*ULTIMOS CAMBIOS*/
+/* AGREGAR estos estilos al final de AltaEgreso.css */
+
+/* Ajustar el contenedor de fecha y deuda para mejor distribución */
+.fecha-deuda-container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start; /* Alinear al inicio para mejor apariencia */
+}
+
+/* Reducir ancho del input de fecha */
+.fecha-input-egreso {
+  flex: 0.4; /* Reducir de flex: 1 a flex: 0.4 (40% del espacio) */
+  min-width: 120px; /* Ancho mínimo para que la fecha no se corte */
+}
+
+.fecha-input-egreso input[type="date"] {
+  width: 100%;
+  min-width: 120px; /* Asegurar que siempre tenga espacio para la fecha */
+}
+
+/* Aumentar ancho del select de deuda */
+.deuda-input-egreso {
+  flex: 0.6; /* Aumentar a 60% del espacio disponible */
+  min-width: 200px; /* Ancho mínimo para mostrar descripciones completas */
+}
+
+.deuda-input-egreso select {
+  width: 100%;
+  min-width: 200px; /* Asegurar espacio suficiente para descripción + monto */
+  /* Ajustar padding para mejor legibilidad */
+  padding: 8px 12px;
+  text-overflow: ellipsis; /* Cortar con ... si aún es muy largo */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Opcional: Mejorar la presentación del texto en el select */
+.deuda-input-egreso select option {
+  padding: 4px 8px;
+  font-size: 0.95rem;
+}
+
+/* ========================================
+   BOTONES X PARA LIMPIAR FECHAS
+   ======================================== */
+
+/*
+.clear-date-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e3a5f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 0;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.clear-date-btn:hover {
+  background: #152943;
+}
+*/
+
+/* ========================================
+   BOTONES X PARA LIMPIAR FECHAS - VERSION REFORZADA
+   ======================================== */
+.clear-date-btn {
+  position: absolute !important;
+  right: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: #1e3a5f !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 14px !important;
+  padding: 0 !important;
+  transition: background-color 0.2s !important;
+  z-index: 10 !important;
+}
+
+.clear-date-btn:hover {
+  background: #152943 !important;
+}
+
+
+/* ========================================
+   AJUSTE CALENDARIO REACT-DATEPICKER FORMULARIO
+   ======================================== */
+
+.formulario-ingreso .react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+.formulario-ingreso .react-datepicker-popper[data-placement^="bottom"] {
+  margin-top: 8px !important;
+}
+
+.formulario-ingreso .react-datepicker-popper[data-placement^="top"] {
+  margin-bottom: 8px !important;
+}
+
+.formulario-ingreso .react-datepicker {
+  max-height: 320px !important;
+}
+
+/* ========================================
+   DÍAS DEL CALENDARIO - REACT DATEPICKER
+   ======================================== */
+
+/* Contenedor del mes */
+.react-datepicker__month {
+  margin: 0.4rem !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+/* Semanas */
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+  white-space: nowrap !important;
+}
+
+/* ✅ DÍAS - FORZAR VISIBILIDAD */
+.react-datepicker__day {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #333 !important;
+  font-size: 0.85rem !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  line-height: 2rem !important;
+  margin: 0.166rem !important;
+  border-radius: 4px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+}
+
+/* Días de otros meses (grises) */
+.react-datepicker__day--outside-month {
+  color: #ccc !important;
+  cursor: default !important;
+  visibility: visible !important;
+}
+
+/* Día seleccionado (azul marino) */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #0056b3 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Día hover */
+.react-datepicker__day:hover:not(.react-datepicker__day--outside-month):not(.react-datepicker__day--selected) {
+  background-color: #e3f2fd !important;
+  color: #0056b3 !important;
+}
+
+/* Día de hoy (borde azul) */
+.react-datepicker__day--today {
+  font-weight: bold !important;
+  border: 2px solid #0056b3 !important;
+  background-color: transparent !important;
+}
+
+/* Día deshabilitado */
+.react-datepicker__day--disabled {
+  color: #ccc !important;
+  cursor: not-allowed !important;
+}
+
+
+/* ========================================
+   FIX PARA REACT-DATEPICKER v8.x
+   ======================================== */
+
+/* Mostrar el contenedor del calendario */
+.react-datepicker__month-container {
+  display: block !important;
+}
+
+/* Asegurar que el mes sea visible */
+.react-datepicker__month {
+  display: block !important;
+  margin: 0.4rem !important;
+}
+
+/* Forzar visibilidad de semanas */
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+/* ✅ DÍAS - Versión 8.x usa estructura diferente */
+.react-datepicker__day,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day--selected,
+.react-datepicker__day--today,
+.react-datepicker__day--outside-month {
+  display: inline-block !important;
+  width: 1.7rem !important;
+  height: 1.7rem !important;
+  line-height: 1.7rem !important;
+  text-align: center !important;
+  margin: 0.166rem !important;
+  border-radius: 0.3rem !important;
+  color: #000 !important;
+  font-size: 0.875rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Días fuera del mes actual */
+.react-datepicker__day--outside-month {
+  color: #ccc !important;
+}
+
+/* Día seleccionado */
+.react-datepicker__day--selected {
+  background-color: #0056b3 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+/* Día de hoy */
+.react-datepicker__day--today {
+  font-weight: bold !important;
+  border: 2px solid #0056b3 !important;
+}
+
+/* Hover */
+.react-datepicker__day:hover {
+  background-color: #f0f0f0 !important;
+  border-radius: 0.3rem !important;
+}
+
+/* ========================================
+   FLECHAS DE NAVEGACIÓN IGUALES EN TODOS LOS CALENDARIOS
+   ======================================== */
+/* ========================================
+   FLECHAS IGUALES Y VISIBLES EN TODOS LOS CALENDARIOS
+   ======================================== */
+
+/* Resetear completamente las flechas */
+.react-datepicker__navigation {
+  top: 12px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border: solid white !important;
+  border-width: 0 2px 2px 0 !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+/* Flecha izquierda (anterior) */
+.react-datepicker__navigation--previous {
+  left: 12px !important;
+  transform: rotate(135deg) !important;
+  border-right-color: white !important;
+  border-bottom-color: white !important;
+}
+
+/* Flecha derecha (siguiente) */
+.react-datepicker__navigation--next {
+  right: 12px !important;
+  transform: rotate(-45deg) !important;
+  border-right-color: white !important;
+  border-bottom-color: white !important;
+}
+
+/* Hover de las flechas */
+.react-datepicker__navigation:hover {
+  opacity: 0.7 !important;
+}
+
+/* Ocultar el icono interno que genera react-datepicker */
+.react-datepicker__navigation-icon::before {
+  display: none !important;
+}
+
+.react-datepicker__navigation-icon {
+  display: none !important;
+}
+
+/* Botón de limpiar */
+.react-datepicker__close-icon::after {
+  background-color: #ff4d4d !important;
+  font-size: 16px !important;
+  padding: 2px !important;
+}
+
+/* Forzar estilos en todos los DatePickers */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+/* ========================================
+   FIX DEFINITIVO REACT-DATEPICKER v8.x - DÍAS VISIBLES
+   ======================================== */
+
+/* Ocultar el texto completo (sr-only) */
+.react-datepicker__sr-only {
+  display: none !important;
+}
+
+/* MOSTRAR las abreviaturas de días (lu, ma, mi...) */
+.react-datepicker__day-name span[aria-hidden="true"] {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+
+/* Contenedor de nombres de días */
+.react-datepicker__day-names {
+  display: flex !important;
+  justify-content: space-around !important;
+  margin-bottom: 5px !important;
+}
+
+.react-datepicker__day-name {
+  display: inline-block !important;
+  width: 2rem !important;
+  line-height: 2rem !important;
+  text-align: center !important;
+  color: #ffffff !important;
+}
+
+/* ========================================
+   MOSTRAR NÚMEROS DE DÍAS DEL MES - v8.x
+   ======================================== */
+
+/* Contenedor de días del mes */
+div[role="gridcell"] {
+  display: inline-block !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  line-height: 2rem !important;
+  text-align: center !important;
+  margin: 0.166rem !important;
+  visibility: visible !important;
+}
+
+/* Los números de días están en spans con aria-hidden */
+div[role="gridcell"] span[aria-hidden="true"] {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #333 !important;
+  font-size: 0.85rem !important;
+  cursor: pointer !important;
+}
+
+/* Ocultar el texto completo sr-only de los días */
+div[role="gridcell"] .react-datepicker__sr-only {
+  display: none !important;
+}
+
+/* Día seleccionado (tiene clase especial) */
+div[role="gridcell"].react-datepicker__day--selected span[aria-hidden="true"],
+div[role="gridcell"].react-datepicker__day--keyboard-selected span[aria-hidden="true"] {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Hover en días */
+div[role="gridcell"]:hover span[aria-hidden="true"] {
+  background-color: #e3f2fd !important;
+  border-radius: 4px !important;
+  color: #0056b3 !important;
+}
+
+/* Días de otros meses (fuera del mes actual) */
+div[role="gridcell"].react-datepicker__day--outside-month span[aria-hidden="true"] {
+  color: #ccc !important;
+}
+
+/* Día de hoy */
+div[role="gridcell"].react-datepicker__day--today span[aria-hidden="true"] {
+  font-weight: bold !important;
+  border: 2px solid #0056b3 !important;
+  border-radius: 4px !important;
+}
+
+/* ======== CORRIGE COLOR Y VISIBILIDAD DE LOS NOMBRES DE LOS DÍAS ======== */
+.calendario-formulario div[role="columnheader"] span,
+.calendario-formulario .react-datepicker__day-name {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: inline-block !important;
+}
+
+/* ========================================
+   MODAL DE CONFIRMACIÓN CENTRADO
+   ======================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.modal-content p {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-btn-eliminar {
+  padding: 10px 24px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.modal-btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+.modal-btn-cancelar {
+  padding: 10px 24px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modal-btn-cancelar:hover {
+  background-color: #5a6268;
+}
+
+/* ========================================
+   FILTRO DE DESCRIPCIÓN
+   ======================================== */
+
+/* Labels de filtros */
+.filtro-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.80rem;
+  font-weight: 600;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Select de descripción en filtros */
+.filtro-select-descripcion {
+  width: 160px;
+  padding: 4px 6px;
+  border: 1px solid #d0d7dd;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background: white;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.filtro-select-descripcion:hover {
+  border-color: #0088fe;
+}
+
+.filtro-select-descripcion:focus {
+  outline: none;
+  border-color: #0088fe;
+  box-shadow: 0 0 0 2px rgba(0, 136, 254, 0.1);
+}
+
+/* ========================================
+   AJUSTE CALENDARIO REACT-DATEPICKER FORMULARIO
+   ======================================== */
+
+.formulario-egreso .react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+.formulario-egreso .react-datepicker-popper[data-placement^="bottom"] {
+  margin-top: 8px !important;
+}
+
+.formulario-egreso .react-datepicker-popper[data-placement^="top"] {
+  margin-bottom: 8px !important;
+}
+
+.formulario-egreso .react-datepicker {
+  max-height: 320px !important;
+}
+
+/* Estilo para columna Deuda */
+.tabla-egresos td:nth-child(4) {
+  font-size: 0.85rem;
+  padding: 8px 6px;
+}
+.tabla-egresos td:nth-child(4) span[style*="bold"] {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* pequeño ajuste responsive 
+@media (max-width: 900px) {
+  .tabla-filtros { min-width: 100%; height: auto; }
+  .formulario-egreso { min-width: 100%; height: auto; }
+  .egreso-container { padding: 12px; gap: 12px; }
+}
+*/
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================ */
+
+/* 📱 TABLET (768px - 1023px) */
+@media (max-width: 1023px) {
+  .egreso-container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .tabla-filtros,
+  .formulario-egreso {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .formulario-egreso {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .titulo-principal {
+    font-size: 1.8rem;
+    margin: 60px 0 10px 0 !important;
+  }
+
+  /* ✅ BOTONES AJUSTADOS */
+  .botones-filtro {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .botones-filtro button {
+    flex: 0 1 auto;
+    min-width: 100px;
+    max-width: 120px;
+  }
+}
+
+
+/* 📱 MÓVIL GRANDE (640px - 767px) */
+@media (max-width: 767px) {
+  /* ✅ FORZAR contenedor de lista para permitir scroll */
+  .tabla-filtros {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Quitar restricciones del tabla-con-scroll */
+  .tabla-egresos {
+    overflow: visible !important;
+    width: auto !important;
+  }
+
+  /* Forzar ancho mínimo de la tabla */
+  .tabla-filtros table {
+    min-width: 650px !important;
+    width: 650px !important;
+    table-layout: fixed !important;
+  }
+
+  /* Hacer columnas de ancho fijo */
+  .tabla-filtros th:nth-child(1),
+  .tabla-filtros td:nth-child(1) {
+    width: 150px !important;
+    min-width: 150px !important;
+  }
+
+  .tabla-filtros th:nth-child(2),
+  .tabla-filtros td:nth-child(2) {
+    width: 120px !important;
+    min-width: 120px !important;
+  }
+
+  .tabla-filtros th:nth-child(3),
+  .tabla-filtros td:nth-child(3) {
+    width: 110px !important;
+    min-width: 110px !important;
+  }
+
+  .tabla-filtros th:nth-child(4),
+  .tabla-filtros td:nth-child(4) {
+    width: 100px !important;
+    min-width: 100px !important;
+  }
+
+  .tabla-filtros th:nth-child(5),
+  .tabla-filtros td:nth-child(5) {
+    width: 170px !important;
+    min-width: 170px !important;
+  }
+
+  /* Barra de scroll MÁS VISIBLE */
+  .tabla-filtros::-webkit-scrollbar {
+    height: 14px !important;
+  }
+
+  .tabla-filtros::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
+    margin: 0 10px !important;
+  }
+
+  .tabla-filtros::-webkit-scrollbar-thumb {
+    background: #0088fe !important;
+    border-radius: 10px !important;
+    border: 3px solid #f1f1f1 !important;
+  }
+
+  .tabla-filtros::-webkit-scrollbar-thumb:hover {
+    background: #006fcb !important;
+  }
+
+  /* ✅ NUEVO: Filtros apilados verticalmente CON ESPACIADO */
+  .filtros {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px !important;
+    padding: 10px;
+  }
+
+  .filtros label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .filtro-input-fecha {
+    width: 100% !important;
+    height: 44px !important;
+  }
+
+  /* ✅ BOTONES EN FILA HORIZONTAL */
+  .botones-filtro {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  /* ✅ BOTONES CENTRADOS CON SEPARACIÓN */
+  .filtros-flex-container,
+  .filtros {
+    align-items: center;
+  }
+
+  .botones-filtro {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .botones-filtro button {
+    margin: 0 5px !important;
+  }
+
+  .botones-filtro button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Fecha y deuda en columna */
+  .fecha-deuda-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fecha-input-egreso,
+  .deuda-input-egreso {
+    width: 100%;
+  }
+}
+
+/* 📱 MÓVIL PEQUEÑO (320px - 639px) */
+@media (max-width: 639px) {
+  .egreso-container {
+    padding: 5px;
+    gap: 10px;
+    margin: 5px auto;
+  }
+
+  .titulo-principal {
+    font-size: 1.3rem;
+    margin: 40px 0 6px 0 !important;
+    letter-spacing: 1px;
+  }
+
+  .tabla-filtros h2,
+  .formulario-egreso h2 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    padding-bottom: 3px;
+  }
+
+  .tabla-filtros,
+  .formulario-egreso {
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  /* Tabla ultra compacta */
+  .tabla-filtros table {
+    min-width: 550px;
+  }
+
+  .tabla-filtros th,
+  .tabla-filtros td {
+    font-size: 0.75rem;
+    padding: 3px 4px;
+  }
+
+  /* Formulario más compacto */
+  .formulario-egreso label {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
+  .formulario-egreso input[type="text"],
+  .formulario-egreso input[type="number"] {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .formulario-egreso button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  /* Barra de estado compacta */
+  .barra-estado {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+
+  .estado-contador {
+    font-size: 0.8rem;
+  }
+
+  /* Modal responsive */
+  .modal-content {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .modal-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-content p {
+    font-size: 0.9rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .modal-btn-eliminar,
+  .modal-btn-cancelar {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   💻 DESKTOP PEQUEÑO (1024x768)
+   ============================================ */
+@media (min-width: 1024px) and (max-height: 768px) {
+  /* ✅ AJUSTAR BOTONES PARA QUE NO SE DESBORDEN */
+  .botones-filtro {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .botones-filtro button {
+    flex: 0 0 auto;
+    min-width: 95px;
+    max-width: 95px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+}
+
+/* 📱 MÓVIL MUY PEQUEÑO (menos de 375px) */
+@media (max-width: 374px) {
+  .titulo-principal {
+    font-size: 1.1rem;
+  }
+
+  .filtros {
+    gap: 8px;
+  }
+
+  .botones-filtro button {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    min-width: auto;
+    height: 32px;
+  }
+
+  .tabla-filtros table {
+    min-width: 500px;
+  }
+}
+
