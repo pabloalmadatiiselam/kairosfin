@@ -8,7 +8,8 @@ from sqlalchemy.orm import sessionmaker
 
 from urllib.parse import quote_plus
 
-
+import os 
+from dotenv import load_dotenv
 
 # -------- CONFIGURACIÓN DE CONEXIÓN --------
 
@@ -29,7 +30,15 @@ DB = "kairosfin"
 
 # Construimos la URL de conexión con el formato correcto para SQLAlchemy + MySQL
 # DATABASE_URL = f"mysql+mysqlconnector://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB}"
-DATABASE_URL = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB}"
+#DATABASE_URL = f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB}"
+
+
+
+
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://root@localhost/kairosfin")
 
 
 
