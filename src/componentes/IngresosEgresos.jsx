@@ -15,7 +15,7 @@ function IngresosEgresos() {
   const [datosMensuales, setDatosMensuales] = useState([]);
 
   useEffect(() => {
-  fetch("http://127.0.0.1:8000/movimientos")
+  fetch("`${import.meta.env.VITE_API_URL}`/movimientos")
     .then((response) => response.json())
     .then((data) => {
       console.log("Datos recibidos desde /movimientos:", data);

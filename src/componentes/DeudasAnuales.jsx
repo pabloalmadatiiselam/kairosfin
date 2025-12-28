@@ -6,7 +6,7 @@ const DeudasAnuales = () => {
   const [datos, setDatos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/deudas")
+    fetch("`${import.meta.env.VITE_API_URL}`/deudas")
       .then((response) => response.json())
       .then((data) => {
         const pagadas = data

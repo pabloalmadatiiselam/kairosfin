@@ -289,7 +289,7 @@ function AltaEgreso() {
       if (totalResp === null) {
         try {
           const totalRes = await fetch(
-            //`http://127.0.0.1:8000/egresos/total?desde=${fechaDesde || ""}&hasta=${fechaHasta || ""}`
+            //``${import.meta.env.VITE_API_URL}`/egresos/total?desde=${fechaDesde || ""}&hasta=${fechaHasta || ""}`
             `${import.meta.env.VITE_API_URL}/egresos/total?desde=${fechaDesde || ""}&hasta=${fechaHasta || ""}`
           );
           if (totalRes.ok) {
@@ -513,11 +513,11 @@ const handleSiguiente = () => {
   try {
     setLoading(true);
 
-    //let url = "http://127.0.0.1:8000/egresos";
+    //let url = "`${import.meta.env.VITE_API_URL}`/egresos";
     let url = `${import.meta.env.VITE_API_URL}/egresos`;
     let method = "POST";
     if (editarId) {
-      //url = `http://127.0.0.1:8000/egresos/${editarId}`;
+      //url = ``${import.meta.env.VITE_API_URL}`/egresos/${editarId}`;
       url = `${import.meta.env.VITE_API_URL}/egresos/${editarId}`;      
       method = "PUT";
     }
@@ -615,7 +615,7 @@ const handleSiguiente = () => {
     try {
       setError("");
       setLoading(true);
-      //const res = await fetch(`http://127.0.0.1:8000/egresos/${egresoAEliminar.id}`, { method: "DELETE" });
+      //const res = await fetch(``${import.meta.env.VITE_API_URL}`/egresos/${egresoAEliminar.id}`, { method: "DELETE" });
       const res = await fetch(`${import.meta.env.VITE_API_URL}/egresos/${egresoAEliminar.id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Error al eliminar egreso");
       setMensajeIzquierda(`Egreso eliminado: ${egresoAEliminar.categoria} - ${formatearMontoParaMostrar(egresoAEliminar.monto)}`);

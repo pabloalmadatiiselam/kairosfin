@@ -6,7 +6,7 @@ function IngresosEgresosAnual() {
   const [datos, setDatos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/movimientos")
+    fetch("`${import.meta.env.VITE_API_URL}`/movimientos")
       .then((response) => response.json())
       .then((data) => {
         const ingresos = data
