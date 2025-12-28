@@ -43,10 +43,10 @@ async def all_exception_handler(request: Request, exc: Exception):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",      # Desarrollo local
-        "http://localhost:3000",      # Desarrollo local alternativo
-        "https://kairosfin.vercel.app",    # ← CAMBIO: Tu dominio específico
-        "https://*.vercel.app",       # Vercel (cuando despliegues)
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://kairosfin.vercel.app",
+        "https://kairosfin-ec6il3iaw-pabloalmadatiiselams-projects.vercel.app",  # Preview URLs
     ],
     allow_credentials=True,
     allow_methods=["*"],
