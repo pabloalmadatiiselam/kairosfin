@@ -50,7 +50,7 @@ export default function ResumenGeneral() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/resumen-general")
+      .get(`${import.meta.env.VITE_API_URL}/resumen-general`)
       .then((res) => setDatos(res.data))
       .catch((err) => console.error("Error al obtener resumen:", err));
   }, []);
