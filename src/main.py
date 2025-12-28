@@ -45,6 +45,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",      # Desarrollo local
         "http://localhost:3000",      # Desarrollo local alternativo
+        "https://kairosfin.vercel.app",    # ← CAMBIO: Tu dominio específico
         "https://*.vercel.app",       # Vercel (cuando despliegues)
     ],
     allow_credentials=True,
