@@ -41,17 +41,13 @@ async def all_exception_handler(request: Request, exc: Exception):
     traceback.print_exc()
     return JSONResponse(status_code=500, content={"detail": str(exc)})
 
-
-
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite TODOS los orígenes (temporal para debugging)
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,  # ← ESTO ES CRÍTICO
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 def get_db():
     db = SessionLocal()
