@@ -31,6 +31,8 @@ from sqlalchemy.orm import Session
 from src.database import engine
 from sqlalchemy import text
 
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
@@ -40,20 +42,11 @@ async def all_exception_handler(request: Request, exc: Exception):
     return JSONResponse(status_code=500, content={"detail": str(exc)})
 
 
-from fastapi.middleware.cors import CORSMiddleware
-import re
 
-# Configuración CORS con validación de origen
-allowed_origins_regex = re.compile(
-    r"^https://([a-zA-Z0-9-]+\.)?vercel\.app$|^http://localhost:(5173|3000)$"
-)
-
-def is_allowed_origin(origin: str) -> bool:
-    return bool(allowed_origins_regex.match(origin))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://.*\.vercel\.app",  # Permite todos los subdominios de Vercel
+    allow_origins=["*"],  # Permite TODOS los orígenes (temporal para debugging)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
