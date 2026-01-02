@@ -31,9 +31,10 @@ from sqlalchemy.orm import Session
 from src.database import engine
 from sqlalchemy import text
 
+# Importar CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
-
+# Crear la aplicación FastAPI
 app = FastAPI()
 
 @app.exception_handler(Exception)
@@ -41,10 +42,15 @@ async def all_exception_handler(request: Request, exc: Exception):
     traceback.print_exc()
     return JSONResponse(status_code=500, content={"detail": str(exc)})
 
+# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,  # ← ESTO ES CRÍTICO
+    allow_origins=[
+        "https://kairosfin.vercel.app",
+        "http://localhost:5173",  # Para desarrollo local
+        "http://localhost:3000"   # Por si usas otro puerto
+    ],
+    allow_credentials=True,  # Cambiar a True si usas cookies/auth
     allow_methods=["*"],
     allow_headers=["*"],
 )
