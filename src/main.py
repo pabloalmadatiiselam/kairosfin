@@ -34,6 +34,8 @@ from sqlalchemy import text
 # Importar CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
+# Versión: 1.0.1 - CORS actualizado para Vercel
+
 # Crear la aplicación FastAPI
 app = FastAPI()
 
