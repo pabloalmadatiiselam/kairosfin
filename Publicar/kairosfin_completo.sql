@@ -1,0 +1,123 @@
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+--
+-- Host: localhost    Database: kairosfin
+-- ------------------------------------------------------
+-- Server version	8.0.41
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `descripciones`
+--
+
+DROP TABLE IF EXISTS `descripciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `descripciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `tipo` enum('ingreso','egreso','deuda') COLLATE utf8mb3_spanish_ci NOT NULL,
+  `activa` tinyint(1) DEFAULT '1',
+  `fecha_creacion` date,
+  `telefono` varchar(20) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `direccion` varchar(200) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `tipo_entidad` enum('persona','empresa','organismo') COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_nombre_tipo` (`nombre`,`tipo`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `descripciones`
+--
+
+LOCK TABLES `descripciones` WRITE;
+/*!40000 ALTER TABLE `descripciones` DISABLE KEYS */;
+INSERT INTO `descripciones` VALUES (1,'Familiares','ingreso',1,'2025-09-20','','','','persona'),(2,'Clases Alumnos','ingreso',1,'2025-09-20','','','','persona'),(3,'Trabajos Clientes','ingreso',1,'2025-09-20','','','','persona'),(4,'Banco Macro','egreso',1,'2025-09-20','','','','empresa'),(5,'Banco Santander','egreso',1,'2025-09-20','','','','empresa'),(6,'Banco Nación','egreso',1,'2025-09-20','','','','empresa'),(7,'Supermercado California','egreso',1,'2025-09-20','','','','empresa'),(8,'Kiosko Rosa','egreso',1,'2025-09-20','','','','persona'),(9,'Alquiler Mary','egreso',1,'2025-09-20','','','','persona'),(10,'Impuestos Mary','egreso',1,'2025-09-20','','','','persona'),(11,'Banco Macro','deuda',1,'2025-09-20','','','','empresa'),(12,'Banco Santander','deuda',1,'2025-09-20','','','','empresa'),(13,'Banco Nación','deuda',1,'2025-09-20','','','','empresa'),(14,'Peluquería Beto','deuda',1,'2025-09-20','','','','persona'),(15,'Impuestos ARCA','deuda',1,'2025-09-20','','','','organismo'),(16,'Impuestos ATM','deuda',1,'2025-09-20',NULL,NULL,NULL,'organismo'),(17,'Transporte Colectivo','egreso',1,'2025-09-20',NULL,NULL,NULL,'empresa'),(18,'Ropas Placita','egreso',1,'2025-09-20',NULL,NULL,NULL,'empresa'),(19,'Kiosko Esquina','egreso',1,'2025-09-20',NULL,NULL,NULL,'empresa'),(21,'Peluquería Beto','egreso',1,'2025-09-20',NULL,NULL,NULL,'persona'),(22,'Kiosko Rosa','deuda',1,'2025-09-20',NULL,NULL,NULL,'persona'),(23,'Kiosko Esquina','deuda',1,'2025-09-20',NULL,NULL,NULL,'empresa'),(24,'Panadería Grimaud','egreso',1,'2025-09-28',NULL,NULL,NULL,'empresa'),(25,'Extragas','egreso',1,NULL,'3764-4887481/4580934',NULL,'Av. Monteagudo 2405','empresa'),(50,'Plecom Tecnhology','egreso',1,NULL,NULL,NULL,NULL,'empresa');
+/*!40000 ALTER TABLE `descripciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `deudas`
+--
+
+DROP TABLE IF EXISTS `deudas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `deudas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `monto` decimal(10,2) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `fecha_vencimiento` date DEFAULT NULL,
+  `pagado` tinyint DEFAULT '0',
+  `monto_pagado` decimal(10,2) DEFAULT '0.00',
+  `saldo_pendiente` decimal(10,2) DEFAULT NULL,
+  `descripcion_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `descripcion_id` (`descripcion_id`),
+  CONSTRAINT `deudas_ibfk_1` FOREIGN KEY (`descripcion_id`) REFERENCES `descripciones` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `deudas`
+--
+
+LOCK TABLES `deudas` WRITE;
+/*!40000 ALTER TABLE `deudas` DISABLE KEYS */;
+INSERT INTO `deudas` VALUES (1,8400.00,'2025-08-04','2025-08-11',1,8400.00,0.00,22),(2,5838.76,'2025-08-20','2025-09-10',1,5838.76,0.00,11),(3,5951.53,'2025-08-20','2025-08-10',1,5951.53,0.00,11),(24,200.00,'2025-09-19','2025-09-23',1,200.00,0.00,23),(34,9400.00,'2025-10-07','2025-10-17',1,9400.00,0.00,22),(35,5796.69,'2025-10-10','2025-10-10',1,5796.69,0.00,11),(43,200.00,'2025-10-21','2025-10-24',1,200.00,0.00,23),(44,13700.00,'2025-10-31','2025-11-17',1,13700.00,0.00,22),(45,5739.66,'2025-11-10','2025-11-10',1,5739.66,0.00,11),(46,11600.00,'2025-12-02','2025-12-15',1,11600.00,0.00,22),(47,5648.25,'2025-12-10','2025-12-16',1,5648.25,0.00,11),(48,50.00,'2025-12-12','2025-12-23',1,50.00,0.00,23);
+/*!40000 ALTER TABLE `deudas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movimientos`
+--
+
+DROP TABLE IF EXISTS `movimientos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `movimientos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `monto` decimal(10,2) NOT NULL,
+  `fecha` date NOT NULL,
+  `deuda_id` int DEFAULT NULL,
+  `descripcion_id` int DEFAULT NULL,
+  `deuda_saldo_antes` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_deuda` (`deuda_id`),
+  KEY `descripcion_id` (`descripcion_id`),
+  CONSTRAINT `fk_deuda` FOREIGN KEY (`deuda_id`) REFERENCES `deudas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`descripcion_id`) REFERENCES `descripciones` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movimientos`
+--
+
+LOCK TABLES `movimientos` WRITE;
+/*!40000 ALTER TABLE `movimientos` DISABLE KEYS */;
+INSERT INTO `movimientos` VALUES (1,10000.00,'2025-08-07',NULL,1,NULL),(2,1400.00,'2025-08-09',NULL,19,NULL),(3,1000.00,'2025-08-11',NULL,19,NULL),(4,1100.00,'2025-08-12',NULL,19,NULL),(5,1200.00,'2025-08-13',NULL,19,NULL),(6,2000.00,'2025-08-14',NULL,19,NULL),(7,100000.00,'2025-08-14',NULL,1,NULL),(8,1300.00,'2025-08-15',NULL,19,NULL),(9,1100.00,'2025-08-17',NULL,19,NULL),(10,6851.60,'2025-08-18',NULL,7,NULL),(11,8400.00,'2025-08-19',1,8,8400.00),(12,5951.53,'2025-08-20',3,4,NULL),(13,56000.00,'2025-08-20',NULL,10,NULL),(14,3950.00,'2025-08-21',NULL,7,NULL),(15,3770.00,'2025-08-22',NULL,7,NULL),(16,40000.00,'2025-08-24',NULL,1,NULL),(17,12000.00,'2025-08-24',NULL,7,NULL),(18,1400.00,'2025-08-24',NULL,17,NULL),(19,25000.00,'2025-08-26',NULL,18,NULL),(20,1300.00,'2025-08-26',NULL,19,NULL),(21,1000.00,'2025-08-27',NULL,19,NULL),(22,1000.00,'2025-08-27',NULL,19,NULL),(23,1200.00,'2025-08-28',NULL,19,NULL),(24,90000.00,'2025-09-01',NULL,1,NULL),(25,1300.00,'2025-08-29',NULL,19,NULL),(26,1000.00,'2025-08-30',NULL,19,NULL),(27,1200.00,'2025-09-01',NULL,8,NULL),(28,1300.00,'2025-09-02',NULL,19,NULL),(29,1150.00,'2025-09-03',NULL,19,NULL),(32,15000.00,'2025-09-04',NULL,1,NULL),(33,9150.00,'2025-09-04',NULL,7,NULL),(34,1300.00,'2025-09-06',NULL,19,NULL),(37,1200.00,'2025-09-07',NULL,8,NULL),(43,1200.00,'2025-09-09',NULL,19,NULL),(44,1100.00,'2025-09-10',NULL,19,NULL),(45,1550.00,'2025-09-11',NULL,19,NULL),(55,100000.00,'2025-09-12',NULL,1,NULL),(56,17180.00,'2025-09-13',NULL,7,NULL),(57,90000.00,'2025-09-02',NULL,9,NULL),(58,1100.00,'2025-09-14',NULL,19,NULL),(59,5838.76,'2025-09-16',2,4,NULL),(60,60000.00,'2025-09-16',NULL,10,NULL),(61,7350.00,'2025-09-16',NULL,7,NULL),(78,3250.00,'2025-09-18',NULL,7,NULL),(85,1400.00,'2025-09-19',NULL,19,NULL),(86,30000.00,'2025-09-20',NULL,1,NULL),(87,8050.00,'2025-09-21',NULL,7,NULL),(88,6750.00,'2025-09-22',NULL,7,NULL),(89,200.00,'2025-09-22',24,19,NULL),(91,1250.00,'2025-09-23',NULL,19,NULL),(95,1200.00,'2025-09-24',NULL,19,NULL),(96,4350.00,'2025-09-25',NULL,7,NULL),(97,10000.00,'2025-09-25',NULL,1,NULL),(100,1700.00,'2025-09-26',NULL,19,NULL),(101,7900.00,'2025-09-27',NULL,7,NULL),(102,1500.00,'2025-09-27',NULL,19,NULL),(103,1000.00,'2025-09-28',NULL,8,NULL),(106,1000.00,'2025-09-28',NULL,24,NULL),(107,30000.00,'2025-09-28',NULL,1,NULL),(108,1400.00,'2025-09-29',NULL,19,NULL),(112,1100.00,'2025-09-30',NULL,19,NULL),(115,10000.00,'2025-10-02',NULL,1,NULL),(116,1300.00,'2025-10-02',NULL,19,NULL),(117,50000.00,'2025-10-03',NULL,1,NULL),(118,90000.00,'2025-10-03',NULL,9,NULL),(119,1300.00,'2025-10-03',NULL,19,NULL),(120,3800.00,'2025-10-04',NULL,7,NULL),(121,1300.00,'2025-10-06',NULL,19,NULL),(122,1300.00,'2025-10-09',NULL,19,NULL),(123,1400.00,'2025-10-10',NULL,19,NULL),(124,16000.00,'2025-10-11',NULL,25,NULL),(126,100000.00,'2025-10-16',NULL,1,NULL),(127,17940.00,'2025-10-16',NULL,7,NULL),(128,5796.69,'2025-10-17',35,4,NULL),(130,63000.00,'2025-10-17',NULL,10,NULL),(142,1200.00,'2025-10-18',NULL,19,NULL),(163,1200.00,'2025-10-24',NULL,19,NULL),(164,9400.00,'2025-10-20',34,8,NULL),(165,3623.75,'2025-10-24',NULL,7,NULL),(166,9200.00,'2025-10-23',NULL,1,NULL),(167,1400.00,'2025-10-26',NULL,24,NULL),(171,80000.00,'2025-10-30',NULL,1,NULL),(172,80000.00,'2025-11-01',NULL,9,NULL),(174,10000.00,'2025-11-09',NULL,1,NULL),(175,5010.00,'2025-11-10',NULL,7,NULL),(176,1300.00,'2025-11-11',NULL,19,NULL),(177,200.00,'2025-11-11',43,19,NULL),(178,12000.00,'2025-11-12',NULL,2,NULL),(179,8645.00,'2025-11-12',NULL,7,NULL),(180,6175.25,'2025-11-15',NULL,7,NULL),(181,100000.00,'2025-11-16',NULL,1,NULL),(182,13700.00,'2025-11-17',44,8,13700.00),(183,5739.66,'2025-11-17',45,4,5739.66),(184,73000.00,'2025-11-17',NULL,10,NULL),(185,1200.00,'2025-11-17',NULL,8,NULL),(186,7867.45,'2025-11-18',NULL,7,NULL),(187,12000.00,'2025-11-18',NULL,2,NULL),(188,1400.00,'2025-11-20',NULL,19,NULL),(189,1200.00,'2025-11-20',NULL,19,NULL),(190,15000.00,'2025-11-20',NULL,2,NULL),(191,11560.75,'2025-11-20',NULL,7,NULL),(192,1100.00,'2025-11-21',NULL,19,NULL),(193,1600.00,'2025-11-22',NULL,19,NULL),(194,1000.00,'2025-11-23',NULL,24,NULL),(195,1400.00,'2025-11-24',NULL,19,NULL),(196,4849.60,'2025-11-26',NULL,7,NULL),(197,15000.00,'2025-11-26',NULL,2,NULL),(198,13397.80,'2025-11-26',NULL,7,NULL),(199,1000.00,'2025-11-28',NULL,19,NULL),(200,135000.00,'2025-11-30',NULL,1,NULL),(201,1300.00,'2025-11-29',NULL,19,NULL),(202,1000.00,'2025-11-30',NULL,24,NULL),(203,135000.00,'2025-12-01',NULL,9,NULL),(205,11000.00,'2025-12-11',NULL,1,NULL),(206,5850.00,'2025-12-11',NULL,7,NULL),(208,1500.00,'2025-12-13',NULL,19,NULL),(209,100000.00,'2025-12-14',NULL,1,NULL),(210,11600.00,'2025-12-15',46,8,11600.00),(211,5648.25,'2025-12-15',47,4,5648.25),(212,78000.00,'2025-12-15',NULL,10,NULL),(213,1300.00,'2025-12-16',NULL,24,NULL),(214,3625.00,'2025-12-17',NULL,7,NULL),(215,23000.00,'2025-12-19',NULL,1,NULL),(216,23000.00,'2025-12-20',NULL,50,NULL),(217,50.00,'2025-12-21',48,19,50.00),(218,100000.00,'2025-12-25',NULL,1,NULL);
+/*!40000 ALTER TABLE `movimientos` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-12-29 23:56:02

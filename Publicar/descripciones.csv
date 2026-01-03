@@ -1,0 +1,26 @@
+id,nombre,tipo,activa,fecha_creacion,telefono,email,direccion,tipo_entidad
+1,Familiares,ingreso,1,2025-09-20,,,,persona
+2,Clases Alumnos,ingreso,1,2025-09-20,,,,persona
+3,Trabajos Clientes,ingreso,1,2025-09-20,,,,persona
+4,Banco Macro,egreso,1,2025-09-20,,,,empresa
+5,Banco Santander,egreso,1,2025-09-20,,,,empresa
+6,Banco Nación,egreso,1,2025-09-20,,,,empresa
+7,Supermercado California,egreso,1,2025-09-20,,,,empresa
+8,Kiosko Rosa,egreso,1,2025-09-20,,,,persona
+9,Alquiler Mary,egreso,1,2025-09-20,,,,persona
+10,Impuestos Mary,egreso,1,2025-09-20,,,,persona
+11,Banco Macro,deuda,1,2025-09-20,,,,empresa
+12,Banco Santander,deuda,1,2025-09-20,,,,empresa
+13,Banco Nación,deuda,1,2025-09-20,,,,empresa
+14,Peluquería Beto,deuda,1,2025-09-20,,,,persona
+15,Impuestos ARCA,deuda,1,2025-09-20,,,,organismo
+16,Impuestos ATM,deuda,1,2025-09-20,,,,organismo
+17,Transporte Colectivo,egreso,1,2025-09-20,,,,empresa
+18,Ropas Placita,egreso,1,2025-09-20,,,,empresa
+19,Kiosko Esquina,egreso,1,2025-09-20,,,,empresa
+21,Peluquería Beto,egreso,1,2025-09-20,,,,persona
+22,Kiosko Rosa,deuda,1,2025-09-20,,,,persona
+23,Kiosko Esquina,deuda,1,2025-09-20,,,,empresa
+24,Panadería Grimaud,egreso,1,2025-09-28,,,,empresa
+25,Extragas,egreso,1,,3764-4887481/4580934,,Av. Monteagudo 2405,empresa
+50,Plecom Tecnhology,egreso,1,,,,,empresa
