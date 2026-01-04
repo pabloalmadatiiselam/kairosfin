@@ -130,10 +130,10 @@ function PiePagina() {
           <div className="pie-seccion">
             <h3>Contacto</h3>
             <ul>
-              <li>📧 info@kairosfin.com</li>
-              <li>📱 +54 9 11 1234-5678</li>
-              <li>🌐 www.kairosfin.com</li>
-              <li>📍 Buenos Aires, Argentina</li>
+              <li>📧 pabloj94g@gmail.com</li>
+              <li>📱 +54 9 376 4360178</li>
+              <li>🌐 https://kairosfin.vercel.app/</li>
+              <li>📍 Posadas Misiones, Argentina</li>
             </ul>
           </div>
         </div>

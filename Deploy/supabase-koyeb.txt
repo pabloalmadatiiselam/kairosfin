@@ -1,0 +1,9 @@
+# URL completa de conexión
+DATABASE_URL=postgresql://postgres.pvdtdxwdqpofqfurwzsr:Jes22p@b3948@aws-1-sa-east-1.pooler.supabase.com:6543/postgres
+
+# Variables individuales
+DB_USER=postgres.pvdtdxwdqpofqfurwzsr
+DB_PASSWORD=Jes22p@b3948
+DB_HOST=aws-1-sa-east-1.pooler.supabase.com
+DB_PORT=6543
+DB_NAME=postgres

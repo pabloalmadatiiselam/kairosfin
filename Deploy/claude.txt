@@ -1,0 +1,16 @@
+Si hare el esfuerzo y vere que pasa en 7 dias en Koyeb. Porque ya tengo un cliente que le quiero vender y el cliente me quiere comprar el sistema web finaciero. Pero hare el esfuerzo de esperaar que pasa despues de 7 dias ,  porque vos decis que  koyeb es mejor que todos  y sobre todo que es mejor que estos 3 Fly.io - 3 VMs gratis (256 MB c/u) * Deta Space - Gratis ilimitado para Python * Cyclic.sh - Gratis para APIs pequeñas. Confirmame que Koyeb que es mejor que estos 3 y fundamentame bien si es mejor que estos 3. Si es asi hare el esfuerzo y vendere al cliente recien pasados 7 dias el sistema.  Mientras tanto yo haria la ayuda de video y publicidad en esos 7 dias. Pero luego editaria el video y cambiaria la  parte del video que muesta la url de acceso, esto siempre y cuando koyeb pasado los 7 dias resulta ser de pago, y yo tenga que elegir otro hosting totalmente gratis como Fly.io, DetaSpace o Cyclic.sh.  Te cuento que encontre informacion del plan trial de Koyeb cuya url es esta: https://www.koyeb.com/docs/faqs/pro-plan-trial. Igual te adjunto la informacion que habla del plan trial. 
+
+
+-----------------------------------------------------------------------------------
+
+Encontre esta informacion del plan trial de koyeb . Podes encontrar mas informacion de lo que queremos saber, sobre todo si terminado los 7 dias, se pude seguir usando koyeb gratis?. Esta es la url  de la explicacion del plan trial. https://www.koyeb.com/docs/faqs/pro-plan-trial.  Te adujunto la informacion que habla del plan trial.    Y encontre esta informacion de koyeb que habla de plan starter en esta url https://www.koyeb.com/pricing#plans. "Starter
+$0/mo
++compute
+For individuals. Pay-per-use by the second after the free tier, perfect for small apps.
+Features
+* Generous Free Tier
+1x Web Service, 1x Postgres, 5x custom domains
+* Scale-to-Zero and Autoscaling
+* CPU and GPU access
+* US, EU, and Asia regions
+* Run Inference, APIs, Web Apps, Workers, and Databases"
