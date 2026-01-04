@@ -7,6 +7,8 @@ const scrollToTop = () => {
 };
 
 function HeroPortada() {
+  // Obtener el año actual dinámicamente
+  const anioActual = new Date().getFullYear();
   // Función para navegar suavemente a cada sección
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -66,7 +68,7 @@ function HeroPortada() {
 
         {/* Subtítulo */}
         <h2 className="hero-subtitle">
-          Resumen General 2025
+          Resumen General {anioActual}
         </h2>
 
         {/* Descripción */}
