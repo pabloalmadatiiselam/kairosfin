@@ -1,28 +1,28 @@
 # src/database.py
-
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from urllib.parse import quote_plus
 
-# Leer DATABASE_URL desde variables de entorno
+# 1. Leer DATABASE_URL (Railway la provee automáticamente)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    # Si no existe, construirla desde variables individuales
-    USER = os.getenv("DB_USER", "root")
-    PASSWORD = os.getenv("DB_PASSWORD")
-    HOST = os.getenv("DB_HOST", "localhost")
-    PORT = os.getenv("DB_PORT", "3306")
-    DB_NAME = os.getenv("DB_NAME", "kairosfin")
-    
-    encoded_password = quote_plus(PASSWORD)
-    DATABASE_URL = f"mysql+pymysql://{USER}:{encoded_password}@{HOST}:{PORT}/{DB_NAME}"
+# 2. Convertir de mysql:// a mysql+pymysql://
+if DATABASE_URL and DATABASE_URL.startswith("mysql://"):
+    DATABASE_URL = DATABASE_URL.replace("mysql://", "mysql+pymysql://", 1)
 
+# 3. Fallback para desarrollo local (sin .env, valores fijos)
+if not DATABASE_URL:
+    DATABASE_URL = "mysql+pymysql://root@localhost:3306/kairosfin"
+
+# 4. Log para debugging
+print(f"[INFO] Conectando a base de datos...")
+
+# 5. Crear engine
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
     pool_recycle=3600,
+    echo=False
 )
 
 SessionLocal = sessionmaker(
