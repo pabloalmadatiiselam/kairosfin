@@ -386,7 +386,7 @@ function Descripciones() {
                 options={opcionesNombres}
                 placeholder="Buscar descripción..."
                 isSearchable={true}
-                isClearable={true}
+                isClearable={false}
                 noOptionsMessage={() => "No hay descripciones"}
                 styles={{
                   control: (base) => ({
@@ -440,7 +440,7 @@ function Descripciones() {
                 onChange={(opcion) => setInputTipo(opcion ? opcion.value : "")}
                 options={[{ value: "", label: "Todos" }, ...opcionesTipo]}
                 placeholder="Todos"
-                isClearable={true}
+                isClearable={false}
                 styles={{
                   control: (base) => ({
                     ...base,
@@ -488,7 +488,7 @@ function Descripciones() {
                 onChange={(opcion) => setInputEstado(opcion ? opcion.value : "")}
                 options={[{ value: "", label: "Todos" }, ...opcionesEstado]}
                 placeholder="Todos"
-                isClearable={true}
+                isClearable={false}
                 styles={{
                   control: (base) => ({
                     ...base,
