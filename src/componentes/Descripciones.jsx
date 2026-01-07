@@ -392,7 +392,7 @@ function Descripciones() {
                   control: (base) => ({
                     ...base,
                     minHeight: "30px",
-                    minWidth: "150px",
+                    minWidth: "180px",
                     fontSize: "0.75rem",
                     borderColor: "#d0d7dd",
                     borderRadius: "4px",
@@ -445,8 +445,8 @@ function Descripciones() {
                   control: (base) => ({
                     ...base,
                     minHeight: "30px",
-                    minWidth: "90px",
-                    maxWidth: "90px",
+                    minWidth: "110px",
+                    maxWidth: "110px",
                     fontSize: "0.80rem",
                     borderColor: "#d0d7dd",
                     borderRadius: "6px",
@@ -493,8 +493,8 @@ function Descripciones() {
                   control: (base) => ({
                     ...base,
                     minHeight: "30px",
-                    minWidth: "90px",
-                    maxWidth: "90px",
+                    minWidth: "110px",
+                    maxWidth: "110px",
                     fontSize: "0.80rem",
                     borderColor: "#d0d7dd",
                     borderRadius: "6px",
