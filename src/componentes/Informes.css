@@ -212,7 +212,16 @@
   table-layout: fixed;
 }
 
-.tabla-contenido th,
+.tabla-contenido th {
+  background-color: #1D283A;
+  font-weight: bold;
+  font-size: 0.76rem;
+  text-transform: none;
+  line-height: 1.2;
+  color: #ffffff;
+  text-align: center; /* ← AGREGAR ESTA LÍNEA */
+}
+
 .tabla-contenido td {
   padding: 5px 5px; /* Padding horizontal aumentado */
   border: 1px solid #94a3b8;
@@ -233,6 +242,7 @@
   width: 16%; /* Fecha */
   white-space: nowrap;
   font-size: 0.75rem;
+  text-align: center; /* ← CAMBIO: de sin alineación a centrado */
 }
 
 .tabla-contenido th:nth-child(3),
@@ -241,6 +251,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left; /* ← AGREGAR: mantener a la izquierda */
 }
 
 .tabla-contenido th:nth-child(4),
