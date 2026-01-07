@@ -616,33 +616,7 @@ function Informes() {
       { name: 'Pagadas', value: pagadas },
       { name: 'Pendientes', value: pendientes }
     ];
-  };
-
-
-  // Función para renderizar label con total en barras apiladas
-  /*
-  const renderTotalLabel = (props) => {
-    const { x, y, width, index } = props;
-    
-    // Obtener el total sumando pagadas + pendientes del dato correspondiente
-    const dataPoint = datosDeudas[index];
-    if (!dataPoint) return null;
-    
-    const total = (dataPoint.pagadas || 0) + (dataPoint.pendientes || 0);
-    
-    return (
-      <text 
-        x={x + width / 2} 
-        y={y - 5} 
-        fill="#333" 
-        textAnchor="middle" 
-        fontSize="10"
-      >
-        ${total.toLocaleString('es-AR')}
-      </text>
-    );
-  };
-  */
+  };  
 
   const COLORS = ['#4CAF50', '#F44336'];
 

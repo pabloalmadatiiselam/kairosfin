@@ -112,8 +112,8 @@ function PiePagina() {
                   Ayuda
                  </a>
               </li>
-              <li><a href="#documentacion">Documentación</a></li>
-              <li><a href="#tutoriales">Tutoriales</a></li>
+              <li><a href="#documentacion" hidden>Documentación</a></li>
+              <li><a href="#tutoriales" hidden>Tutoriales</a></li>
               <li>
                 <a 
                   href="/docs/kairosfin_faq.html" 
