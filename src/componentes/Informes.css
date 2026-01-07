@@ -202,6 +202,7 @@
   overflow-x: auto;
   border-radius: 8px;
   border: 1px solid #94a3b8;
+  box-sizing: border-box; /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* Estilos de la tabla */
@@ -210,6 +211,7 @@
   border-collapse: collapse;
   font-size: 0.78rem; /* Aumentado ligeramente de 0.75rem */
   table-layout: fixed;
+  box-sizing: border-box; /* ← AGREGAR ESTA LÍNEA */
 }
 
 .tabla-contenido th {
