@@ -219,8 +219,9 @@
   text-transform: none;
   line-height: 1.2;
   color: #ffffff;
-  text-align: center; /* ← AGREGAR ESTA LÍNEA */
+  text-align: center !important; /* ← AGREGAR ESTA LÍNEA */
   padding: 5px 8px; /* ← AGREGAR ESTA LÍNEA para recuperar altura */
+  border: 1px solid #94a3b8 !important; /* ← Asegura borde completo */
 }
 
 .tabla-contenido td {
