@@ -220,6 +220,7 @@
   line-height: 1.2;
   color: #ffffff;
   text-align: center; /* ← AGREGAR ESTA LÍNEA */
+  padding: 5px 8px; /* ← AGREGAR ESTA LÍNEA para recuperar altura */
 }
 
 .tabla-contenido td {
