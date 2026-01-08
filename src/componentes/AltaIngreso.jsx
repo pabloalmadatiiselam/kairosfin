@@ -383,14 +383,19 @@ function AltaIngreso() {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/ingresos/${ingresoAEliminar.id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`Error al eliminar (status ${res.status})`);        
-      setError("");        
-      setMensajeIzquierda(`Ingreso eliminado: ${ingresoAEliminar.categoria} - ${formatearMontoParaMostrar(ingresoAEliminar.monto)}`);
+      
+      // ✅ CORRECCIÓN: Limpiar mensajes en orden correcto
+      setError("");
       setMensajeDerecha("");
+      setMensajeIzquierda(`Ingreso eliminado: ${ingresoAEliminar.categoria} - ${formatearMontoParaMostrar(ingresoAEliminar.monto)}`);
+      
       await fetchIngresos(currentPage);
-      setNuevoIngreso({ id: null, categoria: "", monto: "", fecha: "" });
+      resetForm();
     } catch (err) {
       console.error("Error al eliminar ingreso:", err);
       setError("❌ Error al eliminar ingreso.");
+      setMensajeIzquierda("");
+      setMensajeDerecha("");
     } finally {
       setShowDeleteModal(false);
       setIngresoAEliminar(null);
