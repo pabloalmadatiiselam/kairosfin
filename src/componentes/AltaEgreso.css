@@ -161,6 +161,7 @@ h1.titulo-principal {
   font-size: 0.75rem !important;
   box-sizing: border-box !important;
   line-height: normal !important;
+  margin-left: 2px; /* ← AGREGAR ESTA LÍNEA */
 }
 /*
 .botones-filtro {
