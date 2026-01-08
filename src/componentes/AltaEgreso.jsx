@@ -235,6 +235,7 @@ function AltaEgreso() {
 
   //--- fetch egresos paginados (usa /egresos/paginados)---
   const fetchEgresos = async (p = 1) => {
+    if (listCleared) return { egresos: [], total: 0 };
     setLoading(true); // ← AGREGAR ESTA LÍNEA
     try {
       setLoading(true);
