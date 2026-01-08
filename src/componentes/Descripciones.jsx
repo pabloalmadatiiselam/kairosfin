@@ -379,7 +379,11 @@ function Descripciones() {
             <label>
               Desc:
               <Select
-                value={opcionesNombres.find((opt) => opt.value === inputNombreId) || null}
+                value={
+                  inputNombreId === ""
+                    ? { value: "", label: "Todas" }  /* ← Si está vacío, mostrar "Todas" */
+                    : opcionesNombres.find((opt) => opt.value === inputNombreId) || null
+                }
                 onChange={(opcion) => {
                   setInputNombreId(opcion ? opcion.value : "");
                 }}
