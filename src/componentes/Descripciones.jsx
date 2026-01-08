@@ -383,7 +383,10 @@ function Descripciones() {
                 onChange={(opcion) => {
                   setInputNombreId(opcion ? opcion.value : "");
                 }}
-                options={opcionesNombres}
+                options={[
+                  { value: "", label: "Todas" },  // ← Nueva opción con valor vacío
+                  ...opcionesNombres              // ← Las opciones de la BD
+                ]}
                 placeholder="Buscar descripción..."
                 isSearchable={true}
                 isClearable={false}
