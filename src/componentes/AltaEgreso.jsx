@@ -81,7 +81,7 @@ function AltaEgreso() {
   const [inputDescripcion, setInputDescripcion] = useState("");
 
   // ✅ Estados para auto-completar fecha mínima
-  const [fechaMinima, setFechaMinima] = useState(null);
+  const [fechaMinima, setFechaMinima] = useState(null);  
 
   // Ref para el Select de descripción
   const selectDescripcionRef = useRef(null);
@@ -235,6 +235,7 @@ function AltaEgreso() {
 
   //--- fetch egresos paginados (usa /egresos/paginados)---
   const fetchEgresos = async (p = 1) => {
+    setLoading(true); // ← AGREGAR ESTA LÍNEA
     try {
       setLoading(true);
       // construir URL
@@ -707,22 +708,26 @@ const handleSiguiente = () => {
           <label className="filtro-label" title="Filtrar por descripción">
             Desc:
             <Select
-              value={inputDescripcion 
-                ? descripciones.find(d => d.id === parseInt(inputDescripcion))
-                  ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
-                  : null
-                : null
+              value={
+                inputDescripcion === '' || !inputDescripcion
+                  ? { value: '', label: 'Todas' }  /* ← Si está vacío, mostrar "Todas" */
+                  : descripciones.find(d => d.id === parseInt(inputDescripcion))
+                    ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
+                    : null
               }
               onChange={(opcion) => {
                 setInputDescripcion(opcion ? opcion.value : '');
               }}
-              options={descripciones.map(d => ({
-                value: d.id,
-                label: d.nombre
-              }))}
+              options={[
+                { value: '', label: 'Todas' },  /* ← AGREGAR esta línea */
+                ...descripciones.map(d => ({
+                  value: d.id,
+                  label: d.nombre
+                }))
+              ]}
               placeholder="Todas"
               isSearchable={true}
-              isClearable={true}
+              isClearable={false}
               noOptionsMessage={() => "No hay descripciones"}
               styles={{
                 control: (base) => ({
