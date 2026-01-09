@@ -70,6 +70,8 @@ function AltaEgreso() {
   const [mensajeDerecha, setMensajeDerecha] = useState("");     // Mensajes de formulario
   const [error, setError] = useState("");
 
+  const [listCleared, setListCleared] = useState(false); // ← AGREGAR ESTA LÍNEA
+
   // NUEVO: estado para saber si se ha realizado una búsqueda
   const [busquedaRealizada, setBusquedaRealizada] = useState(false);
 
