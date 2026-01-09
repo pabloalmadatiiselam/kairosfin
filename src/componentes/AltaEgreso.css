@@ -149,6 +149,7 @@ h1.titulo-principal {
   gap: 6px;
   font-size: 0.95rem;
   color: #333;
+  padding-left: 3px; /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* Inputs de fecha en filtros */
@@ -163,32 +164,6 @@ h1.titulo-principal {
   line-height: normal !important;
   margin-left: 2px !important; /* ← AGREGAR ESTA LÍNEA */
 }
-/*
-.botones-filtro {
-  display: flex;
-  gap: 6px;  /* ✅ AGREGAR: Separación entre botones 
-}
-*/
-/* Botones Buscar y Limpiar */
-/*
-.botones-filtro button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  background-color: #0088fe;
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  min-width: 100px;  /* ✅ CAMBIO: de 85px a 100px para igualar Ingresos 
-}
-*/
-/*
-.botones-filtro button:hover {
-  background-color: #006fcb;
-}
-*/
 
 .botones-filtro {
   display: flex;
@@ -507,37 +482,6 @@ h1.titulo-principal {
   padding: 4px 8px;
   font-size: 0.95rem;
 }
-
-/* ========================================
-   BOTONES X PARA LIMPIAR FECHAS
-   ======================================== */
-
-/*
-.clear-date-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #1e3a5f;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  padding: 0;
-  transition: background-color 0.2s;
-  z-index: 10;
-}
-
-.clear-date-btn:hover {
-  background: #152943;
-}
-*/
 
 /* ========================================
    BOTONES X PARA LIMPIAR FECHAS - VERSION REFORZADA
@@ -1029,13 +973,15 @@ div[role="gridcell"].react-datepicker__day--today span[aria-hidden="true"] {
   text-overflow: ellipsis;
 }
 
-/* pequeño ajuste responsive 
-@media (max-width: 900px) {
-  .tabla-filtros { min-width: 100%; height: auto; }
-  .formulario-egreso { min-width: 100%; height: auto; }
-  .egreso-container { padding: 12px; gap: 12px; }
+/* Spinner de carga */
+.spinner {
+  text-align: center;
+  font-weight: bold;
+  color: #0088fe;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 0.95rem;
 }
-*/
 
 /* ============================================
    RESPONSIVE DESIGN - MOBILE FIRST
