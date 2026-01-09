@@ -651,9 +651,6 @@ const handleSiguiente = () => {
   return (
     <div className="egreso-container">
       <h1 className="titulo-principal">Egresos</h1>
-
-      {loading && <div className="spinner">Cargando...</div>} 
-
       <div className="tabla-filtros">
         <h2>Historial</h2>
         <form className="filtros" onSubmit={handleBuscar}>
@@ -783,6 +780,7 @@ const handleSiguiente = () => {
         </form>
 
         <div className="tabla-egresos">
+          {loading && <div className="spinner">Cargando...</div>} 
           <table>
             <thead>
               <tr>
