@@ -140,6 +140,7 @@ h1.titulo-principal {
   gap: 8px;
   margin-bottom: 10px;
   flex-wrap: nowrap;
+  padding-left: 5px; /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* labels con layout horizontal */
@@ -152,6 +153,11 @@ h1.titulo-principal {
   padding-left: 3px; /* ← AGREGAR ESTA LÍNEA */
 }
 
+/* Margen específico para el primer label (De:) */
+.filtros label:first-child {
+  margin-left: 5px;
+}
+
 /* Inputs de fecha en filtros */
 .filtro-input-fecha {
   width: 120px !important;
@@ -162,7 +168,7 @@ h1.titulo-principal {
   font-size: 0.75rem !important;
   box-sizing: border-box !important;
   line-height: normal !important;
-  margin-left: 2px !important; /* ← AGREGAR ESTA LÍNEA */
+  margin-left: 8px !important; /* ← CAMBIAR de 2px a 8px */
 }
 
 .botones-filtro {
