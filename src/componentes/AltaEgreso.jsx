@@ -650,7 +650,7 @@ const handleSiguiente = () => {
     <div className="egreso-container">
       <h1 className="titulo-principal">Egresos</h1>
 
-      {loading && <div className="spinner">Cargando...</div>}
+      {loading && <div className="spinner">Cargando...</div>} 
 
       <div className="tabla-filtros">
         <h2>Historial</h2>
