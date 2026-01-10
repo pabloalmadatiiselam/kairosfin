@@ -73,7 +73,7 @@ h1.titulo-principal {
   gap: 6px;
   align-items: center;
   flex-wrap: nowrap;  
-  padding-left: 5px;  /* ← AGREGAR ESTA LÍNEA */
+  padding-left: 0px;  /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* Fila 2: Botones centrados */
@@ -91,13 +91,13 @@ h1.titulo-principal {
   font-weight: 600;
   gap: 3px;
   white-space: nowrap;
-  padding-left: 3px; /* ← AGREGAR ESTA LÍNEA */
+  padding-left: 0px; /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* Margen específico para el primer label (De:) */
-.filtro-label:first-child {
+/*.filtro-label:first-child {
   margin-left: 5px;
-}
+}*/
 
 .filtro-select-estado {
   margin-left: 0px;
@@ -129,8 +129,8 @@ h1.titulo-principal {
   display: flex !important;
   flex-direction: row !important;
   gap: 4px !important;
-  width: auto !important;  /* ← CAMBIAR de 100% a auto */
-  margin-left: auto !important;  /* ← AGREGAR ESTA LÍNEA */
+  width: auto !important;  /* ← MANTENER */
+  flex-shrink: 0 !important;  /* ← AGREGAR: Evita que se encoja */
 }
 
   .filtros-botones-row button {
