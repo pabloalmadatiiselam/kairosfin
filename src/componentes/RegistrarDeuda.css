@@ -91,6 +91,7 @@ h1.titulo-principal {
   font-weight: 600;
   gap: 3px;
   white-space: nowrap;
+  padding-left: 3px; /* ← AGREGAR ESTA LÍNEA */
 }
 /*
 .filtro-input-fecha{
@@ -125,7 +126,7 @@ h1.titulo-principal {
   cursor: pointer;
   font-weight: 600;
   white-space: nowrap;
-  margin: 0 5px !important;  /* ← NUEVA LÍNEA */   
+  margin: 0 8px !important;  /* ← CAMBIAR de 5px a 8px */ 
 }
 
  /* Si hay contenedor específico para botones */
@@ -556,6 +557,7 @@ h1.titulo-principal {
   border-radius: 4px !important;
   font-size: 0.70rem !important;/* ← CAMBIAR de 0.75rem a 0.70rem */
   box-sizing: border-box !important;
+  margin-left: 8px !important; /* ← AGREGAR ESTA LÍNEA */
 }
 
 .formulario-input-fecha {

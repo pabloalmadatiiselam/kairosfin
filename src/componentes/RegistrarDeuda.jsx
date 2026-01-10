@@ -643,7 +643,7 @@ const confirmarEliminar = async () => {
                 }))}
                 placeholder="Todas"
                 isSearchable={true}
-                isClearable={true}
+                isClearable={false}
                 noOptionsMessage={() => "No hay descripciones"}
                 styles={{
                   control: (base) => ({
