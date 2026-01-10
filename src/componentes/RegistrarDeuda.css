@@ -73,7 +73,7 @@ h1.titulo-principal {
   gap: 6px;
   align-items: center;
   flex-wrap: nowrap;  
-  /*margin-bottom: 6px;*/
+  padding-left: 5px;  /* ← AGREGAR ESTA LÍNEA */
 }
 
 /* Fila 2: Botones centrados */
@@ -93,17 +93,12 @@ h1.titulo-principal {
   white-space: nowrap;
   padding-left: 3px; /* ← AGREGAR ESTA LÍNEA */
 }
-/*
-.filtro-input-fecha{
-  margin-left: 0px;     antes 3px
-  width: 115px; antes 135
-  font-size: 0.75rem;
-  padding: 2px 4px; Agregar esta línea 
-  transform: scale(0.85); Reducir más el scale 
-  transform-origin: left center;
-  box-sizing: border-box;
+
+/* Margen específico para el primer label (De:) */
+.filtro-label:first-child {
+  margin-left: 5px;
 }
-*/
+
 .filtro-select-estado {
   margin-left: 0px;
   padding: 4px 6px;
@@ -130,12 +125,13 @@ h1.titulo-principal {
 }
 
  /* Si hay contenedor específico para botones */
-  .filtros-botones-row {
-    display: flex !important;
-    flex-direction: row !important;
-    gap:4px !important;
-    width: 100%;
-  }
+.filtros-botones-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 4px !important;
+  width: auto !important;  /* ← CAMBIAR de 100% a auto */
+  margin-left: auto !important;  /* ← AGREGAR ESTA LÍNEA */
+}
 
   .filtros-botones-row button {
     flex: 1 !important;
