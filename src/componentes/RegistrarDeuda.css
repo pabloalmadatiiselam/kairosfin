@@ -110,7 +110,7 @@ h1.titulo-principal {
   box-sizing: border-box;
 }
 
-.filtro-button {
+.botones-filtro button {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
@@ -124,8 +124,12 @@ h1.titulo-principal {
   height: 38px;
 }
 
-.filtro-button:hover {
+.botones-filtro button:hover {
   background-color: #006fcb;
+}
+
+.botones-filtro button:active {
+  transform: scale(0.98);
 }
 
  /* Si hay contenedor específico para botones */
