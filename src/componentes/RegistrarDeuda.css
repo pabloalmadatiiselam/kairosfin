@@ -72,8 +72,7 @@ h1.titulo-principal {
   display: flex;
   gap: 6px;
   align-items: center;
-  flex-wrap: nowrap;  
-  padding-left: 0px;  /* ← AGREGAR ESTA LÍNEA */
+  flex-wrap: nowrap;   
 }
 
 /* Fila 2: Botones centrados */
@@ -91,7 +90,7 @@ h1.titulo-principal {
   font-weight: 600;
   gap: 3px;
   white-space: nowrap;
-  padding-left: 0px; /* ← AGREGAR ESTA LÍNEA */
+  padding-left: 3px;  /* ← VOLVER a 3px */
 }
 
 /* Margen específico para el primer label (De:) */
@@ -111,7 +110,7 @@ h1.titulo-principal {
 
 .filtro-button {
   padding: 6px 12px;
-  width: 100px !important;
+  width: 95px !important;  /* ← CAMBIAR de 100px a 95px */
   height: 38px;
   font-size: 0.85rem;
   border: none;
@@ -121,7 +120,7 @@ h1.titulo-principal {
   cursor: pointer;
   font-weight: 600;
   white-space: nowrap;
-  margin: 0 8px !important;  /* ← CAMBIAR de 5px a 8px */ 
+  margin: 0 5px !important;  /* ← CAMBIAR de 8px a 5px */
 }
 
  /* Si hay contenedor específico para botones */
@@ -129,8 +128,7 @@ h1.titulo-principal {
   display: flex !important;
   flex-direction: row !important;
   gap: 4px !important;
-  width: auto !important;  /* ← MANTENER */
-  flex-shrink: 0 !important;  /* ← AGREGAR: Evita que se encoja */
+  width: 100%;  /* ← VOLVER a 100% */
 }
 
   .filtros-botones-row button {
