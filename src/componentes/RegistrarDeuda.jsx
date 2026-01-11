@@ -767,11 +767,9 @@ const confirmarEliminar = async () => {
               />
             </label>
             
-            <div className="filtros-botones-row">
-              <button type="submit" className="filtro-button">Buscar</button>
-              <button type="button" onClick={handleLimpiarFiltros} className="filtro-button">
-                Limpiar
-              </button>
+            <div className="botones-filtro">  {/* ← CAMBIAR clase de filtros-botones-row a botones-filtro */}
+              <button type="submit">Buscar</button>  {/* ← QUITAR className="filtro-button" */}
+              <button type="button" onClick={handleLimpiarFiltros}>Limpiar</button>  {/* ← QUITAR className="filtro-button" */}
             </div>
             
           </div>
