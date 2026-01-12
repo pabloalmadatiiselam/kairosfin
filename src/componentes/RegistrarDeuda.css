@@ -74,7 +74,7 @@ h1.titulo-principal {
   gap: 4px;  /* ← REDUCIR de 8px a 4px */
   margin-bottom: 10px;
   flex-wrap: nowrap;
-  padding-left: 2px;  /* ← REDUCIR de 5px a 2px */
+  padding-left: 8px; 
 }
 
 /* Fila 2: Botones centrados */
