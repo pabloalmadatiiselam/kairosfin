@@ -120,7 +120,7 @@ h1.titulo-principal {
 }
 
 .botones-filtro button {
-  padding: 6px 12px;
+  padding: 6px 10px;  /* ← REDUCIR de 12px a 10px */
   border: none;
   border-radius: 6px;
   background-color: #0088fe;
@@ -129,7 +129,7 @@ h1.titulo-principal {
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
-  min-width: 100px;
+  min-width: 92px;  /* ← REDUCIR de 100px a 92px */
   height: 38px;
 }
 
