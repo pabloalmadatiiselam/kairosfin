@@ -708,7 +708,7 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '42px',        // ← CAMBIAR de 30px a 42px
+                    minHeight: '38px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
@@ -795,7 +795,7 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '42px',        // ← CAMBIAR de 30px a 42px
+                    minHeight: '38px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
