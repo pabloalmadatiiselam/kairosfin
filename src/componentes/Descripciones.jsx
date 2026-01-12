@@ -716,7 +716,7 @@ function Descripciones() {
                   }),
                    valueContainer: (base) => ({
                     ...base,
-                    padding: '10px 8px'       // ← AGREGAR esta línea
+                   padding: '2px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'
                   }),
                                   menu: (base) => ({
                     ...base,
@@ -807,8 +807,8 @@ function Descripciones() {
                     backgroundColor: '#ffffff'
                   }),
                   valueContainer: (base) => ({
-                    ...base,
-                    padding: '10px 8px'       // ← AGREGAR esta línea
+                    ...base,                   
+                    padding: '2px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'                    
                   }),
                   option: (base, state) => ({
                     ...base,
