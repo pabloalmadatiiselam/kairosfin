@@ -687,8 +687,7 @@ function Descripciones() {
                 type="text"
                 name="nombre"
                 value={nuevaDescripcion.nombre}
-                onChange={handleChange}
-                placeholder="Obligatorio"
+                onChange={handleChange}                
               />
             </label>
             <label>
@@ -705,8 +704,7 @@ function Descripciones() {
                     ...prev,
                     tipo: opcion ? opcion.value : ''
                   }));
-                }}
-                options={opcionesTipo}
+                }}                
                 placeholder="Obligatorio"
                 isClearable={false}
                 styles={{
@@ -795,7 +793,7 @@ function Descripciones() {
                   }));
                 }}
                 options={[
-                  { value: "", label: "Ninguno" },  // ← Primera opción = "sin tipo"
+                  { value: "", label: "" },  // ← Primera opción = "sin tipo"
                   ...opcionesTipoEntidad            // ← Resto de opciones
                 ]}                
                 isClearable={false}
