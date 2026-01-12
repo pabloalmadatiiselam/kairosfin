@@ -783,7 +783,7 @@ function Descripciones() {
                 name="tipo_entidad"
                 value={
                   nuevaDescripcion.tipo_entidad === "" || nuevaDescripcion.tipo_entidad === null
-                    ? { value: "", label: "Ninguno" }  // ← Si está vacío, muestra "Ninguno"
+                    ? { value: "", label: "" }  // ← Si está vacío, muestra "Ninguno"
                     : opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || { value: "", label: "Ninguno" }
                 }
                 onChange={(opcion) => {
