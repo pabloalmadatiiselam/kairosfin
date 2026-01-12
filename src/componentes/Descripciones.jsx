@@ -703,7 +703,7 @@ function Descripciones() {
                   }));
                 }}
                 options={opcionesTipo}
-                placeholder="Seleccionar tipo"
+                placeholder="Seleccionar"
                 isClearable={false}
                 styles={{
                   control: (base) => ({
