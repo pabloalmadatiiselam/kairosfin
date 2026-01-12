@@ -113,10 +113,10 @@ h1.titulo-principal {
 /* Contenedor de botones - FUERA de filtros-fila-1 */
 .botones-filtro {
   display: flex;
-  gap: 4px;  /* ← REDUCIR de 6px a 4px */
+  gap: 4px;
+  margin-left: auto;  /* ← AGREGAR: Empuja los botones a la derecha */
   flex-shrink: 0;
   white-space: nowrap;
-  margin: 0 2px;  /* ← REDUCIR de 0 5px a 0 2px */
 }
 
 .botones-filtro button {
