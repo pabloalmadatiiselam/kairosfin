@@ -704,7 +704,11 @@ function Descripciones() {
                     ...prev,
                     tipo: opcion ? opcion.value : ''
                   }));
-                }}               
+                }} 
+                 options={[
+                  { value: "", label: "" },  // ← Primera opción = "sin tipo"
+                  ...opcionesTipo           // ← Resto de opciones
+                ]}              
                 isClearable={false}
                 styles={{
                   control: (base) => ({
