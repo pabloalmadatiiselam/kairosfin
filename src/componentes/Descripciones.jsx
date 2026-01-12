@@ -790,7 +790,7 @@ function Descripciones() {
                   }));
                 }}
                 options={opcionesTipoEntidad}
-                placeholder="Seleccionar tipo entidad"
+                placeholder="Seleccionar entidad"
                 isClearable={true}
                 styles={{
                   control: (base) => ({
