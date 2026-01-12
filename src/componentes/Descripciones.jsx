@@ -749,41 +749,38 @@ function Descripciones() {
           </div>
           <div className="row-2-cols">
             <label>
-              Teléfono
+              Teléfono(opcional)
               <input
                 type="tel"
                 name="telefono"
                 value={nuevaDescripcion.telefono}
-                onChange={handleChange}
-                placeholder="Opcional"
+                onChange={handleChange}                
               />
             </label>
 
             <label>
-              Email
+              Email(opcional)
               <input
                 type="email"
                 name="email"
                 value={nuevaDescripcion.email}
-                onChange={handleChange}
-                placeholder="Opcional"
+                onChange={handleChange}               
               />
             </label>
           </div>
 
           <div className="row-2-cols">
             <label>
-              Dirección
+              Dirección(opcional)
               <input
                 type="text"
                 name="direccion"
                 value={nuevaDescripcion.direccion}
-                onChange={handleChange}
-                placeholder="Opcional"
+                onChange={handleChange}               
               />
             </label>
             <label>
-              Tipo Entidad
+              Tipo Entidad(opcional)
               <Select
                 name="tipo_entidad"
                 value={
@@ -798,10 +795,9 @@ function Descripciones() {
                   }));
                 }}
                 options={[
-                  { value: "", label: "Opcional" },  // ← Primera opción = "sin tipo"
+                  { value: "", label: "Ninguno" },  // ← Primera opción = "sin tipo"
                   ...opcionesTipoEntidad            // ← Resto de opciones
-                ]}
-                placeholder="Opcional"
+                ]}                
                 isClearable={false}
                 styles={{
                   control: (base) => ({
