@@ -787,7 +787,7 @@ function Descripciones() {
                 name="tipo_entidad"
                 value={
                   nuevaDescripcion.tipo_entidad === "" || nuevaDescripcion.tipo_entidad === null
-                    ? { value: "", label: "" }  // ← Si está vacío, muestra blanco
+                    ? { value: "", label: "🔍 Buscar tipo" }  // ← Si está vacío, muestra blanco
                     : opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || { value: "", label: "Ninguno" }
                 }
                 onChange={(opcion) => {
