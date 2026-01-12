@@ -695,7 +695,11 @@ function Descripciones() {
               Tipo
               <Select
                 name="tipo"
-                value={opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null}
+                value={
+                  nuevaDescripcion.tipo === ""
+                    ? null  // ← Si está vacío, no selecciona nada (muestra placeholder)
+                    : opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null
+                }
                 onChange={(opcion) => {
                   setNuevaDescripcion(prev => ({
                     ...prev,
@@ -704,7 +708,7 @@ function Descripciones() {
                 }}
                 options={opcionesTipo}
                 placeholder="- Seleccionar -"
-                isClearable={true}
+                isClearable={false}
                 styles={{
                   control: (base) => ({
                     ...base,
@@ -782,16 +786,23 @@ function Descripciones() {
               Tipo Entidad
               <Select
                 name="tipo_entidad"
-                value={opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || null}
+                value={
+                  nuevaDescripcion.tipo_entidad === "" || nuevaDescripcion.tipo_entidad === null
+                    ? { value: "", label: "Ninguno" }  // ← Si está vacío, muestra "Ninguno"
+                    : opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || { value: "", label: "Ninguno" }
+                }
                 onChange={(opcion) => {
                   setNuevaDescripcion(prev => ({
                     ...prev,
-                    tipo_entidad: opcion ? opcion.value : ''
+                    tipo_entidad: opcion ? opcion.value : ''  // ← Si selecciona "Ninguno", guarda ""
                   }));
                 }}
-                options={opcionesTipoEntidad}
+                options={[
+                  { value: "", label: "Ninguno" },  // ← Primera opción = "sin tipo"
+                  ...opcionesTipoEntidad            // ← Resto de opciones
+                ]}
                 placeholder="Opcional"
-                isClearable={true}
+                isClearable={false}
                 styles={{
                   control: (base) => ({
                     ...base,

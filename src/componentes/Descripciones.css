@@ -99,8 +99,7 @@ h1.titulo-principal {
   white-space: nowrap;
   min-width: 100px;  /* ← Ancho fijo igual a Ingresos */
   max-width: 100px;  /* ← AGREGAR ESTA LÍNEA */
-  height: 38px;      /* ← Altura fija igual a Ingresos */
-  margin: 0 5px;  /* ← NUEVA LÍNEA */
+  height: 38px;      /* ← Altura fija igual a Ingresos */ 
 }
 
 /* ===== BOTONES EN FILA HORIZONTAL ===== */
