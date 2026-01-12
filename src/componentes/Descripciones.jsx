@@ -708,7 +708,7 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '38px',        // ← CAMBIAR de 30px a 42px
+                    minHeight: '36px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
@@ -716,7 +716,7 @@ function Descripciones() {
                   }),
                    valueContainer: (base) => ({
                     ...base,
-                   padding: '2px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'
+                   padding: '0px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'
                   }),
                                   menu: (base) => ({
                     ...base,
@@ -795,7 +795,7 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '38px',        // ← CAMBIAR de 30px a 42px
+                    minHeight: '36px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
@@ -808,7 +808,7 @@ function Descripciones() {
                   }),
                   valueContainer: (base) => ({
                     ...base,                   
-                    padding: '2px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'                    
+                    padding: '0px 8px'       // ← CAMBIAR de '10px 8px' a '2px 8px'                    
                   }),
                   option: (base, state) => ({
                     ...base,
