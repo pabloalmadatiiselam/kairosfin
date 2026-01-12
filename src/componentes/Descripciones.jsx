@@ -697,7 +697,7 @@ function Descripciones() {
                 name="tipo"
                 value={
                   nuevaDescripcion.tipo === "" | nuevaDescripcion.tipo === null
-                    ? { value: "", label: "" }  // ← Si está vacío, muestra blanco
+                    ? { value: "", label: "🔍 Buscar tipo" }  // ← Si está vacío, muestra blanco
                     : opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null
                 }
                 onChange={(opcion) => {
@@ -706,11 +706,10 @@ function Descripciones() {
                     tipo: opcion ? opcion.value : ''
                   }));
                 }} 
-                 options={[
-                  { value: "", label: "" },  // ← Primera opción = "sin tipo"
+                 options={[                  
                   ...opcionesTipo           // ← Resto de opciones
-                ]}  
-                placeholder = "🔍 Buscar tipo "            
+                ]}
+                
                 isClearable={false}
                 styles={{
                   control: (base) => ({
