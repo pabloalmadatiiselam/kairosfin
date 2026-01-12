@@ -695,21 +695,15 @@ function Descripciones() {
               Tipo
               <Select
                 name="tipo"
-                value={
-                  nuevaDescripcion.tipo === "" | nuevaDescripcion.tipo === null
-                    ? { value: "", label: "🔍 Buscar tipo" }  // ← Si está vacío, muestra blanco
-                    : opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null
-                }
+                value={opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null}
                 onChange={(opcion) => {
                   setNuevaDescripcion(prev => ({
                     ...prev,
                     tipo: opcion ? opcion.value : ''
                   }));
-                }} 
-                 options={[                  
-                  ...opcionesTipo           // ← Resto de opciones
-                ]}
-                
+                }}
+                options={opcionesTipo}
+                placeholder="Seleccionar tipo"
                 isClearable={false}
                 styles={{
                   control: (base) => ({
@@ -721,29 +715,28 @@ function Descripciones() {
                     '&:hover': { borderColor: '#0088fe' }
                   }),
                   menu: (base) => ({
-                  ...base,
-                  zIndex: 9999,
-                  backgroundColor: '#ffffff'  // ← NUEVO: fondo blanco del menú desplegable
-                  }),
-                  option: (base, state) => ({  // ← NUEVO: estilos de cada opción
                     ...base,
-                    backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',  // Azul claro al pasar mouse
-                    color: '#333333',  // Texto oscuro SIEMPRE visible
+                    zIndex: 9999,
+                    backgroundColor: '#ffffff'
+                  }),
+                  option: (base, state) => ({
+                    ...base,
+                    backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',
+                    color: '#333333',
                     cursor: 'pointer',
-                    padding: '10px 12px',  // Más espacio para tocar
+                    padding: '10px 12px',
                     '&:hover': {
-                      backgroundColor: '#bbdefb'  // Azul más intenso al hover
+                      backgroundColor: '#bbdefb'
                     }
                   }),
-                  singleValue: (base) => ({  // ← NUEVO: valor seleccionado visible
+                  singleValue: (base) => ({
                     ...base,
-                    color: '#333333'  // Texto oscuro cuando hay algo seleccionado
+                    color: '#333333'
                   }),
                   placeholder: (base) => ({
                     ...base,
-                    color: '#6c757d',
-                    fontWeight: 400,
-                    opacity: 1
+                    color: '#999999',
+                    fontStyle: 'italic'
                   })
                 }}
               />
@@ -783,25 +776,18 @@ function Descripciones() {
             </label>
             <label>
               Tipo Entidad(opcional)
-              <Select
+             <Select
                 name="tipo_entidad"
-                value={
-                  nuevaDescripcion.tipo_entidad === "" || nuevaDescripcion.tipo_entidad === null
-                    ? { value: "", label: "🔍 Buscar tipo" }  // ← Si está vacío, muestra blanco
-                    : opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || { value: "", label: "Ninguno" }
-                }
+                value={opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || null}
                 onChange={(opcion) => {
                   setNuevaDescripcion(prev => ({
                     ...prev,
-                    tipo_entidad: opcion ? opcion.value : ''  // ← Si selecciona "Ninguno", guarda ""
+                    tipo_entidad: opcion ? opcion.value : ''
                   }));
                 }}
-                options={[
-                  { value: "", label: "" },  // ← Primera opción = "sin tipo"
-                  ...opcionesTipoEntidad            // ← Resto de opciones
-                ]}
-                placeholder = "🔍 Buscar tipo entidad"                  
-                isClearable={false}
+                options={opcionesTipoEntidad}
+                placeholder="Seleccionar tipo entidad"
+                isClearable={true}
                 styles={{
                   control: (base) => ({
                     ...base,
@@ -812,29 +798,28 @@ function Descripciones() {
                     '&:hover': { borderColor: '#0088fe' }
                   }),
                   menu: (base) => ({
-                  ...base,
-                  zIndex: 9999,
-                  backgroundColor: '#ffffff'  // ← NUEVO: fondo blanco del menú desplegable
-                  }),
-                  option: (base, state) => ({  // ← NUEVO: estilos de cada opción
                     ...base,
-                    backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',  // Azul claro al pasar mouse
-                    color: '#333333',  // Texto oscuro SIEMPRE visible
+                    zIndex: 9999,
+                    backgroundColor: '#ffffff'
+                  }),
+                  option: (base, state) => ({
+                    ...base,
+                    backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',
+                    color: '#333333',
                     cursor: 'pointer',
-                    padding: '10px 12px',  // Más espacio para tocar
+                    padding: '10px 12px',
                     '&:hover': {
-                      backgroundColor: '#bbdefb'  // Azul más intenso al hover
+                      backgroundColor: '#bbdefb'
                     }
                   }),
-                  singleValue: (base) => ({  // ← NUEVO: valor seleccionado visible
+                  singleValue: (base) => ({
                     ...base,
-                    color: '#333333'  // Texto oscuro cuando hay algo seleccionado
+                    color: '#333333'
                   }),
                   placeholder: (base) => ({
                     ...base,
-                    color: '#6c757d',
-                    fontWeight: 400,
-                    opacity: 1
+                    color: '#999999',
+                    fontStyle: 'italic'
                   })
                 }}
               />
