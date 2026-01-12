@@ -687,7 +687,8 @@ function Descripciones() {
                 type="text"
                 name="nombre"
                 value={nuevaDescripcion.nombre}
-                onChange={handleChange}                
+                onChange={handleChange}  
+                placeholder = "Ej: Banco Macro"               
               />
             </label>
             <label>
@@ -708,7 +709,8 @@ function Descripciones() {
                  options={[
                   { value: "", label: "" },  // ← Primera opción = "sin tipo"
                   ...opcionesTipo           // ← Resto de opciones
-                ]}              
+                ]}  
+                placeholder = "🔍 Buscar tipo "            
                 isClearable={false}
                 styles={{
                   control: (base) => ({
@@ -798,7 +800,8 @@ function Descripciones() {
                 options={[
                   { value: "", label: "" },  // ← Primera opción = "sin tipo"
                   ...opcionesTipoEntidad            // ← Resto de opciones
-                ]}                
+                ]}
+                placeholder = "🔍 Buscar tipo entidad"                  
                 isClearable={false}
                 styles={{
                   control: (base) => ({
