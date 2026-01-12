@@ -695,8 +695,8 @@ function Descripciones() {
               <Select
                 name="tipo"
                 value={
-                  nuevaDescripcion.tipo === ""
-                    ? null  // ← Si está vacío, no selecciona nada (muestra placeholder)
+                  nuevaDescripcion.tipo === "" | nuevaDescripcion.tipo === null
+                    ? { value: "", label: "" }  // ← Si está vacío, muestra blanco
                     : opcionesTipo.find(opt => opt.value === nuevaDescripcion.tipo) || null
                 }
                 onChange={(opcion) => {
@@ -704,8 +704,7 @@ function Descripciones() {
                     ...prev,
                     tipo: opcion ? opcion.value : ''
                   }));
-                }}                
-                placeholder="Obligatorio"
+                }}               
                 isClearable={false}
                 styles={{
                   control: (base) => ({
@@ -783,7 +782,7 @@ function Descripciones() {
                 name="tipo_entidad"
                 value={
                   nuevaDescripcion.tipo_entidad === "" || nuevaDescripcion.tipo_entidad === null
-                    ? { value: "", label: "" }  // ← Si está vacío, muestra "Ninguno"
+                    ? { value: "", label: "" }  // ← Si está vacío, muestra blanco
                     : opcionesTipoEntidad.find(opt => opt.value === nuevaDescripcion.tipo_entidad) || { value: "", label: "Ninguno" }
                 }
                 onChange={(opcion) => {
