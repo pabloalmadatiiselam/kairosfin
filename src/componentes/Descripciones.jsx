@@ -708,13 +708,17 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '30px',
+                    minHeight: '42px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
                     '&:hover': { borderColor: '#0088fe' }
                   }),
-                  menu: (base) => ({
+                   valueContainer: (base) => ({
+                    ...base,
+                    padding: '10px 8px'       // ← AGREGAR esta línea
+                  }),
+                                  menu: (base) => ({
                     ...base,
                     zIndex: 9999,
                     backgroundColor: '#ffffff'
@@ -791,7 +795,7 @@ function Descripciones() {
                 styles={{
                   control: (base) => ({
                     ...base,
-                    minHeight: '30px',
+                    minHeight: '42px',        // ← CAMBIAR de 30px a 42px
                     fontSize: '1rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
@@ -801,6 +805,10 @@ function Descripciones() {
                     ...base,
                     zIndex: 9999,
                     backgroundColor: '#ffffff'
+                  }),
+                  valueContainer: (base) => ({
+                    ...base,
+                    padding: '10px 8px'       // ← AGREGAR esta línea
                   }),
                   option: (base, state) => ({
                     ...base,
