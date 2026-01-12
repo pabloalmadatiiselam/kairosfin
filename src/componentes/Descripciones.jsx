@@ -688,7 +688,7 @@ function Descripciones() {
                 name="nombre"
                 value={nuevaDescripcion.nombre}
                 onChange={handleChange}
-                placeholder="Ej: Banco Macro"
+                placeholder="Obligatorio"
               />
             </label>
             <label>
@@ -707,7 +707,7 @@ function Descripciones() {
                   }));
                 }}
                 options={opcionesTipo}
-                placeholder="- Seleccionar -"
+                placeholder="Obligatorio"
                 isClearable={false}
                 styles={{
                   control: (base) => ({
@@ -798,7 +798,7 @@ function Descripciones() {
                   }));
                 }}
                 options={[
-                  { value: "", label: "Ninguno" },  // ← Primera opción = "sin tipo"
+                  { value: "", label: "Opcional" },  // ← Primera opción = "sin tipo"
                   ...opcionesTipoEntidad            // ← Resto de opciones
                 ]}
                 placeholder="Opcional"
