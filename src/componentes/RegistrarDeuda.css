@@ -71,10 +71,10 @@ h1.titulo-principal {
 .filtros-fila-1 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;  /* ← REDUCIR de 8px a 4px */
   margin-bottom: 10px;
   flex-wrap: nowrap;
-  padding-left: 5px; /* ← COPIAR ESTA LÍNEA */
+  padding-left: 5px;
 }
 
 /* Fila 2: Botones centrados */
@@ -89,15 +89,15 @@ h1.titulo-principal {
 .filtro-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;  /* ← REDUCIR de 6px a 4px */
   font-size: 0.95rem;
   color: #333;
-  padding-left: 3px; /* ← COPIAR ESTA LÍNEA */
+  padding-left: 3px;
 }
 
 /* Margen específico para el primer label (De:) */
 .filtro-label:first-child {
-  margin-left: 5px;
+  margin-left: 2px;  /* ← REDUCIR de 5px a 2px */
 }
 
 .filtro-select-estado {
@@ -580,8 +580,8 @@ h1.titulo-principal {
   border-radius: 4px !important;
   font-size: 0.70rem !important;
   box-sizing: border-box !important;
-  line-height: normal !important; /* ← AGREGAR ESTA LÍNEA */
-  margin-left: 8px !important;
+  line-height: normal !important;
+  margin-left: 5px !important;  /* ← REDUCIR de 8px a 5px */
 }
 
 .formulario-input-fecha {

@@ -649,7 +649,7 @@ const confirmarEliminar = async () => {
                   control: (base) => ({
                     ...base,
                     minHeight: '30px',
-                    minWidth: '125px',
+                    minWidth: '115px',  /* ← REDUCIR de 125px a 115px */
                     fontSize: '0.65rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
