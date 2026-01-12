@@ -74,7 +74,7 @@ h1.titulo-principal {
   gap: 4px;  /* ← REDUCIR de 8px a 4px */
   margin-bottom: 10px;
   flex-wrap: nowrap;
-  padding-left: 5px;
+  padding-left: 2px;  /* ← REDUCIR de 5px a 2px */
 }
 
 /* Fila 2: Botones centrados */
@@ -113,14 +113,14 @@ h1.titulo-principal {
 /* Contenedor de botones - FUERA de filtros-fila-1 */
 .botones-filtro {
   display: flex;
-  gap: 6px;
-  justify-content: center;  /* ← Centrar los botones */
-  margin-top: 8px;           /* ← Separación del contenedor de filtros */
-  margin-bottom: 6px;
+  gap: 4px;  /* ← REDUCIR de 6px a 4px */
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin: 0 2px;  /* ← REDUCIR de 0 5px a 0 2px */
 }
 
 .botones-filtro button {
-  padding: 6px 10px;  /* ← REDUCIR de 12px a 10px */
+  padding: 6px 8px;  /* ← REDUCIR de 10px a 8px */
   border: none;
   border-radius: 6px;
   background-color: #0088fe;
@@ -129,7 +129,7 @@ h1.titulo-principal {
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
-  min-width: 92px;  /* ← REDUCIR de 100px a 92px */
+  min-width: 88px;  /* ← REDUCIR de 92px a 88px */
   height: 38px;
 }
 
@@ -573,7 +573,7 @@ h1.titulo-principal {
 
 /* ======== ESTILOS DATE PICKER ======== */
 .filtro-input-fecha {
-  width: 110px !important;
+  width: 105px !important; /* ← REDUCIR de 110px a 105px */
   height: 30px !important;
   padding: 6px 8px !important;
   border: 1px solid #d0d7dd !important;
