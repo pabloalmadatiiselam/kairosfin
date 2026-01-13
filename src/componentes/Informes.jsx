@@ -1030,9 +1030,9 @@ const totales = calcularTotales();
             { value: 'egresos', label: 'Egresos' },
             { value: 'ing_egr', label: 'Ingresos y Egresos' }
           ]}
-          placeholder="Seleccionar..."
+          placeholder="Seleccionar"
           isSearchable={true} /* ← CAMBIO: de false a true para permitir navegación con teclado */
-          isClearable={true}
+          isClearable={false}
           noOptionsMessage={() => "No hay opciones"}
           menuPortalTarget={document.body}
           menuPosition="fixed"         
@@ -1086,6 +1086,7 @@ const totales = calcularTotales();
           showPopperArrow={false}
           popperPlacement="bottom-start"
           portalId="root-portal"
+          isClearable={true}  // ← AGREGAR ESTA LÍNEA
         />
       </div>
 
@@ -1102,6 +1103,7 @@ const totales = calcularTotales();
           showPopperArrow={false}
           popperPlacement="bottom-start"
           portalId="root-portal"
+          isClearable={true}  // ← AGREGAR ESTA LÍNEA
         />
       </div>
       <label>
@@ -1110,7 +1112,7 @@ const totales = calcularTotales();
           value={descripcionFiltro}  /* ← CORRECCIÓN 1: usar descripcionFiltro */
           onChange={(opcion) => setDescripcionFiltro(opcion)}  /* ← CORRECCIÓN 2 */
           options={opcionesDescripcion}  /* ← CORRECCIÓN 3: usar opcionesDescripcion */
-          placeholder="Seleccionar descripción..."
+          placeholder="Seleccionar"
           isSearchable={true}
           isClearable={true}
           noOptionsMessage={() => "Seleccioná primero el tipo de informe"}  /* ← Mensaje correcto */
