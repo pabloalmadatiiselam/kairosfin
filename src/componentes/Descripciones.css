@@ -105,7 +105,7 @@ h1.titulo-principal {
 /* ===== BOTONES EN FILA HORIZONTAL ===== */
 .filtros-botones-row {
   display: flex;
-  gap: 6px !important;
+  gap: 10px;
   width: 100%;
 }
 
