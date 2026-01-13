@@ -622,6 +622,49 @@
   font-size: 0.85rem; /* ← Aumentar de 0.82rem a 0.85rem */
 }
 
+/* ========================================
+   ESTILOS PARA LA X DEL DATEPICKER
+   ======================================== */
+
+/* Botón X circular azul marino (igual que Ingresos) */
+.react-datepicker__close-icon {
+  position: absolute;
+  right: 6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #1e3a8a !important;  /* Azul marino */
+  border-radius: 50% !important;  /* Circular */
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* La X dentro del círculo */
+.react-datepicker__close-icon::after {
+  content: "×" !important;
+  color: white !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  background-color: transparent !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+/* Hover sobre la X */
+.react-datepicker__close-icon:hover {
+  background-color: #1e40af !important;  /* Azul más claro al pasar mouse */
+  cursor: pointer !important;
+}
+
+/* Ajustar padding del input para que no tape la fecha */
+.filtro-input-fecha-informe {
+  padding-right: 32px !important;  /* Espacio para la X */
+}
+
 
 /* ============================================
    RESPONSIVE DESIGN - INFORMES
