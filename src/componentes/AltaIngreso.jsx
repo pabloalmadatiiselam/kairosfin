@@ -572,22 +572,26 @@ function AltaIngreso() {
             <label className="filtro-label" title="Filtrar por descripción">
               Desc:
               <Select
-                value={inputDescripcion 
-                  ? descripciones.find(d => d.id === parseInt(inputDescripcion))
-                    ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
-                    : null
-                  : null
+               value={
+                  inputDescripcion === "" || inputDescripcion === null
+                    ? { value: "", label: "Todas" }
+                    : descripciones.find(d => d.id === parseInt(inputDescripcion))
+                      ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
+                      : { value: "", label: "Todas" }
                 }
                 onChange={(opcion) => {
                   setInputDescripcion(opcion ? opcion.value : '');
                 }}
-                options={descripciones.map(d => ({
-                  value: d.id,
-                  label: d.nombre
-                }))}
+                options={[
+                  { value: "", label: "Todas" },
+                  ...descripciones.map(d => ({
+                    value: d.id,
+                    label: d.nombre
+                  }))
+                ]}
                 placeholder="Todas"
                 isSearchable={true}
-                isClearable={true}
+                isClearable={false}
                 noOptionsMessage={() => "No hay descripciones"}
                 styles={{
                   control: (base) => ({
