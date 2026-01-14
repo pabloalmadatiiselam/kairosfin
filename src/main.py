@@ -293,101 +293,9 @@ async def obtener_categorias_movimientos():
     except Exception as e:
         print(f"Error obteniendo categorías de movimientos: {e}")
         raise HTTPException(status_code=500, detail="Error al obtener categorías")
+    
 
-## Prueba de los endpoints:
-# REEMPLAZAR COMPLETAMENTE el endpoint POST /egresos:
-"""
-@app.post("/egresos")
-def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
-    
-    # Crear egreso con lógica específica integrada (no depende de crear_movimiento)    
-    # CAMBIO: Antes llamaba a crear_movimiento(), ahora tiene lógica propia
-    # MOTIVO: Mantener consistencia con PUT /egresos que también es específico
-    
-    
-    # PASO 1: Validaciones iniciales
-    # Convertir monto a Decimal para precisión monetaria
-    monto_pago = Decimal(str(movimiento.monto))
-    
-    # Convertir deuda_id a int o None
-    deuda_id = int(movimiento.deuda_id) if movimiento.deuda_id else None
-    
-    # PASO 2: Validar que la descripción sea tipo "egreso"
-    # EXPLICACIÓN: Esto previene crear un "egreso" con descripción de "ingreso"
-    descripcion = db.query(models.Descripcion).filter(
-        models.Descripcion.id == movimiento.descripcion_id
-    ).first()
-    
-    if not descripcion:
-        raise HTTPException(status_code=400, detail="Descripción no encontrada")
-    
-    if descripcion.tipo != "egreso":
-        raise HTTPException(
-            status_code=400, 
-            detail=f"La descripción seleccionada es tipo '{descripcion.tipo}', debe ser 'egreso'"
-        )
-    
-    # PASO 3: Crear el movimiento (egreso)
-    nuevo_egreso = models.Movimiento(
-        descripcion_id=movimiento.descripcion_id,
-        monto=monto_pago,
-        fecha=movimiento.fecha or date.today(),
-        deuda_id=deuda_id
-    )
-    db.add(nuevo_egreso)
-    
-    # PASO 4: Actualizar deuda si corresponde (lógica de pago)
-    # EXPLICACIÓN: Si el egreso paga una deuda, actualizamos los campos financieros
-    if deuda_id:
-        deuda = db.query(models.Deuda).filter(models.Deuda.id == deuda_id).first()
-        
-        if not deuda:
-            raise HTTPException(status_code=400, detail="Deuda no encontrada")
-        
-        if deuda:
-            # Obtener valores actuales
-            monto_deuda = Decimal(str(deuda.monto))
-            monto_pagado_actual = Decimal(str(deuda.monto_pagado or '0.00'))
-            
-            # Sumar el nuevo pago
-            deuda.monto_pagado = (monto_pagado_actual + monto_pago).quantize(Decimal('0.01'))
-            
-            # Recalcular saldo pendiente
-            deuda.saldo_pendiente = (monto_deuda - deuda.monto_pagado).quantize(Decimal('0.01'))
-            
-            # Actualizar estado de pagado
-            if deuda.saldo_pendiente <= Decimal('0.00'):
-                deuda.pagado = True
-                deuda.saldo_pendiente = Decimal('0.00')  # Asegurar que quede en 0
-    
-    # PASO 5: Confirmar cambios
-    db.commit()
-    db.refresh(nuevo_egreso)
-    
-    # PASO 6: Preparar respuesta
-    # EXPLICACIÓN: Usamos la relación cargada para obtener el nombre
-    descripcion_nombre = nuevo_egreso.descripcion.nombre if nuevo_egreso.descripcion else ""
-    
-    return {
-        "mensaje": "Egreso registrado correctamente",
-        "movimiento": {
-            "id": nuevo_egreso.id,
-            "descripcion_id": nuevo_egreso.descripcion_id,
-            "categoria": descripcion_nombre,
-            "monto": str(nuevo_egreso.monto),
-            "fecha": nuevo_egreso.fecha.isoformat(),
-            "deuda_id": nuevo_egreso.deuda_id
-        }
-    }
-"""
-# IMPORTANTE: Después de este cambio, puedes ELIMINAR o COMENTAR:
-# - @app.post("/movimientos") y su función crear_movimiento()
-# - O dejarlo solo para ingresos si lo usas ahí
-
-# PERO: Si ingresos usa POST /ingresos que llama a crear_movimiento(),
-# deberás hacer el mismo cambio para ingresos en el Paso 2  
-
-
+# EGRESOS
 @app.post("/egresos")
 def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
     try:
@@ -475,84 +383,6 @@ def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
 # Endpoint para obtener egresos paginados y filtrados por fecha
-"""
-@app.get("/egresos/paginados")
-def obtener_egresos_paginados(
-    page: int = Query(1, ge=1),
-    limit: int = Query(4, ge=1),
-    fecha_inicio: Optional[str] = Query(None),
-    fecha_fin: Optional[str] = Query(None),
-    descripcion_id: Optional[int] = Query(None),
-    db: Session = Depends(get_db)
-):
-    # ✅ JOIN con Descripcion + LEFT JOIN con Deuda
-    query = (
-        db.query(models.Movimiento, models.Descripcion, models.Deuda)
-        .join(models.Descripcion, models.Movimiento.descripcion_id == models.Descripcion.id)
-        .outerjoin(models.Deuda, models.Movimiento.deuda_id == models.Deuda.id)
-        .filter(models.Descripcion.tipo == "egreso")
-    )
-
-    # Filtros por fecha
-    if fecha_inicio:
-        try:
-            fecha_desde = datetime.strptime(fecha_inicio, "%Y-%m-%d").date()
-            query = query.filter(models.Movimiento.fecha >= fecha_desde)
-        except ValueError:
-            raise HTTPException(status_code=400, detail="Formato de fecha_inicio inválido, debe ser YYYY-MM-DD")
-
-    if fecha_fin:
-        try:
-            fecha_hasta = datetime.strptime(fecha_fin, "%Y-%m-%d").date()
-            query = query.filter(models.Movimiento.fecha <= fecha_hasta)
-        except ValueError:
-            raise HTTPException(status_code=400, detail="Formato de fecha_fin inválido, debe ser YYYY-MM-DD")
-
-    # Filtro por descripción
-    if descripcion_id is not None:
-        query = query.filter(models.Movimiento.descripcion_id == descripcion_id)
-
-    # Ordenar: más recientes primero
-    query = query.order_by(models.Movimiento.fecha.desc(), models.Movimiento.id.desc())
-
-    # Paginación
-    total = query.count()
-    results = query.offset((page - 1) * limit).limit(limit).all()
-
-    # ✅ Construir resultado seguro: SOLO PRIMITIVOS (str, float, int, None)
-    egresos_list = []
-    for movimiento, descripcion, deuda in results:
-        item = {
-            "id": movimiento.id,
-            "descripcion_id": movimiento.descripcion_id,
-            "categoria": getattr(descripcion, 'nombre', 'Sin descripción'),
-            "monto": float(movimiento.monto) if movimiento.monto else 0.0,
-            "fecha": movimiento.fecha.isoformat() if movimiento.fecha else None,
-            "deuda_id": None,
-            "deuda_descripcion": None,
-            "deuda_saldo_pendiente": None
-        }
-
-        # ✅ Solo si hay deuda (y no es None)
-        if deuda is not None:
-            item["deuda_id"] = deuda.id
-            item["deuda_descripcion"] = (
-                getattr(deuda, 'descripcion', None) or
-                getattr(deuda, 'nombre', None) or
-                'Deuda sin nombre'
-            )
-            saldo = getattr(deuda, 'saldo_pendiente', None) or getattr(deuda, 'monto', 0.0)
-            item["deuda_saldo_pendiente"] = float(saldo) if saldo is not None else 0.0
-
-        egresos_list.append(item)
-
-    return{
-        "page": page,
-        "limit": limit,
-        "total": total,
-        "results": egresos_list
-    }    
-"""
 
 # REEMPLAZAR COMPLETAMENTE el endpoint GET /egresos/paginados:
 @app.get("/egresos/paginados")
@@ -753,28 +583,6 @@ def actualizar_egreso(egreso_id: int, movimiento: MovimientoUpdate, db: Session 
         }
     }
 
-
-"""
-# Endpoint: eliminar un egreso por ID
-@app.delete("/egresos/{id}")
-def delete_egreso(id: int, db: Session = Depends(get_db)):
-     # JOIN agregado para filtrar por tipo
-    egreso = db.query(models.Movimiento).join(
-        models.Descripcion,
-        models.Movimiento.descripcion_id == models.Descripcion.id
-    ).filter(
-        models.Movimiento.id == id,
-        models.Descripcion.tipo == "egreso"  # Filtro cambiado
-    ).first()
-
-    if not egreso:
-        raise HTTPException(status_code=404, detail="Egreso no encontrado")
-
-    db.delete(egreso)
-    db.commit()
-    return {"message": "Egreso eliminado correctamente"}
-"""
-
 # 2. MANTENER IGUAL - Endpoint de eliminación con reversión:
 @app.delete("/egresos/{id}")
 def delete_egreso(id: int, db: Session = Depends(get_db)):
@@ -826,6 +634,7 @@ def delete_egreso(id: int, db: Session = Depends(get_db)):
 # EXPLICACIÓN: La lógica de creación ya funciona correctamente
 # No necesitamos tocarla
 
+# DEUDAS
 @app.get("/deudas")
 def obtener_deudas(db: Session = Depends(get_db)):
     resultados = db.query(models.Deuda).all()

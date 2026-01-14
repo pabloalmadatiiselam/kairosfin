@@ -322,14 +322,7 @@ function AltaEgreso() {
     } finally {
       setLoading(false);
     }
-  };
-
-  // ✅ Recargar egresos cuando cambien las fechas (después de auto-completado)
-  useEffect(() => {
-    if (busquedaRealizada && (fechaDesde || fechaHasta)) {
-      fetchEgresos(page);
-    }
-  }, [fechaDesde, fechaHasta]);
+  }; 
 
   // --- useEffect para cargar descripciones al inicio ---
   useEffect(() => {
