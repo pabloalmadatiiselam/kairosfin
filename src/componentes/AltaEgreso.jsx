@@ -200,15 +200,15 @@ function AltaEgreso() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     setDescripciones(data);
-  } catch (err) {
-    console.error("Error al obtener descripciones:", err);
-    setDescripciones([]);
-    // Línea ~185:
-    setError("Error al cargar descripciones.");
-  } finally {
-    setDescripcionesLoading(false);
-  }
-};  
+    } catch (err) {
+      console.error("Error al obtener descripciones:", err);
+      setDescripciones([]);
+      // Línea ~185:
+      setError("Error al cargar descripciones.");
+    } finally {
+      setDescripcionesLoading(false);
+    }
+  };  
 
   const fetchDeudas = async (includeDeudaId = null) => {
     try {
@@ -456,129 +456,127 @@ const handleSiguiente = () => {
   // CAMBIO 3: Modificar handleSubmit para notificar cuando se modifica una deuda
   // BUSCAR esta sección en handleSubmit y AGREGAR después de guardar exitosamente:
   const handleSubmit = async (e) => {   
-  e.preventDefault();
-  
-  // ✅ VALIDACIONES MANUALES (mostrar en barra de estado)
-  
-  // 1. Validar Descripción
-  if (!nuevoEgreso.descripcion_id) {
-    setMensajeDerecha("⚠️ Por favor, seleccione una descripción");
-    setError("");
-    setMensajeIzquierda("");
-    return;
-  }
-  
-  // 2. Validar Monto
-  if (!nuevoEgreso.monto || nuevoEgreso.monto.trim() === '') {
-    setMensajeDerecha("⚠️ Por favor, ingrese un monto");
-    setError("");
-    setMensajeIzquierda("");
-    return;
-  }
-  
-  // 3. Validar que el monto sea válido
-  const montoConvertido = convertirMontoParaMySQL(nuevoEgreso.monto);
-  const montoNumerico = parseFloat(montoConvertido);
-  if (isNaN(montoNumerico) || montoNumerico <= 0) {
-    setMensajeDerecha("⚠️ Ingrese un monto válido mayor a $0");
-    setError("");
-    setMensajeIzquierda("");
-    return;
-  }
-  
-  // 4. Validar Fecha
-  if (!nuevoEgreso.fecha) {
-    setMensajeDerecha("⚠️ Por favor, ingrese una fecha");
-    setError("");
-    setMensajeIzquierda("");
-    return;
-  }
-
-  setError("");
-  setMensajeIzquierda("");
-  setMensajeDerecha("");
-
-  // Payload para enviar al backend
-  const payload = {
-    tipo: "egreso",
-    descripcion_id: parseInt(nuevoEgreso.descripcion_id),
-    monto: parseFloat(convertirMontoParaMySQL(nuevoEgreso.monto)),
-    fecha: nuevoEgreso.fecha,
-    deuda_id: nuevoEgreso.deuda_id ? parseInt(nuevoEgreso.deuda_id) : null,
-  };
-
-  try {
-    setLoading(true);
-
-    //let url = "`${import.meta.env.VITE_API_URL}`/egresos";
-    let url = `${import.meta.env.VITE_API_URL}/egresos`;
-    let method = "POST";
-    if (editarId) {
-      //url = ``${import.meta.env.VITE_API_URL}`/egresos/${editarId}`;
-      url = `${import.meta.env.VITE_API_URL}/egresos/${editarId}`;      
-      method = "PUT";
+    e.preventDefault();
+    
+    // ✅ VALIDACIONES MANUALES (mostrar en barra de estado)
+    
+    // 1. Validar Descripción
+    if (!nuevoEgreso.descripcion_id) {
+      setMensajeDerecha("⚠️ Por favor, seleccione una descripción");
+      setError("");
+      setMensajeIzquierda("");
+      return;
+    }
+    
+    // 2. Validar Monto
+    if (!nuevoEgreso.monto || nuevoEgreso.monto.trim() === '') {
+      setMensajeDerecha("⚠️ Por favor, ingrese un monto");
+      setError("");
+      setMensajeIzquierda("");
+      return;
+    }
+    
+    // 3. Validar que el monto sea válido
+    const montoConvertido = convertirMontoParaMySQL(nuevoEgreso.monto);
+    const montoNumerico = parseFloat(montoConvertido);
+    if (isNaN(montoNumerico) || montoNumerico <= 0) {
+      setMensajeDerecha("⚠️ Ingrese un monto válido mayor a $0");
+      setError("");
+      setMensajeIzquierda("");
+      return;
+    }
+    
+    // 4. Validar Fecha
+    if (!nuevoEgreso.fecha) {
+      setMensajeDerecha("⚠️ Por favor, ingrese una fecha");
+      setError("");
+      setMensajeIzquierda("");
+      return;
     }
 
-    const res = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      try {
-        const errData = await res.json();
-        const msg = errData.detail || errData.message || "Error en el servidor";
-        throw new Error(msg);
-      } catch {
-        throw new Error(`HTTP ${res.status}`);
-      }
-    }
-
-    const egresoGuardado = await res.json();
-
-    setEditarId(null);
-    setNuevoEgreso({
-      id: null,
-      descripcion_id: "",
-      monto: "",
-      fecha: "",
-      deuda_id: "",
-    });
-    setFormTitulo("Alta");
-
-    if (busquedaRealizada) {
-      await fetchEgresos(page);
-    }
-
-    if (payload.deuda_id) {
-      await fetchDeudas();
-      notifyDeudasChanged('AltaEgreso-Pago');
-      console.log('[AltaEgreso] Notificado cambio en deudas después de pago');
-    }
-
-    const descripcionNombre = descripciones.find(
-      (d) => d.id === parseInt(payload.descripcion_id)
-    )?.nombre || "";
-
-    const montoAMostrar = egresoGuardado?.movimiento?.monto || egresoGuardado?.monto || payload.monto;
-
-    setMensajeDerecha(
-      editarId
-        ? `Egreso editado: ${descripcionNombre} - ${formatearMontoParaMostrar(montoAMostrar)}`
-        : `Egreso agregado: ${descripcionNombre} - ${formatearMontoParaMostrar(montoAMostrar)}`
-    );
-    setMensajeIzquierda("");
-
-  } catch (err) {
-    console.error("Error al guardar egreso:", err);
-    setError("❌ No se pudo guardar el egreso");
+    setError("");
     setMensajeIzquierda("");
     setMensajeDerecha("");
-  } finally {
-    setLoading(false);
-  }
-};
+
+    // Payload para enviar al backend
+    const payload = {
+      tipo: "egreso",
+      descripcion_id: parseInt(nuevoEgreso.descripcion_id),
+      monto: parseFloat(convertirMontoParaMySQL(nuevoEgreso.monto)),
+      fecha: nuevoEgreso.fecha,
+      deuda_id: nuevoEgreso.deuda_id ? parseInt(nuevoEgreso.deuda_id) : null,
+    };
+
+    try {      
+      //let url = "`${import.meta.env.VITE_API_URL}`/egresos";
+      let url = `${import.meta.env.VITE_API_URL}/egresos`;
+      let method = "POST";
+      if (editarId) {
+        //url = ``${import.meta.env.VITE_API_URL}`/egresos/${editarId}`;
+        url = `${import.meta.env.VITE_API_URL}/egresos/${editarId}`;      
+        method = "PUT";
+      }
+
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        try {
+          const errData = await res.json();
+          const msg = errData.detail || errData.message || "Error en el servidor";
+          throw new Error(msg);
+        } catch {
+          throw new Error(`HTTP ${res.status}`);
+        }
+      }
+
+      const egresoGuardado = await res.json();
+
+      setEditarId(null);
+      setNuevoEgreso({
+        id: null,
+        descripcion_id: "",
+        monto: "",
+        fecha: "",
+        deuda_id: "",
+      });
+      setFormTitulo("Alta");
+
+      if (busquedaRealizada) {
+        setLoading(true);  // ← AGREGAR esta línea ANTES de fetchEgresos
+        await fetchEgresos(page);
+        setLoading(false); // ← AGREGAR esta línea DESPUÉS de fetchEgresos
+      }
+
+      if (payload.deuda_id) {
+        await fetchDeudas();
+        notifyDeudasChanged('AltaEgreso-Pago');
+        console.log('[AltaEgreso] Notificado cambio en deudas después de pago');
+      }
+
+      const descripcionNombre = descripciones.find(
+        (d) => d.id === parseInt(payload.descripcion_id)
+      )?.nombre || "";
+
+      const montoAMostrar = egresoGuardado?.movimiento?.monto || egresoGuardado?.monto || payload.monto;
+
+      setMensajeDerecha(
+        editarId
+          ? `Egreso editado: ${descripcionNombre} - ${formatearMontoParaMostrar(montoAMostrar)}`
+          : `Egreso agregado: ${descripcionNombre} - ${formatearMontoParaMostrar(montoAMostrar)}`
+      );
+      setMensajeIzquierda("");
+
+    } catch (err) {
+      console.error("Error al guardar egreso:", err);
+      setError("❌ No se pudo guardar el egreso");
+      setMensajeIzquierda("");
+      setMensajeDerecha("");
+    } 
+  };
 
  const handleEditar = (egr) => {
   setEditarId(egr.id);
