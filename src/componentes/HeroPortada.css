@@ -109,7 +109,7 @@
 
 /* LOGO */
 .hero-logo {
-  margin: 0 auto 32px;
+  margin: 32px auto 32px;  /* ← AGREGAR 32px arriba */
   animation: logoFloat 3s ease-in-out infinite;
 }
 

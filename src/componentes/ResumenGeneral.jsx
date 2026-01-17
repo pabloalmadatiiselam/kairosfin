@@ -125,7 +125,7 @@ export default function ResumenGeneral() {
             </button>
           )}
           <div className="rg-card">
-            <h3 className="rg-card-title">Ingresos y egresos — Año actual</h3>
+            <h3 className="rg-card-title">Ingresos y egresos — Anual</h3>
             <div className="rg-chart rg-chart--pie">
           <ResponsiveContainer width="100%" height={370}>
               <PieChart margin={{ top: 8, right: 16, bottom: 40, left: 16 }}>
@@ -218,7 +218,7 @@ export default function ResumenGeneral() {
             </button>
           )}
           <div className="rg-card">
-            <h3 className="rg-card-title">Deudas — Año actual</h3>
+            <h3 className="rg-card-title">Deudas — Anual</h3>
             <div className="rg-chart rg-chart--pie">
               <ResponsiveContainer width="100%" height={370}>
                 <PieChart margin={{ top: 30, right: 50, bottom: 50, left: 50 }}>
