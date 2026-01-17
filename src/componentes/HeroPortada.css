@@ -152,6 +152,27 @@
 }
 
 /* ============================================
+   SELECTOR DE AÑO
+   ============================================ */
+
+.hero-selector-anio {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.8s ease-out 0.5s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
    RESPONSIVE HERO - MEJORADO
    ============================================ */
 
@@ -171,6 +192,10 @@
 
   .hero-subtitle {
     font-size: 30px;
+  }
+
+  .hero-selector-anio {
+    margin-top: 20px;
   }
 }
 
@@ -209,6 +234,10 @@
   .hero-description {
     font-size: 15px;
   }
+  .hero-selector-anio {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
 }
 
 @media (max-width: 639px) {
@@ -244,6 +273,9 @@
 
   .hero-description {
     font-size: 14px;
+  }
+  hero-selector-anio {
+    margin-top: 12px;
   }
 }
 

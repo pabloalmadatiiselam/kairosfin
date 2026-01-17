@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 import './HeroPortada.css';
 
 // ✅ Función FUERA del componente para poder exportarla
@@ -6,9 +7,7 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-function HeroPortada() {
-  // Obtener el año actual dinámicamente
-  const anioActual = new Date().getFullYear();
+function HeroPortada({ anioSeleccionado, aniosDisponibles, anioActual, onAnioChange }) {
   // Función para navegar suavemente a cada sección
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -68,9 +67,73 @@ function HeroPortada() {
 
         {/* Subtítulo */}
         <h2 className="hero-subtitle">
-          Resumen General {anioActual}
+          Resumen General {anioSeleccionado}
         </h2>
 
+        {/* Selector de año */}
+        <div className="hero-selector-anio">
+          <Select
+            value={
+              anioSeleccionado === anioActual
+                ? { value: anioSeleccionado, label: `${anioSeleccionado} (Actual)` }
+                : { value: anioSeleccionado, label: String(anioSeleccionado) }
+            }
+            onChange={(opcion) => onAnioChange(opcion.value)}
+            options={aniosDisponibles.map(anio => ({
+              value: anio,
+              label: anio === anioActual ? `${anio} (Actual)` : String(anio)
+            }))}
+            isSearchable={false}
+            placeholder="Seleccionar año"
+            styles={{
+              control: (base) => ({
+                ...base,
+                minWidth: '200px',
+                maxWidth: '250px',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                borderRadius: '10px',
+                borderColor: '#cbd5e1',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                '&:hover': { 
+                  borderColor: '#3b82f6',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)'
+                }
+              }),
+              menu: (base) => ({
+                ...base,
+                borderRadius: '10px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.12)'
+              }),
+              option: (base, state) => ({
+                ...base,
+                backgroundColor: state.isFocused ? '#e0f2fe' : 'white',
+                color: '#1e293b',
+                fontWeight: state.isSelected ? '700' : '500',
+                cursor: 'pointer',
+                '&:active': {
+                  backgroundColor: '#bfdbfe'
+                }
+              }),
+              singleValue: (base) => ({
+                ...base,
+                color: '#1e293b',
+                fontWeight: '600'
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                color: '#3b82f6',
+                '&:hover': {
+                  color: '#2563eb'
+                }
+              }),
+              indicatorSeparator: () => ({
+                display: 'none'
+              })
+            }}
+          />
+        </div>
         {/* Descripción */}
         <p className="hero-description">
           Ingresos, egresos y deudas al instante,<br />

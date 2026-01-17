@@ -15,6 +15,7 @@ import {
 } from "recharts";
 import HeroPortada, { scrollToTop } from './HeroPortada';
 import "./ResumenGeneral.css";
+import Select from 'react-select';
 
 const colores = ["#4caf50", "#f44336"]; // Ingresos(verde) / Egresos(rojo)
 
@@ -25,8 +26,11 @@ const formatearMes = (mes) => {
 
 export default function ResumenGeneral() {
   const [datos, setDatos] = useState(null);
-
   const [mostrarBotonVolver, setMostrarBotonVolver] = useState(false);  // ← NUEVO
+  // Estados para selector de año
+  const anioActual = new Date().getFullYear();
+  const [anioSeleccionado, setAnioSeleccionado] = useState(anioActual);
+  const [aniosDisponibles, setAniosDisponibles] = useState([]);
 
   // ✅ NUEVO: Detectar si está en la portada o en los gráficos
   useEffect(() => {
@@ -48,12 +52,25 @@ export default function ResumenGeneral() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Cargar años disponibles (solo una vez al montar)
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/resumen-general`)
+      .get(`${import.meta.env.VITE_API_URL}/anios-disponibles`)
+      .then((res) => setAniosDisponibles(res.data))
+      .catch((err) => {
+        console.error("Error al obtener años:", err);
+        // Si falla, al menos mostrar el año actual
+        setAniosDisponibles([anioActual]);
+      });
+  }, [anioActual]);
+
+  // Cargar datos del año seleccionado (cada vez que cambia el año)
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/resumen-general/${anioSeleccionado}`)
       .then((res) => setDatos(res.data))
       .catch((err) => console.error("Error al obtener resumen:", err));
-  }, []);
+  }, [anioSeleccionado]);
 
   if (!datos) {
     return (
@@ -93,7 +110,12 @@ export default function ResumenGeneral() {
   return (
     <>
       {/* ✅ PORTADA HERO */}
-      <HeroPortada />
+      <HeroPortada 
+        anioSeleccionado={anioSeleccionado}
+        aniosDisponibles={aniosDisponibles}
+        anioActual={anioActual}
+        onAnioChange={setAnioSeleccionado}
+      />
       <div className="rg-container">       
         {/* PAREJA 1: Ingresos/Egresos */}
         <section id="seccion-ingresos-egresos" className="rg-pair">

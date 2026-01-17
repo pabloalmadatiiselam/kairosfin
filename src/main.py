@@ -1453,11 +1453,45 @@ def grafico_ingresos_egresos(
 
     return resultado
 
-@app.get("/resumen-general")
-def resumen_general(db: Session = Depends(get_db)):
-    ahora = datetime.now()
-    anio = ahora.year
-    mes = ahora.month
+@app.get("/anios-disponibles")
+def anios_disponibles(db: Session = Depends(get_db)):
+    """
+    Devuelve lista de años que tienen movimientos o deudas registradas,
+    ordenados de más reciente a más antiguo.
+    """
+    # Años con movimientos (ingresos o egresos)
+    anios_movimientos = db.query(
+        extract('year', models.Movimiento.fecha).label('anio')
+    ).distinct().all()
+    
+    # Años con deudas registradas
+    anios_deudas = db.query(
+        extract('year', models.Deuda.fecha_registro).label('anio')
+    ).distinct().all()
+    
+    # Unir ambos conjuntos y eliminar duplicados
+    todos_anios = set()
+    
+    for (anio,) in anios_movimientos:
+        if anio:
+            todos_anios.add(int(anio))
+    
+    for (anio,) in anios_deudas:
+        if anio:
+            todos_anios.add(int(anio))
+    
+    # Si no hay datos, devolver al menos el año actual
+    if not todos_anios:
+        todos_anios.add(datetime.now().year)
+    
+    # Ordenar de más reciente a más antiguo
+    return sorted(list(todos_anios), reverse=True)
+
+
+@app.get("/resumen-general/{anio}")
+def resumen_general(anio: int, db: Session = Depends(get_db)):
+    # Ya no necesitamos obtener el año actual, viene como parámetro
+    mes = datetime.now().month  # Esto lo podés dejar o sacar si no lo usás
 
     # Ingresos/Egresos anuales (totales) - usando JOIN con descripciones
     ingresos_total = db.query(func.sum(models.Movimiento.monto)).join(
