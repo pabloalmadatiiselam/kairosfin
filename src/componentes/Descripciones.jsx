@@ -209,7 +209,7 @@ function Descripciones() {
 
     try {
       const body = {
-        nombre: nuevaDescripcion.nombre,
+        nombre: nuevaDescripcion.nombre.trim(),  // ← Limpiar espacios
         tipo: nuevaDescripcion.tipo,
         activa: nuevaDescripcion.activa,
         telefono: nuevaDescripcion.telefono || null,
@@ -220,36 +220,65 @@ function Descripciones() {
       };
 
       if (nuevaDescripcion.id) {
+        // ============ EDITAR ============
         const res = await fetch(`${import.meta.env.VITE_API_URL}/descripciones/${nuevaDescripcion.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        if (!res.ok) throw new Error(`Error al actualizar (status ${res.status})`);
+        
+        // ✅ MEJORAR MANEJO DE ERRORES
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          const errorMsg = errorData.detail || `Error al actualizar (status ${res.status})`;
+          throw new Error(errorMsg);
+        }
+        
         setMensajeDerecha(`Descripción editada: ${nuevaDescripcion.nombre}`);
         setMensajeIzquierda("");
+        setError("");
 
         if (busquedaHecha && !listCleared) {
           await fetchDescripciones(currentPage);
         }
       } else {
+        // ============ CREAR ============
         const res = await fetch(`${import.meta.env.VITE_API_URL}/descripciones`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        if (!res.ok) throw new Error(`Error al crear (status ${res.status})`);
-        setMensajeDerecha(`Descripción agregada: ${nuevaDescripcion.nombre}`);
+        
+        // ✅ MEJORAR MANEJO DE ERRORES
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          const errorMsg = errorData.detail || `Error al crear (status ${res.status})`;
+          
+          // ✅ DETECTAR SI ES ERROR DE DUPLICADO
+          if (res.status === 400 && errorMsg.includes("Ya existe")) {
+            setMensajeDerecha(errorMsg + " ⚠️");
+            setError("");
+            setMensajeIzquierda("");
+            return;  // ← NO lanzar excepción, solo mostrar mensaje
+          }
+          
+          throw new Error(errorMsg);
+        }
+        
+        setMensajeDerecha(`Descripción agregada: ${nuevaDescripcion.nombre} ✅`);
         setMensajeIzquierda("");
+        setError("");
 
         if (busquedaHecha) {
           setCurrentPage(1);
           await fetchDescripciones(1);
         }
+        
+        resetForm();  // ← Resetear form solo si se creó exitosamente
       }
     } catch (err) {
       console.error("Error al guardar descripción:", err);
-      setError("Error guardando la descripción. ❌");
+      setError(err.message || "Error guardando la descripción. ❌");
       setMensajeIzquierda("");
       setMensajeDerecha("");
     }

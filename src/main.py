@@ -968,22 +968,27 @@ def get_descripciones_por_tipo(
 #PAGINA DE DESCRIPCIONES
 
 # 1. CREAR UNA NUEVA DESCRIPCIÓN
+# REEMPLAZAR este endpoint:
 @app.post("/descripciones", status_code=201)
 def crear_descripcion(descripcion: DescripcionCreate, db: Session = Depends(get_db)):
     """
     Crea una nueva descripción en la base de datos.
-    
-    Args:
-        descripcion: Datos de la descripción a crear
-        db: Sesión de base de datos
-    
-    Returns:
-        Dict con la descripción creada
     """
     try:
+        # ✅ NUEVA VALIDACIÓN: Verificar si ya existe una descripción con ese nombre
+        descripcion_existente = db.query(models.Descripcion).filter(
+            models.Descripcion.nombre.ilike(descripcion.nombre.strip())
+        ).first()
+        
+        if descripcion_existente:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Ya existe una descripción con el nombre '{descripcion.nombre}'"
+            )
+        
         # Crear instancia del modelo
         nueva_descripcion = models.Descripcion(
-            nombre=descripcion.nombre,
+            nombre=descripcion.nombre.strip(),  # ← Limpiar espacios
             tipo=descripcion.tipo,
             activa=descripcion.activa if descripcion.activa is not None else True,
             telefono=descripcion.telefono,
@@ -1000,6 +1005,8 @@ def crear_descripcion(descripcion: DescripcionCreate, db: Session = Depends(get_
         
         return nueva_descripcion.to_dict()
     
+    except HTTPException:
+        raise  # ← Re-lanzar excepciones HTTP
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error al crear descripción: {str(e)}")
