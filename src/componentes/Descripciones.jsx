@@ -192,7 +192,7 @@ function Descripciones() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // VALIDACIONES MANUALES ✅
+    // VALIDACIONES
     if (!nuevaDescripcion.nombre || nuevaDescripcion.nombre.trim() === "") {
       setMensajeDerecha("Por favor, ingrese una descripción ⚠️");
       setError("");
@@ -209,7 +209,7 @@ function Descripciones() {
 
     try {
       const body = {
-        nombre: nuevaDescripcion.nombre.trim(),  // ← Limpiar espacios
+        nombre: nuevaDescripcion.nombre.trim(),
         tipo: nuevaDescripcion.tipo,
         activa: nuevaDescripcion.activa,
         telefono: nuevaDescripcion.telefono || null,
@@ -220,21 +220,27 @@ function Descripciones() {
       };
 
       if (nuevaDescripcion.id) {
-        // ============ EDITAR ============
+        // EDITAR
         const res = await fetch(`${import.meta.env.VITE_API_URL}/descripciones/${nuevaDescripcion.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        
-        // ✅ MEJORAR MANEJO DE ERRORES
+
         if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          const errorMsg = errorData.detail || `Error al actualizar (status ${res.status})`;
+          let errorMsg = `Error al actualizar (status ${res.status})`;
+          try {
+            const errorData = await res.json();
+            if (errorData.detail) {
+              errorMsg = errorData.detail;
+            }
+          } catch (jsonErr) {
+            console.error("Error parseando JSON:", jsonErr);
+          }
           throw new Error(errorMsg);
         }
-        
-        setMensajeDerecha(`Descripción editada: ${nuevaDescripcion.nombre}`);
+
+        setMensajeDerecha(`Descripción editada: ${nuevaDescripcion.nombre} ✅`);
         setMensajeIzquierda("");
         setError("");
 
@@ -242,29 +248,37 @@ function Descripciones() {
           await fetchDescripciones(currentPage);
         }
       } else {
-        // ============ CREAR ============
+        // CREAR
         const res = await fetch(`${import.meta.env.VITE_API_URL}/descripciones`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        
-        // ✅ MEJORAR MANEJO DE ERRORES
+
         if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          const errorMsg = errorData.detail || `Error al crear (status ${res.status})`;
+          let errorMsg = `Error al crear (status ${res.status})`;
           
-          // ✅ DETECTAR SI ES ERROR DE DUPLICADO
-          if (res.status === 400 && errorMsg.includes("Ya existe")) {
-            setMensajeDerecha(errorMsg + " ⚠️");
-            setError("");
-            setMensajeIzquierda("");
-            return;  // ← NO lanzar excepción, solo mostrar mensaje
+          try {
+            const errorData = await res.json();
+            console.log("Error data:", errorData);
+            
+            if (errorData.detail) {
+              errorMsg = errorData.detail;
+              
+              if (errorMsg.includes("Ya existe")) {
+                setMensajeDerecha(errorMsg + " ⚠️");
+                setError("");
+                setMensajeIzquierda("");
+                return;
+              }
+            }
+          } catch (jsonErr) {
+            console.error("Error parseando JSON:", jsonErr);
           }
           
           throw new Error(errorMsg);
         }
-        
+
         setMensajeDerecha(`Descripción agregada: ${nuevaDescripcion.nombre} ✅`);
         setMensajeIzquierda("");
         setError("");
@@ -273,8 +287,8 @@ function Descripciones() {
           setCurrentPage(1);
           await fetchDescripciones(1);
         }
-        
-        resetForm();  // ← Resetear form solo si se creó exitosamente
+
+        resetForm();
       }
     } catch (err) {
       console.error("Error al guardar descripción:", err);
