@@ -1,0 +1,15 @@
+# Ignorar todos los archivos de Python/Backend
+*.py
+__pycache__/
+*.pyc
+requirements.txt
+Procfile
+.env
+railway.json
+Pipfile
+Pipfile.lock
+venv/
+env/
+.venv/
+alembic/
+alembic.ini
