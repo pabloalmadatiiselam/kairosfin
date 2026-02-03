@@ -57,6 +57,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Middleware HTTP adicional para forzar CORS
+@app.middleware("http")
+async def add_cors_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "https://kairosfin.vercel.app"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
+
 def get_db():
     db = SessionLocal()
     try:
