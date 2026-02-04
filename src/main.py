@@ -698,7 +698,7 @@ def obtener_deudas_no_pagadas(
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
-    ).filter(models.Deuda.pagado == 0)
+    ).filter(models.Deuda.pagado == False)
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -729,7 +729,7 @@ def obtener_deudas_pagadas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
-    query = db.query(models.Deuda).filter(models.Deuda.pagado == 1)
+    query = db.query(models.Deuda).filter(models.Deuda.pagado == True)
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -1548,12 +1548,12 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
 
     # Deudas anuales - torta (pagadas vs pendientes) - SIN CAMBIOS
     deudas_pendientes = db.query(func.sum(models.Deuda.saldo_pendiente)).filter(
-        models.Deuda.pagado == 0,
+        models.Deuda.pagado == False,
         extract('year', models.Deuda.fecha_registro) == anio
     ).scalar() or 0
 
     deudas_pagadas = db.query(func.sum(models.Deuda.monto)).filter(
-        models.Deuda.pagado == 1,
+        models.Deuda.pagado == True,
         extract('year', models.Deuda.fecha_registro) == anio
     ).scalar() or 0
 
@@ -1563,7 +1563,7 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
         func.sum(models.Deuda.saldo_pendiente)
     ).filter(
         extract('year', models.Deuda.fecha_registro) == anio,
-        models.Deuda.pagado == 0
+        models.Deuda.pagado == False
     ).group_by("mes").order_by("mes").all()
 
     deudas_mensuales_pagadas = db.query(
@@ -1571,7 +1571,7 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
         func.sum(models.Deuda.monto)
     ).filter(
         extract('year', models.Deuda.fecha_registro) == anio,
-        models.Deuda.pagado == 1
+        models.Deuda.pagado == True
     ).group_by("mes").order_by("mes").all()
 
     return {
