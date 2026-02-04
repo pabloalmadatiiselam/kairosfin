@@ -232,6 +232,7 @@
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-clip: padding-box;  /* ← AGREGAR esta línea */
 }
 
 /* Anchos específicos para el nuevo orden: Tipo, Fecha, Descripción, Monto, F. Deuda */
@@ -256,6 +257,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left; /* ← AGREGAR: mantener a la izquierda */
+  border-right: 1px solid #94a3b8 !important;  /* ← AGREGAR */
 }
 
 .tabla-contenido th:nth-child(4),
@@ -287,6 +289,11 @@
 
 .tabla-contenido tr:nth-child(even) {
   background-color: #fdfdfd;
+}
+
+.tabla-contenido tr:nth-child(even) td {
+  background-color: #fdfdfd !important;  /* ← AGREGAR */
+  border-collapse: collapse !important;  /* ← AGREGAR */
 }
 
 .tabla-contenido tr:hover {

@@ -195,6 +195,13 @@ h1.titulo-principal {
 .filtros-container {
   margin-bottom: 8px;
 }
+/* ✅ NUEVO: Contenedor para botones lado a lado */
+.botones-filtro-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
 
 .filtros-container input[type="date"] {
   padding: 6px 8px;
@@ -493,7 +500,7 @@ h1.titulo-principal {
   white-space: nowrap;
   min-width: 100px;  /* ← IMPORTANTE: unifica ancho */
   height: 38px;      /* ← IMPORTANTE: unifica altura */
-  margin: 0 5px;  /* ← AGREGAR ESTA LÍNEA */
+  margin: 0px;  /* ← AGREGAR ESTA LÍNEA */
 }
 
 .filtro-button:hover {
@@ -1259,9 +1266,20 @@ div[role="gridcell"].react-datepicker__day--today span[aria-hidden="true"] {
   min-width: 160px !important;  /* ← AGREGAR esta línea */
   }
 
+  /* ✅ BOTONES LADO A LADO EN MÓVIL */
+.botones-filtro-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;  /* ← IMPORTANTE */
+  gap: 10px;
+  margin-top: 10px;
+}
+
   /* ✅ BOTONES CON SEPARACIÓN */
   .filtro-button {
-    margin: 0 5px !important;
+  flex: 1;  /* ← Ocupan mismo ancho */
+  min-width: 0;
+  margin: 0;
   }
 
   /* ✅ MEJORAS TÁCTILES */
