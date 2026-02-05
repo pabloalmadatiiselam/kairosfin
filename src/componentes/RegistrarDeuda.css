@@ -192,14 +192,38 @@ h1.titulo-principal {
   font-size: 0.9rem;
 }
 
+/* ✅ CÓDIGO CORREGIDO - Botones SIEMPRE en fila */
+.acciones {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;  /* ← CLAVE: nunca permite que bajen a otra línea */
+  white-space: nowrap !important;
+}
+
 .acciones button {
-  margin: 2px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  color: #fff;
+  margin: 0 !important;  /* ← Quitar margen, usar gap del contenedor */
+  padding: 6px 12px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 0.8rem !important;
+  color: #fff !important;
+  flex-shrink: 0 !important;  /* ← Evita que los botones se encojan */
+  min-width: 70px !important;  /* ← Ancho mínimo garantizado */
+  white-space: nowrap !important;  /* ← Texto nunca baja a otra línea */
+}
+
+/* Botones deshabilitados - MISMO LAYOUT */
+.acciones button:disabled {
+  background-color: #e0e0e0 !important;
+  color: #9e9e9e !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+  border: 1px solid #bdbdbd !important;
+  /* ← HEREDAN flex-shrink: 0 y min-width del selector anterior */
 }
 
 .acciones button:first-child {
