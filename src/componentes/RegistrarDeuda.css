@@ -1,4 +1,12 @@
-/* Basado en AltaIngreso.css pero adaptado a deudas */
+/* ============================================
+   REGISTRAR DEUDA - ESTILOS PRINCIPALES
+   Versión: 2.0 - Limpio y organizado
+   ============================================ */
+
+/* ============================================
+   1. LAYOUT GENERAL
+   ============================================ */
+
 .registrar-deuda-container {
   display: flex;
   gap: 10px;
@@ -23,7 +31,72 @@ h1.titulo-principal {
   text-shadow: 2px 2px 4px rgba(29, 40, 58, 0.2);
 }
 
-/* Lista de deudas */
+/* ============================================
+   2. BARRA DE ESTADO
+   ============================================ */
+
+.barra-estado {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.06) 0%, rgba(15, 23, 42, 0.09) 100%);
+  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(30, 41, 59, 0.15);
+  box-sizing: border-box;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.estado-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.estado-izquierda {
+  text-align: left;
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.estado-contador {
+  color: #374151;
+}
+
+.estado-centro {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.estado-derecha {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.barra-estado .mensaje-exito { color: #1a7f2e; }
+.barra-estado .mensaje-error { color: #c53030; }
+.barra-estado .mensaje-neutro { color: #4b5563; }
+
+/* ============================================
+   3. LISTA DE DEUDAS
+   ============================================ */
+
 .lista-deudas {
   flex: 1;
   min-width: 300px;
@@ -51,33 +124,23 @@ h1.titulo-principal {
   padding-bottom: 4px;
 }
 
-.formulario-deuda h2 {
-  margin-bottom: 6px;
-  margin-top: 0px;
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #ffffff;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
-  padding-bottom: 4px;
-}
+/* ============================================
+   4. FILTROS
+   ============================================ */
 
-/* NUEVOS ESTILOS PARA FILTROS */
 .filtros-container {
   margin-bottom: 12px;
 }
 
-/* Fila 1: Filtros */
 .filtros-fila-1 {
   display: flex;
   align-items: center;
-  gap: 4px;  /* ← REDUCIR de 8px a 4px */
+  gap: 4px;
   margin-bottom: 10px;
   flex-wrap: nowrap;
-  padding-left: 8px; 
+  padding-left: 8px;
 }
 
-/* Fila 2: Botones centrados */
 .filtros-fila-2 {
   display: flex;
   gap: 8px;
@@ -85,42 +148,92 @@ h1.titulo-principal {
   align-items: center;
 }
 
-/* labels con layout horizontal */
 .filtro-label {
   display: flex;
   align-items: center;
-  gap: 4px;  /* ← REDUCIR de 6px a 4px */
+  gap: 4px;
   font-size: 0.95rem;
   color: #333;
   padding-left: 3px;
 }
 
-/* Margen específico para el primer label (De:) */
 .filtro-label:first-child {
-  margin-left: 2px;  /* ← REDUCIR de 5px a 2px */
+  margin-left: 2px;
 }
 
-.filtro-select-estado {
-  margin-left: 0px;
+/* Input de fecha en filtros */
+.filtro-input-fecha {
+  width: 105px !important;
+  height: 30px !important;
+  padding: 6px 8px !important;
+  border: 1px solid #d0d7dd !important;
+  border-radius: 4px !important;
+  font-size: 0.70rem !important;
+  box-sizing: border-box !important;
+  line-height: normal !important;
+  margin-left: 5px !important;
+}
+
+/* Select de descripción en filtros */
+.filtro-select-descripcion {
+  width: 95px !important;
   padding: 4px 6px;
-  width: 85px !important;  /* ← VOLVER a 85px */
-  font-size: 0.65rem;
   border: 1px solid #d0d7dd;
   border-radius: 4px;
+  font-size: 0.65rem;
+  background: white;
+  cursor: pointer;
   box-sizing: border-box;
 }
 
-/* Contenedor de botones - FUERA de filtros-fila-1 */
+.filtro-select-descripcion:hover {
+  border-color: #0088fe;
+}
+
+/* Select de estado (con íconos) */
+.filtro-select-estado-iconos {
+  margin-left: 0px;
+  padding: 4px 6px;
+  width: 45px !important;
+  height: 30px;
+  font-size: 1.1rem;
+  border: 1px solid #d0d7dd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  background-color: #fff;
+}
+
+.filtro-select-estado-iconos:hover {
+  border-color: #0088fe;
+}
+
+.filtro-select-estado-iconos option {
+  font-size: 1.2rem;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Select de estado deshabilitado */
+.filtro-select-estado:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Botones de filtro */
 .botones-filtro {
   display: flex;
   gap: 4px;
-  margin-left: auto;  /* ← AGREGAR: Empuja los botones a la derecha */
+  margin-left: auto;
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 .botones-filtro button {
-  padding: 6px 8px;  /* ← REDUCIR de 10px a 8px */
+  padding: 6px 8px;
   border: none;
   border-radius: 6px;
   background-color: #0088fe;
@@ -129,7 +242,7 @@ h1.titulo-principal {
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
-  min-width: 88px;  /* ← REDUCIR de 92px a 88px */
+  min-width: 88px;
   height: 38px;
 }
 
@@ -141,29 +254,9 @@ h1.titulo-principal {
   transform: scale(0.98);
 }
 
- /* Si hay contenedor específico para botones */
-/* 
-.filtros-botones-row {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 4px !important;
-  width: 100%;  /* ← VOLVER a 100% 
-}*/
-/*
-  .filtros-botones-row button {
-    flex: 1 !important;
-    min-width: 0 !important;
-  }
-*/
-
-.botones-filtro {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-  white-space: nowrap;
-  margin: 0 5px;
-}
-
+/* ============================================
+   5. TABLA DE DEUDAS
+   ============================================ */
 
 .tabla-con-scroll {
   flex: 1;
@@ -192,75 +285,108 @@ h1.titulo-principal {
   font-size: 0.9rem;
 }
 
-/* Asegurar que la celda Acciones tenga todos sus bordes */
-.lista-deudas th:last-child,
-.lista-deudas td:last-child {
-  border: 1px solid #94a3b8 !important;  /* ← Fuerza todos los bordes */
-  border-collapse: separate !important;
+/* Compactar filas para más espacio */
+.registrar-deuda-container .lista-deudas table th,
+.registrar-deuda-container .lista-deudas table td {
+  padding: 3px 6px !important;
+  font-size: 0.9rem;
+  line-height: 1.1;
 }
 
-/* ✅ CÓDIGO CORREGIDO - Botones SIEMPRE en fila */
-.acciones {
+.registrar-deuda-container .lista-deudas table tbody tr {
+  height: 46px;
+}
+
+/* Estados de deudas */
+.estado-pagado {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.estado-pendiente {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* ============================================
+   6. COLUMNA ACCIONES (BOTONES EDITAR/ELIMINAR)
+   ============================================ */
+
+/* Celdas de la columna Acciones */
+.lista-deudas th:nth-child(7),
+.lista-deudas td:nth-child(7) {
+  width: 180px !important;
+  min-width: 180px !important;
+  border: 1px solid #94a3b8 !important;
+  padding: 8px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+/* Contenedor de botones dentro de la celda */
+.lista-deudas td.acciones {
   display: flex !important;
   flex-direction: row !important;
-  gap: 6px !important;
   justify-content: center !important;
   align-items: center !important;
-  flex-wrap: nowrap !important;  /* ← CLAVE: nunca permite que bajen a otra línea */
-  white-space: nowrap !important;
-  border: none !important;  /* ← QUITAR cualquier borde del contenedor */
-  padding: 10px !important;  /* ← Padding para que los botones no toquen los bordes */
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+  padding: 8px !important;
+  border: 1px solid #94a3b8 !important;
+  box-sizing: border-box !important;
 }
 
-.acciones button {
-  margin: 0 !important;  /* ← Quitar margen, usar gap del contenedor */
+/* Botones dentro de Acciones */
+.lista-deudas .acciones button {
+  margin: 0 !important;
   padding: 6px 12px !important;
   border: none !important;
   border-radius: 6px !important;
   cursor: pointer !important;
   font-size: 0.8rem !important;
   color: #fff !important;
-  flex-shrink: 0 !important;  /* ← Evita que los botones se encojan */
-  min-width: 70px !important;  /* ← Ancho mínimo garantizado */
-  white-space: nowrap !important;  /* ← Texto nunca baja a otra línea */
-  box-shadow: none !important;  /* ← Asegurar que no haya sombras raras */
+  flex-shrink: 0 !important;
+  min-width: 70px !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
 }
 
-/* Botones deshabilitados - MISMO LAYOUT */
-.acciones button:disabled {
+/* Botón Editar (azul) */
+.lista-deudas .acciones button:first-child {
+  background-color: #3399ff !important;
+}
+
+.lista-deudas .acciones button:first-child:hover:not(:disabled) {
+  background-color: #0077cc !important;
+}
+
+/* Botón Eliminar (rojo) */
+.lista-deudas .acciones button:last-child {
+  background-color: #ff4d4d !important;
+}
+
+.lista-deudas .acciones button:last-child:hover:not(:disabled) {
+  background-color: #cc0000 !important;
+}
+
+/* Botones deshabilitados */
+.lista-deudas .acciones button:disabled {
   background-color: #e0e0e0 !important;
   color: #9e9e9e !important;
   cursor: not-allowed !important;
   opacity: 0.6 !important;
-  border: 1px solid #bdbdbd !important; /* ← Este puede quedarse para los deshabilitados */
-  /* ← HEREDAN flex-shrink: 0 y min-width del selector anterior */  
+  border: 1px solid #bdbdbd !important;
 }
 
-/* Hover en botón deshabilitado (sin cambios) */
-.acciones button:disabled:hover {
+.lista-deudas .acciones button:disabled:hover {
   background-color: #e0e0e0 !important;
   transform: none !important;
 }
 
-.acciones button:first-child {
-  background-color: #3399ff;
-  border: none !important;  /* ← Reforzar: sin borde */
-}
+/* ============================================
+   7. PAGINACIÓN
+   ============================================ */
 
-.acciones button:first-child:hover {
-  background-color: #0077cc;
-}
-
-.acciones button:last-child {
-  background-color: #ff4d4d;
-  border: none !important;  /* ← Reforzar: sin borde */  
-}
-
-.acciones button:last-child:hover {
-  background-color: #cc0000;
-}
-
-/* ESTILOS PARA PAGINACIÓN */
 .paginacion {
   display: flex;
   justify-content: center;
@@ -293,7 +419,10 @@ h1.titulo-principal {
   align-self: center;
 }
 
-/* Formulario de deuda */
+/* ============================================
+   8. FORMULARIO DE ALTA
+   ============================================ */
+
 .formulario-deuda {
   flex: 0.5;
   min-width: 250px;
@@ -304,6 +433,17 @@ h1.titulo-principal {
   border: none;
   height: 360px;
   box-sizing: border-box;
+}
+
+.formulario-deuda h2 {
+  margin-bottom: 6px;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffffff;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 4px;
 }
 
 .formulario-deuda label {
@@ -333,6 +473,75 @@ h1.titulo-principal {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
+/* Input de fecha en formulario */
+.formulario-input-fecha {
+  width: 100% !important;
+  height: 42px !important;
+  padding: 10px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  font-size: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Select de descripción en formulario */
+.formulario-deuda select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  height: 42px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 35px;
+}
+
+.formulario-deuda select:hover {
+  border-color: #0088fe;
+}
+
+.formulario-deuda select:focus {
+  outline: none;
+  border-color: #0088fe;
+  box-shadow: 0 0 0 2px rgba(0, 136, 254, 0.1);
+}
+
+.formulario-deuda select:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+  border-color: #dee2e6;
+}
+
+.formulario-deuda select::-ms-expand {
+  display: none;
+}
+
+.formulario-deuda select option {
+  padding: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+}
+
+.formulario-deuda small {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Botón del formulario */
 .formulario-deuda button {
   margin-top: 10px;
   padding: 12px;
@@ -349,106 +558,7 @@ h1.titulo-principal {
   background-color: #006fcb;
 }
 
-.spinner {
-  text-align: center;
-  font-weight: bold;
-  color: #0088fe;
-  margin: 15px 0;
-}
-
-/* Barra de estado */
-.barra-estado {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.06) 0%, rgba(15, 23, 42, 0.09) 100%);
-  color: #111827;
-  font-size: 0.95rem;
-  font-weight: 600;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(30, 41, 59, 0.15);
-  box-sizing: border-box;
-  margin-top: 3px;
-  margin-bottom: 10px;
-}
-
-/* Contenedor interior: distribuye en 3 zonas */
-.estado-contenido {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-}
-
-/* IZQUIERDA: Contador + mensajes de tabla */
-.estado-izquierda {
-  text-align: left;
-  color: #374151;
-  font-size: 0.95rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex: 1;
-  min-width: 0;
-}
-
-.estado-contador {
-  color: #374151;
-}
-
-/* CENTRO: Mensaje neutro */
-.estado-centro {
-  text-align: center;
-  flex-shrink: 0;
-}
-
-/* DERECHA: Mensajes de formulario */
-.estado-derecha {
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  min-width: 0;
-}
-
-/* Colores de mensajes */
-.barra-estado .mensaje-exito { color: #1a7f2e; }
-.barra-estado .mensaje-error { color: #c53030; }
-.barra-estado .mensaje-neutro { color: #4b5563; }
-
-/* Compactar filas y celdas (más espacio para filas) */
-.registrar-deuda-container .lista-deudas table th,
-.registrar-deuda-container .lista-deudas table td { 
-  padding: 3px 6px !important;  /* Reducir de 4px 8px a 3px 6px */
-  font-size: 0.9rem;           /* Reducir fuente de 0.95rem a 0.9rem */
-  line-height: 1.1;
-}
-
-/* Forzar altura de fila (opcional: ajustá si hace falta) */
-.registrar-deuda-container .lista-deudas table tbody tr {
-  height: 46px;
-}
-
-/* Ajustes menores: reducir espacios arriba/abajo */
-.registrar-deuda-container .lista-deudas h2 { margin-bottom: 6px; }
-.registrar-deuda-container .filtros-container { margin-bottom: 6px; gap: 8px; }
-
-/* Estilos para estados de deudas */
-.estado-pagado {
-  color: #28a745;
-  font-weight: bold;
-}
-
-.estado-pendiente {
-  color: #dc3545;
-  font-weight: bold;
-}
-
-/* Estilos para las fechas en dos columnas */
+/* Fechas en dos columnas */
 .fechas-container {
   display: flex;
   gap: 10px;
@@ -464,7 +574,7 @@ h1.titulo-principal {
   margin-bottom: 6px;
   font-weight: bold;
   font-size: 0.95rem;
-  color: #ffffff;  /* ← CAMBIO: de #333 a #ffffff (blanco) */
+  color: #ffffff;
 }
 
 .fecha-input input[type="date"] {
@@ -476,167 +586,10 @@ h1.titulo-principal {
   box-sizing: border-box;
 }
 
-/* Agregar estilos para el combo deshabilitado */
-.filtro-select-estado:disabled {
-  background-color: #f5f5f5;
-  color: #999;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
+/* ============================================
+   9. REACT DATEPICKER
+   ============================================ */
 
-/* 🔹 ESTILOS ADICIONALES PARA EL SELECT DE DESCRIPCIONES - AGREGAR AL FINAL DE RegistrarDeuda.css */
-
-/* Select de descripción - uniforme con los inputs existentes */
-.formulario-deuda select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-  /* Altura específica para que coincida con los inputs */
-  height: 42px; /* Mismo alto que los inputs (padding + font-size + border) */
-}
-
-/* Select hover - efecto visual */
-.formulario-deuda select:hover {
-  border-color: #0088fe;
-}
-
-/* Select focus - consistente con el diseño */
-.formulario-deuda select:focus {
-  outline: none;
-  border-color: #0088fe;
-  box-shadow: 0 0 0 2px rgba(0, 136, 254, 0.1);
-}
-
-/* Select deshabilitado - para modo edición */
-.formulario-deuda select:disabled {
-  background-color: #f8f9fa;
-  color: #6c757d;
-  cursor: not-allowed;
-  border-color: #dee2e6;
-}
-
-/* Opciones del select */
-.formulario-deuda select option {
-  padding: 8px;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
-}
-
-/* Texto pequeño informativo */
-.formulario-deuda small {
-  font-size: 0.85rem;
-  color: #666;
-  font-weight: normal;
-  font-style: italic;
-}
-
-/* OPCIONAL: Si quieres personalizar la flecha del select */
-.formulario-deuda select {
-  /* Quitar la flecha por defecto del navegador */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  
-  /* Agregar flecha personalizada */
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
-  padding-right: 35px; /* Espacio para la flecha */
-}
-
-/* Para navegadores webkit (Chrome, Safari) */
-.formulario-deuda select::-ms-expand {
-  display: none;
-}
-
-/* AGREGAR AL FINAL DE RegistrarDeuda.css */
-
-/* Estilos para botones deshabilitados en tabla de deudas */
-.acciones button:disabled {
-  /* VISUAL: Hacer que el botón se vea claramente deshabilitado */
-  background-color: #e0e0e0 !important;  /* Gris claro */
-  color: #9e9e9e !important;             /* Texto gris */
-  cursor: not-allowed;                    /* Cursor con símbolo de prohibido */
-  opacity: 0.6;                           /* Semi-transparente */
-  border: 1px solid #bdbdbd;             /* Borde gris */
-}
-
-/* Hover en botón deshabilitado (no cambia color) */
-.acciones button:disabled:hover {
-  background-color: #e0e0e0 !important;  /* Mantener gris, no cambiar */
-  transform: none;                        /* Sin efecto de transformación */
-}
-
-/* EXPLICACIÓN DE CADA PROPIEDAD:
-
-1. background-color: #e0e0e0
-   - Gris claro que visualmente indica "no disponible"
-   - !important asegura que sobrescriba otros estilos
-
-2. color: #9e9e9e
-   - Texto gris para que coincida con el fondo
-   - Indica claramente que no es clickeable
-
-3. cursor: not-allowed
-   - Muestra el símbolo de "prohibido" (círculo con línea)
-   - Feedback visual inmediato al usuario
-
-4. opacity: 0.6
-   - Semi-transparente para enfatizar que está deshabilitado
-   - 0.6 es el balance perfecto (no demasiado transparente)
-
-5. border: 1px solid #bdbdbd
-   - Borde gris para definir el botón
-   - Mantiene la estructura visual de la tabla
-
-6. :hover sin cambios
-   - Importante: botón deshabilitado NO debe cambiar al pasar mouse
-   - Refuerza que no es interactivo
-*/
-
-/* OPCIONAL: Si quieres diferentes colores para Editar vs Eliminar deshabilitados */
-/*
-.acciones button:first-child:disabled {
-  background-color: #bbdefb !important;  // Azul muy claro
-}
-
-.acciones button:last-child:disabled {
-  background-color: #ffcdd2 !important;  // Rojo muy claro
-}
-*/
-
-/* ======== ESTILOS DATE PICKER ======== */
-.filtro-input-fecha {
-  width: 105px !important; /* ← REDUCIR de 110px a 105px */
-  height: 30px !important;
-  padding: 6px 8px !important;
-  border: 1px solid #d0d7dd !important;
-  border-radius: 4px !important;
-  font-size: 0.70rem !important;
-  box-sizing: border-box !important;
-  line-height: normal !important;
-  margin-left: 5px !important;  /* ← REDUCIR de 8px a 5px */
-}
-
-.formulario-input-fecha {
-  width: 100% !important;
-  height: 42px !important;
-  padding: 10px !important;
-  border: 1px solid #ccc !important;
-  border-radius: 6px !important;
-  font-size: 1rem !important;
-  box-sizing: border-box !important;
-}
-
-/* Calendario desplegable */
 .react-datepicker {
   font-family: inherit !important;
   font-size: 0.9rem !important;
@@ -645,15 +598,13 @@ h1.titulo-principal {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* ✅ HEADER DEL CALENDARIO - AZUL MARINO */
 .react-datepicker__header {
-  background-color: #0056b3 !important;  /* ← Azul marino oscuro */
+  background-color: #0056b3 !important;
   border-bottom: none !important;
   border-radius: 8px 8px 0 0 !important;
   padding: 12px 10px 10px 10px !important;
 }
 
-/* ✅ MES Y AÑO - BLANCO Y VISIBLE */
 .react-datepicker__current-month {
   color: #ffffff !important;
   font-size: 1rem !important;
@@ -665,7 +616,6 @@ h1.titulo-principal {
   opacity: 1 !important;
 }
 
-/* ✅ NOMBRES DE DÍAS (Lu, Ma, Mi...) - VISIBLES */
 .react-datepicker__day-names {
   display: flex !important;
   justify-content: space-around !important;
@@ -682,7 +632,6 @@ h1.titulo-principal {
   text-align: center !important;
 }
 
-/* Días del mes */
 .react-datepicker__day {
   color: #333 !important;
   font-size: 0.85rem !important;
@@ -692,51 +641,32 @@ h1.titulo-principal {
   border-radius: 4px !important;
 }
 
-/* ✅ DÍA SELECCIONADO - AZUL MARINO */
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  background-color: #0056b3 !important;  /* ← Azul marino oscuro */
+  background-color: #0056b3 !important;
   color: white !important;
   font-weight: bold !important;
 }
 
-/* Día hover */
 .react-datepicker__day:hover {
-  background-color: #cce5ff !important;  /* Azul claro para hover */
+  background-color: #cce5ff !important;
   color: #0056b3 !important;
 }
 
-/* Día de hoy (outline) */
 .react-datepicker__day--today {
   font-weight: bold !important;
   border: 2px solid #0056b3 !important;
 }
 
-/* Input dentro de filtros */
-.filtros-flex-container .react-datepicker__input-container input {
-  width: 120px !important;
-  height: 30px !important;
-  padding: 6px 8px !important;
-  font-size: 0.75rem !important;
-  border: 1px solid #d0d7dd !important;
-  border-radius: 4px !important;
-  box-sizing: border-box !important;
+/* Z-index para que aparezca sobre navbar */
+.formulario-deuda .react-datepicker-popper,
+.react-datepicker-popper {
+  z-index: 10001 !important;
 }
 
-/* Input dentro de formulario */
-.formulario-ingreso .react-datepicker__input-container input {
-  width: 100% !important;
-  height: 42px !important;
-  padding: 10px !important;
-  font-size: 1rem !important;
-  border: 1px solid #ccc !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
-}
-
-/* ✅ FIX ESPECÍFICO PARA CALENDARIO DEL FORMULARIO */
+/* Calendario del formulario */
 .calendario-formulario .react-datepicker__header {
-  background-color: #0056b3 !important;  /* ← Azul marino */
+  background-color: #0056b3 !important;
 }
 
 .calendario-formulario .react-datepicker__current-month {
@@ -749,14 +679,13 @@ h1.titulo-principal {
 
 .calendario-formulario .react-datepicker__day--selected,
 .calendario-formulario .react-datepicker__day--keyboard-selected {
-  background-color: #0056b3 !important;  /* ← Azul marino */
+  background-color: #0056b3 !important;
 }
 
-/* ========================================
-   FIN ESTILOS DATE PICKER
-   ======================================== */
+/* ============================================
+   10. MODAL DE CONFIRMACIÓN
+   ============================================ */
 
-/* ======== MODAL DE CONFIRMACIÓN ======== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -827,76 +756,22 @@ h1.titulo-principal {
   background-color: #5a6268;
 }
 
-/* ======== FIN MODAL DE CONFIRMACIÓN ======== */
-
-/* Estilos específicos para el select de descripción en filtros */
-
-.filtro-select-descripcion {
-  width: 95px !important;  /* ← REDUCIDO  110 a 95*/
-  padding: 4px 6px;
-  border: 1px solid #d0d7dd;
-  border-radius: 4px;
-  font-size: 0.65rem/* reducir de 0.75 a 0.65*/;
-  background: white;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.filtro-select-descripcion:hover {
-  border-color: #0088fe;
-}
-
-/*fin de estilos específicos para el select de descripción en filtros*/
-
-/* AGREGAR al final del archivo CSS: */
-.formulario-deuda .react-datepicker-popper {
-  z-index: 10001 !important; /* Mayor que el navbar */}
-
-/* También agregar esto para asegurar que aparezca encima: */
-.react-datepicker-popper {
-  z-index: 10001 !important;
-}
-
-/* ===== NUEVO: Select de Estado SOLO con íconos ===== */
-.filtro-select-estado-iconos {
-  margin-left: 0px;
-  padding: 4px 6px;
-  width: 45px !important;
-  height: 30px;
-  font-size: 1.1rem;
-  border: 1px solid #d0d7dd;
-  border-radius: 4px;
-  box-sizing: border-box;
-  cursor: pointer;
-  text-align: center;
-  background-color: #fff;
-}
-
-.filtro-select-estado-iconos:hover {
-  border-color: #0088fe;
-}
-
-.filtro-select-estado-iconos option {
-  font-size: 1.2rem;
-  padding: 8px;
-  text-align: center;
-}
-/* ===== FIN NUEVO ===== */
-
-/* Media Queries para Responsividad
-@media (max-width: 900px) {
-  .lista-deudas { min-width: 100%; height: auto; }
-  .formulario-deuda { min-width: 100%; height: auto; }
-  .registrar-deuda-container { padding: 12px; gap: 12px; }
-}
-/* Fin Media Queries */
-
-
 /* ============================================
-   RESPONSIVE DESIGN - MOBILE FIRST
+   11. SPINNER
    ============================================ */
 
-/* 📱 TABLET (768px - 1023px) */
+.spinner {
+  text-align: center;
+  font-weight: bold;
+  color: #0088fe;
+  margin: 15px 0;
+}
+
+/* ============================================
+   12. RESPONSIVE DESIGN
+   ============================================ */
+
+/* TABLET (768px - 1023px) */
 @media (max-width: 1023px) {
   .registrar-deuda-container {
     flex-direction: column;
@@ -920,7 +795,6 @@ h1.titulo-principal {
     margin: 60px 0 10px 0 !important;
   }
 
-  /* ✅ BOTONES AJUSTADOS */
   .filtros-botones-row {
     display: flex;
     gap: 10px;
@@ -932,14 +806,11 @@ h1.titulo-principal {
     flex: 0 1 auto;
     min-width: 100px;
     max-width: 120px;
-  }  
+  }
 }
 
-/* ============================================
-   💻 DESKTOP PEQUEÑO (1024x768)
-   ============================================ */
+/* DESKTOP PEQUEÑO (1024x768) */
 @media (min-width: 1024px) and (max-height: 768px) {
-  /* ✅ AJUSTAR BOTONES PARA QUE NO SE DESBORDEN */
   .filtros-botones-row {
     display: flex;
     gap: 8px;
@@ -952,37 +823,32 @@ h1.titulo-principal {
     min-width: 95px;
     max-width: 95px;
     padding: 6px 10px;
-    font-size: 0.82rem;        
+    font-size: 0.82rem;
   }
-  
 }
 
-
-/* ============================================
-   📱 MÓVIL GRANDE (640px - 767px)
-   ============================================ */
+/* MÓVIL GRANDE (640px - 767px) */
 @media (max-width: 767px) {
-  /* ✅ FORZAR contenedor de lista para permitir scroll */
+  /* Permitir scroll horizontal */
   .lista-deudas {
     overflow-x: auto !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch !important;
   }
 
-  /* Quitar restricciones del tabla-con-scroll */
   .tabla-con-scroll {
     overflow: visible !important;
     width: auto !important;
   }
 
-  /* Forzar ancho mínimo de la tabla */
+  /* Tabla con ancho fijo */
   .lista-deudas table {
-    min-width: 800px !important;  /* ← CAMBIO: de 750px a 800px */
+    min-width: 800px !important;
     width: 800px !important;
     table-layout: fixed !important;
   }
 
-  /* Hacer columnas de ancho fijo */
+  /* Anchos fijos de columnas */
   .lista-deudas th:nth-child(1),
   .lista-deudas td:nth-child(1) {
     width: 150px !important;
@@ -1021,12 +887,11 @@ h1.titulo-principal {
 
   .lista-deudas th:nth-child(7),
   .lista-deudas td:nth-child(7) {
-    width: 170px !important;  /* ← Ancho fijo suficiente para 2 botones */
-    min-width: 170px !important;
-    white-space: nowrap;  /* ← Evita que los botones bajen a otra línea */
+    width: 180px !important;
+    min-width: 180px !important;
   }
 
-  /* Barra de scroll MÁS VISIBLE */
+  /* Scrollbar visible */
   .lista-deudas::-webkit-scrollbar {
     height: 14px !important;
   }
@@ -1047,7 +912,7 @@ h1.titulo-principal {
     background: #006fcb !important;
   }
 
-  /* ✅ FILTROS APILADOS VERTICALMENTE */
+  /* Filtros verticales */
   .filtros-fila-1 {
     display: flex;
     flex-direction: column;
@@ -1068,19 +933,7 @@ h1.titulo-principal {
     height: 44px !important;
   }
 
-  /* ✅ BOTONES EN FILA HORIZONTAL (UNO AL LADO DEL OTRO) */
-  .filtros-fila-1 > button:nth-last-child(1),
-  .filtros-fila-1 > button:nth-last-child(2) {
-    display: inline-flex !important;
-    width: calc(50% - 5px) !important;
-    vertical-align: top;
-  }
-
-  .filtros-fila-1 > button:nth-last-child(2) {
-    margin-right: 10px;
-  }
-
-  /* Si hay contenedor específico para botones */
+  /* Botones horizontales */
   .filtros-botones-row {
     display: flex !important;
     flex-direction: row !important;
@@ -1097,7 +950,6 @@ h1.titulo-principal {
     width: 100%;
   }
 
- /* ✅ BOTONES CENTRADOS CON SEPARACIÓN */
   .filtros-deuda {
     display: flex;
     flex-direction: column;
@@ -1109,13 +961,13 @@ h1.titulo-principal {
     justify-content: center;
     gap: 10px;
     width: 100%;
-  }  
+  }
 
   .controles-busqueda button {
     margin: 0 5px !important;
   }
 
-  /* Fechas en columna */
+  /* Fechas verticales */
   .fechas-container {
     flex-direction: column;
     gap: 10px;
@@ -1125,38 +977,18 @@ h1.titulo-principal {
     width: 100%;
   }
 
-  /* ✅ BOTONES EDITAR/ELIMINAR MÁS PEQUEÑOS */
-  /*
+  /* Botones más compactos */
   .acciones button {
+    margin: 2px !important;
     padding: 4px 8px !important;
-    font-size: 0.7rem !important;
-    min-width: 60px !important;
-    white-space: nowrap;
-  }
-  */
-  /*Ajustar padding de botones para que quepan */
-  .acciones button {
-  margin: 2px !important;
-  padding: 4px 8px !important;  /* ← Reducir si es necesario */
-  font-size: 0.75rem !important;
-  white-space: nowrap !important;
-  display: inline-block !important;
-  }  
-  /* Contenedor de acciones como flexbox */
-  .lista-deudas td.acciones {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 4px !important;
-    flex-wrap: nowrap !important;  /* ← CLAVE: no permitir wrap */
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
   }
 }
 
-/* ============================================
-   📱 TABLET VERTICAL (768px - 1023px)
-   ============================================ */
+/* TABLET VERTICAL (768px - 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* ✅ AJUSTAR BOTONES */
   .filtros-botones-row {
     display: flex;
     gap: 8px;
@@ -1172,7 +1004,7 @@ h1.titulo-principal {
   }
 }
 
-/* 📱 MÓVIL PEQUEÑO (320px - 639px) */
+/* MÓVIL PEQUEÑO (320px - 639px) */
 @media (max-width: 639px) {
   .registrar-deuda-container {
     padding: 5px;
@@ -1199,7 +1031,6 @@ h1.titulo-principal {
     border-radius: 4px;
   }
 
-  /* Tabla ultra compacta */
   .lista-deudas table {
     min-width: 650px;
   }
@@ -1210,7 +1041,6 @@ h1.titulo-principal {
     padding: 3px 4px;
   }
 
-  /* Formulario más compacto */
   .formulario-deuda label {
     font-size: 0.85rem;
     margin-bottom: 4px;
@@ -1227,7 +1057,6 @@ h1.titulo-principal {
     font-size: 0.9rem;
   }
 
-  /* Barra de estado compacta */
   .barra-estado {
     font-size: 0.85rem;
     padding: 6px 8px;
@@ -1237,7 +1066,6 @@ h1.titulo-principal {
     font-size: 0.8rem;
   }
 
-  /* Modal responsive */
   .modal-content {
     padding: 20px;
     max-width: 90%;
@@ -1261,7 +1089,7 @@ h1.titulo-principal {
   }
 }
 
-/* 📱 MÓVIL MUY PEQUEÑO (menos de 375px) */
+/* MÓVIL MUY PEQUEÑO (menos de 375px) */
 @media (max-width: 374px) {
   .titulo-principal {
     font-size: 1.1rem;
@@ -1282,4 +1110,3 @@ h1.titulo-principal {
     min-width: 600px;
   }
 }
-
