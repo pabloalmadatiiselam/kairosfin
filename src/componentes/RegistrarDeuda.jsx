@@ -811,78 +811,77 @@ const confirmarEliminar = async () => {
                       <td className={deuda.pagado ? "estado-pagado" : "estado-pendiente"}>
                         {deuda.pagado ? "Pagado" : "Pendiente"}
                       </td>
-                      <td className="acciones" style={{ 
-                        display: 'flex', 
-                        flexDirection: 'row', 
-                        justifyContent: 'center', 
-                        alignItems: 'center', 
-                        gap: '8px', 
-                        flexWrap: 'nowrap',
-                        padding: '8px',
-                        border: '1px solid #94a3b8'
-                      }}>
-                        <button 
-                          onClick={() => handleEdit(deuda)}
-                          disabled={tienePagos}
-                          title={tienePagos 
-                            ? "No se puede editar: tiene pagos registrados" 
-                            : "Editar deuda"
-                          }
-                          style={{
-                            margin: 0,
-                            padding: '6px 12px',
-                            border: 'none',
-                            borderRadius: '6px',
-                            cursor: tienePagos ? 'not-allowed' : 'pointer',
-                            fontSize: '0.8rem',
-                            color: '#fff',
-                            backgroundColor: tienePagos ? '#e0e0e0' : '#3399ff',
-                            flexShrink: 0,
-                            minWidth: '70px',
-                            whiteSpace: 'nowrap',
-                            opacity: tienePagos ? 0.6 : 1,
-                            border: tienePagos ? '1px solid #bdbdbd' : 'none'
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!tienePagos) e.target.style.backgroundColor = '#0077cc';
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!tienePagos) e.target.style.backgroundColor = '#3399ff';
-                          }}
-                        >
-                          Editar
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(deuda.id)}
-                          disabled={tienePagos}
-                          title={tienePagos 
-                            ? "No se puede eliminar: tiene pagos registrados" 
-                            : "Eliminar deuda"
-                          }
-                          style={{
-                            margin: 0,
-                            padding: '6px 12px',
-                            border: 'none',
-                            borderRadius: '6px',
-                            cursor: tienePagos ? 'not-allowed' : 'pointer',
-                            fontSize: '0.8rem',
-                            color: '#fff',
-                            backgroundColor: tienePagos ? '#e0e0e0' : '#ff4d4d',
-                            flexShrink: 0,
-                            minWidth: '70px',
-                            whiteSpace: 'nowrap',
-                            opacity: tienePagos ? 0.6 : 1,
-                            border: tienePagos ? '1px solid #bdbdbd' : 'none'
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!tienePagos) e.target.style.backgroundColor = '#cc0000';
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!tienePagos) e.target.style.backgroundColor = '#ff4d4d';
-                          }}
-                        >
-                          Eliminar
-                        </button>
+                      <td className="acciones">
+                        <div style={{ 
+                          display: 'flex', 
+                          flexDirection: 'row', 
+                          justifyContent: 'center', 
+                          alignItems: 'center', 
+                          gap: '8px', 
+                          flexWrap: 'nowrap',
+                          padding: '0'
+                        }}>
+                          <button 
+                            onClick={() => handleEdit(deuda)}
+                            disabled={tienePagos}
+                            title={tienePagos 
+                              ? "No se puede editar: tiene pagos registrados" 
+                              : "Editar deuda"
+                            }
+                            style={{
+                              margin: 0,
+                              padding: '6px 12px',
+                              border: 'none',
+                              borderRadius: '6px',
+                              cursor: tienePagos ? 'not-allowed' : 'pointer',
+                              fontSize: '0.8rem',
+                              color: '#fff',
+                              backgroundColor: tienePagos ? '#e0e0e0' : '#3399ff',
+                              flexShrink: 0,
+                              minWidth: '70px',
+                              whiteSpace: 'nowrap',
+                              opacity: tienePagos ? 0.6 : 1
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!tienePagos) e.target.style.backgroundColor = '#0077cc';
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!tienePagos) e.target.style.backgroundColor = '#3399ff';
+                            }}
+                          >
+                            Editar
+                          </button>
+                          <button 
+                            onClick={() => handleDelete(deuda.id)}
+                            disabled={tienePagos}
+                            title={tienePagos 
+                              ? "No se puede eliminar: tiene pagos registrados" 
+                              : "Eliminar deuda"
+                            }
+                            style={{
+                              margin: 0,
+                              padding: '6px 12px',
+                              border: 'none',
+                              borderRadius: '6px',
+                              cursor: tienePagos ? 'not-allowed' : 'pointer',
+                              fontSize: '0.8rem',
+                              color: '#fff',
+                              backgroundColor: tienePagos ? '#e0e0e0' : '#ff4d4d',
+                              flexShrink: 0,
+                              minWidth: '70px',
+                              whiteSpace: 'nowrap',
+                              opacity: tienePagos ? 0.6 : 1
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!tienePagos) e.target.style.backgroundColor = '#cc0000';
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!tienePagos) e.target.style.backgroundColor = '#ff4d4d';
+                            }}
+                          >
+                            Eliminar
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   )
