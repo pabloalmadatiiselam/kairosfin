@@ -1,6 +1,6 @@
 /* ============================================
    REGISTRAR DEUDA - ESTILOS PRINCIPALES
-   Versión: 2.0 - Limpio y organizado
+   Versión: 3.0 - FIX DEFINITIVO
    ============================================ */
 
 /* ============================================
@@ -309,68 +309,67 @@ h1.titulo-principal {
 }
 
 /* ============================================
-   6. COLUMNA ACCIONES (BOTONES EDITAR/ELIMINAR)
+   6. COLUMNA ACCIONES - FIX DEFINITIVO
    ============================================ */
 
-/* Celdas de la columna Acciones */
+/* Celda Acciones - Comportamiento de celda normal */
 .lista-deudas th:nth-child(7),
 .lista-deudas td:nth-child(7) {
   width: 180px !important;
   min-width: 180px !important;
   border: 1px solid #94a3b8 !important;
-  padding: 8px !important;
+  padding: 10px !important;
   text-align: center !important;
   vertical-align: middle !important;
 }
 
-/* Contenedor de botones dentro de la celda */
+/* TD específico de acciones - SIN FLEXBOX */
 .lista-deudas td.acciones {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 8px !important;
-  flex-wrap: nowrap !important;
-  padding: 8px !important;
+  display: table-cell !important;  /* ← CLAVE: comportamiento normal de celda */
   border: 1px solid #94a3b8 !important;
-  box-sizing: border-box !important;
+  padding: 10px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  width: 180px !important;
+  min-width: 180px !important;
 }
 
-/* Botones dentro de Acciones */
-.lista-deudas .acciones button {
-  margin: 0 !important;
+/* Botones dentro de Acciones - INLINE-BLOCK */
+.lista-deudas td.acciones button {
+  display: inline-block !important;  /* ← CLAVE: inline en vez de flex */
+  margin: 0 4px !important;
   padding: 6px 12px !important;
   border: none !important;
   border-radius: 6px !important;
-  cursor: pointer !important;
   font-size: 0.8rem !important;
   color: #fff !important;
-  flex-shrink: 0 !important;
-  min-width: 70px !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
   white-space: nowrap !important;
-  display: inline-block !important;
+  min-width: 70px !important;
 }
 
 /* Botón Editar (azul) */
-.lista-deudas .acciones button:first-child {
+.lista-deudas td.acciones .btn-editar {
   background-color: #3399ff !important;
 }
 
-.lista-deudas .acciones button:first-child:hover:not(:disabled) {
+.lista-deudas td.acciones .btn-editar:hover:not(:disabled) {
   background-color: #0077cc !important;
 }
 
 /* Botón Eliminar (rojo) */
-.lista-deudas .acciones button:last-child {
+.lista-deudas td.acciones .btn-eliminar {
   background-color: #ff4d4d !important;
 }
 
-.lista-deudas .acciones button:last-child:hover:not(:disabled) {
+.lista-deudas td.acciones .btn-eliminar:hover:not(:disabled) {
   background-color: #cc0000 !important;
 }
 
 /* Botones deshabilitados */
-.lista-deudas .acciones button:disabled {
+.lista-deudas td.acciones button:disabled {
   background-color: #e0e0e0 !important;
   color: #9e9e9e !important;
   cursor: not-allowed !important;
@@ -378,7 +377,7 @@ h1.titulo-principal {
   border: 1px solid #bdbdbd !important;
 }
 
-.lista-deudas .acciones button:disabled:hover {
+.lista-deudas td.acciones button:disabled:hover {
   background-color: #e0e0e0 !important;
   transform: none !important;
 }
@@ -977,13 +976,11 @@ h1.titulo-principal {
     width: 100%;
   }
 
-  /* Botones más compactos */
-  .acciones button {
+  /* Botones más compactos en móvil */
+  .lista-deudas td.acciones button {
     margin: 2px !important;
     padding: 4px 8px !important;
     font-size: 0.75rem !important;
-    white-space: nowrap !important;
-    display: inline-block !important;
   }
 }
 

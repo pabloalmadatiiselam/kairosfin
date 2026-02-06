@@ -47,7 +47,7 @@ function RegistrarDeuda() {
   const [nuevaDeuda, setNuevaDeuda] = useState({
     id: null,
     descripcion_id: "", // CAMBIO: era "descripcion"
-   // descripcion: "", NUEVO: para mostrar el texto en edición
+    // descripcion: "", NUEVO: para mostrar el texto en edición
     monto: "",
     fecha_registro: "",
     fecha_vencimiento: "",
@@ -103,25 +103,25 @@ function RegistrarDeuda() {
   const formatearMontoInput = (valor) => {
     // Remover todo excepto números y coma
     let limpio = valor.replace(/[^\d,]/g, '');
-    
+
     // Permitir solo una coma
     const partes = limpio.split(',');
     if (partes.length > 2) {
       limpio = partes[0] + ',' + partes[1];
     }
-    
+
     // Separar parte entera y decimal
     const [entero, decimal] = limpio.split(',');
-    
+
     // Limitar parte entera a 9 dígitos
     const enteroLimitado = entero ? entero.slice(0, 9) : '';
-    
+
     // Agregar puntos de miles solo a la parte entera
     const enteroFormateado = enteroLimitado.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    
+
     // Limitar decimales a 2 dígitos
     const decimalLimitado = decimal !== undefined ? decimal.slice(0, 2) : '';
-    
+
     // Retornar formateado
     if (limpio.includes(',')) {
       return `${enteroFormateado},${decimalLimitado}`;
@@ -138,9 +138,9 @@ function RegistrarDeuda() {
   const formatearMontoParaMostrar = (monto) => {
     const numero = parseFloat(monto);
     if (isNaN(numero)) return '$0,00';
-    return '$' + numero.toLocaleString('es-AR', { 
-      minimumFractionDigits: 2, 
-      maximumFractionDigits: 2 
+    return '$' + numero.toLocaleString('es-AR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
   };
 
@@ -149,13 +149,13 @@ function RegistrarDeuda() {
     if (!montoMySQL) return '';
     const numero = parseFloat(montoMySQL);
     if (isNaN(numero)) return '';
-    
+
     // Convertir a string con 2 decimales
     const [entero, decimal] = numero.toFixed(2).split('.');
-    
+
     // Agregar puntos de miles
     const enteroFormateado = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    
+
     // Retornar con coma decimal
     return `${enteroFormateado},${decimal}`;
   };
@@ -188,17 +188,17 @@ function RegistrarDeuda() {
   };
 
   // AGREGAR nueva función:
-const fetchFechaMinima = async () => {
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/deudas/fecha-minima`);  // ← CAMBIAR AQUÍ
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    setFechaMinima(data.fecha_minima);
-  } catch (err) {
-    console.error("Error al obtener fecha mínima:", err);
-    setFechaMinima(null);
-  }
-};
+  const fetchFechaMinima = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/deudas/fecha-minima`);  // ← CAMBIAR AQUÍ
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setFechaMinima(data.fecha_minima);
+    } catch (err) {
+      console.error("Error al obtener fecha mínima:", err);
+      setFechaMinima(null);
+    }
+  };
 
   // NUEVO useEffect: Cargar descripciones  y fecha mínima al montar el componente
   useEffect(() => {
@@ -215,7 +215,7 @@ const fetchFechaMinima = async () => {
   // --- Traer deudas ---
   const fetchDeudas = async (page = 1, desde = filterDesde, hasta = filterHasta, descripcionId = inputDescripcion) => {
     if (listCleared) return { deudas: [], total: 0 };
-    try {      
+    try {
       const params = new URLSearchParams({
         page,
         limit: PAGE_SIZE,
@@ -223,7 +223,7 @@ const fetchFechaMinima = async () => {
 
       if (desde) params.append("fecha_inicio", desde);
       if (hasta) params.append("fecha_fin", hasta);
-      if (filterEstado !== "") params.append("estado", filterEstado);      
+      if (filterEstado !== "") params.append("estado", filterEstado);
       if (descripcionId) params.append("descripcion_id", descripcionId);
 
       console.log("Parámetros enviados:", params.toString());
@@ -262,8 +262,8 @@ const fetchFechaMinima = async () => {
 
   // useEffect para recargar deudas al cambiar página o filtros
   useEffect(() => {
-  if (busquedaRealizada && !listCleared) {
-    fetchDeudas(currentPage, filterDesde, filterHasta, filterDescripcion);
+    if (busquedaRealizada && !listCleared) {
+      fetchDeudas(currentPage, filterDesde, filterHasta, filterDescripcion);
     }
   }, [currentPage, filterDesde, filterHasta, filterEstado, filterDescripcion, listCleared, busquedaRealizada]);
 
@@ -275,7 +275,7 @@ const fetchFechaMinima = async () => {
   useEffect(() => {
     if (deudasNeedRefresh && busquedaRealizada) {
       console.log('[RegistrarDeuda] Detectados cambios en deudas - actualizando...');
-      
+
       fetchDeudas(currentPage, filterDesde, filterHasta, filterDescripcion)  // ← PASAR LOS FILTROS
         .then(() => {
           markDeudasRefreshed();
@@ -309,7 +309,7 @@ const fetchFechaMinima = async () => {
       fecha_registro: "",
       fecha_vencimiento: "",
     });
-    
+
     // Volver a poner foco en descripción después de resetear
     setTimeout(() => {
       if (selectDescripcionRef.current) {
@@ -377,7 +377,7 @@ const fetchFechaMinima = async () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        if (!res.ok) throw new Error(`Error al actualizar (status ${res.status})`);        
+        if (!res.ok) throw new Error(`Error al actualizar (status ${res.status})`);
         setMensajeDerecha(`Deuda editada: ${obtenerNombreDescripcion(nuevaDeuda.descripcion_id)} - ${formatearMontoParaMostrar(body.monto)}`); // ← Cambio aquí
         setMensajeIzquierda(""); // ← Limpiar mensajes de tabla
         if (busquedaRealizada) {
@@ -393,19 +393,19 @@ const fetchFechaMinima = async () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        if (!res.ok) throw new Error(`Error al crear (status ${res.status})`);        
+        if (!res.ok) throw new Error(`Error al crear (status ${res.status})`);
         setMensajeDerecha(`Deuda agregada: ${obtenerNombreDescripcion(nuevaDeuda.descripcion_id)} - ${formatearMontoParaMostrar(body.monto)}`); // ← Cambio aquí
         setMensajeIzquierda(""); // ← Limpiar mensajes de tabla               
         resetForm();
         setListCleared(false);
-        
+
         if (busquedaRealizada) {  // ← Cambio: recargar si hay búsqueda activa
           setCurrentPage(1);
           await fetchDeudas(1);
         }
         // NUEVO: Notificar al contexto que se creó una deuda
         notifyDeudasChanged('RegistrarDeuda-Crear');
-       }
+      }
       resetForm();
       setListCleared(false);
     } catch (err) {
@@ -418,7 +418,7 @@ const fetchFechaMinima = async () => {
 
   const handleEdit = (deuda) => {
     setNuevaDeuda({
-      id: deuda.id,      
+      id: deuda.id,
       descripcion_id: deuda.descripcion_id ? String(deuda.descripcion_id) : "", // CAMBIO: convertir a string      
       monto: convertirMontoParaEdicion(deuda.monto),
       fecha_registro: deuda.fecha_registro || "",
@@ -429,35 +429,35 @@ const fetchFechaMinima = async () => {
 
   // CAMBIO 5: Modificar handleDelete para notificar cambios
   // REEMPLAZAR la función handleDelete completa por esta:
- const handleDelete = (id) => {
-  const deuda = deudas.find(d => d.id === id);
-  setDeudaAEliminar(deuda);
-  setShowDeleteModal(true);
-};
+  const handleDelete = (id) => {
+    const deuda = deudas.find(d => d.id === id);
+    setDeudaAEliminar(deuda);
+    setShowDeleteModal(true);
+  };
 
-// Y AGREGAR después:
-const confirmarEliminar = async () => {
-  if (!deudaAEliminar) return;
-  
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/deudas/${deudaAEliminar.id}`, { method: "DELETE" });
-    if (!res.ok) throw new Error(`Error al eliminar (status ${res.status})`);
-    setMensajeIzquierda(`Deuda eliminada: ${deudaAEliminar.descripcion} - ${formatearMontoParaMostrar(deudaAEliminar.monto)}`);
-    setMensajeDerecha("");
-    setError("");
-    await fetchDeudas(currentPage);
-    resetForm();
-    notifyDeudasChanged('RegistrarDeuda-Eliminar');
-  } catch (err) {
-    console.error("Error al eliminar deuda:", err);
-    setError("❌ Error al eliminar la deuda.");
-    setMensajeIzquierda("");
-    setMensajeDerecha("");
-  } finally {
-    setShowDeleteModal(false);
-    setDeudaAEliminar(null);
-  }
-};
+  // Y AGREGAR después:
+  const confirmarEliminar = async () => {
+    if (!deudaAEliminar) return;
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/deudas/${deudaAEliminar.id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`Error al eliminar (status ${res.status})`);
+      setMensajeIzquierda(`Deuda eliminada: ${deudaAEliminar.descripcion} - ${formatearMontoParaMostrar(deudaAEliminar.monto)}`);
+      setMensajeDerecha("");
+      setError("");
+      await fetchDeudas(currentPage);
+      resetForm();
+      notifyDeudasChanged('RegistrarDeuda-Eliminar');
+    } catch (err) {
+      console.error("Error al eliminar deuda:", err);
+      setError("❌ Error al eliminar la deuda.");
+      setMensajeIzquierda("");
+      setMensajeDerecha("");
+    } finally {
+      setShowDeleteModal(false);
+      setDeudaAEliminar(null);
+    }
+  };
 
   // --- Filtros ---
   const handleBuscar = (e) => {
@@ -514,8 +514,8 @@ const confirmarEliminar = async () => {
     setFilterDescripcion(inputDescripcion);
 
     // Reiniciar paginación y lista
-    setCurrentPage(1);    
-    setListCleared(false); 
+    setCurrentPage(1);
+    setListCleared(false);
     resetForm();
     setError("");
     setMensajeIzquierda(mensajeInfo); // ← SOLO ESTA LÍNEA (ya la pusiste arriba)
@@ -598,7 +598,7 @@ const confirmarEliminar = async () => {
                 )}
               </div>
             </label>
-            
+
             <label className="filtro-label">
               A:
               <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -624,11 +624,11 @@ const confirmarEliminar = async () => {
                 )}
               </div>
             </label>
-            
+
             <label className="filtro-label" title="Filtrar por descripción">
               Desc:
               <Select
-                value={inputDescripcion 
+                value={inputDescripcion
                   ? descripciones.find(d => d.id === parseInt(inputDescripcion))
                     ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
                     : null
@@ -689,14 +689,14 @@ const confirmarEliminar = async () => {
                 }}
               />
             </label>
-            
+
             <label className="filtro-label" title="Filtrar por estado">
               Est:
               <Select
                 value={
                   inputEstado === "" ? { value: "", label: "Todos" } :
-                  inputEstado === "pendientes" ? { value: "pendientes", label: "Pend." } :
-                  { value: "pagados", label: "Pag." }
+                    inputEstado === "pendientes" ? { value: "pendientes", label: "Pend." } :
+                      { value: "pagados", label: "Pag." }
                 }
                 onChange={(opcion) => {
                   setInputEstado(opcion ? opcion.value : '');
@@ -765,12 +765,12 @@ const confirmarEliminar = async () => {
                   })
                 }}
               />
-            </label>            
+            </label>
             <div className="botones-filtro">  {/* ← CAMBIAR clase de filtros-botones-row a botones-filtro */}
               <button type="submit">Buscar</button>  {/* ← QUITAR className="filtro-button" */}
               <button type="button" onClick={handleLimpiarFiltros}>Limpiar</button>  {/* ← QUITAR className="filtro-button" */}
-            </div> 
-            </div>        
+            </div>
+          </div>
         </form>
 
         <div className="tabla-con-scroll">
@@ -793,106 +793,53 @@ const confirmarEliminar = async () => {
                 <tr>
                   <td colSpan="7">No hay registros para mostrar.</td>
                 </tr>
-              ) : 
-              (                
-                deudas.map((deuda) => 
-                {
-                  // NUEVO: Calcular si la deuda tiene pagos
-                  // EXPLICACIÓN: Si monto_pagado > 0, significa que se hizo al menos un pago
-                  // ya sea parcial o total. En ese caso, no se puede editar ni eliminar.
-                  const tienePagos = parseFloat(deuda.monto_pagado || 0) > 0;                
-                  return (                  
-                    <tr key={deuda.id}>
-                      <td>{deuda.descripcion}</td>
-                      <td>{formatearMontoParaMostrar(deuda.monto)}</td>
-                      <td>{formatearMontoParaMostrar(deuda.saldo_pendiente ?? deuda.monto)}</td>   {/* CAMBIAR ESTA LÍNEA */}                   
-                      <td>{formatearFechaParaMostrar(deuda.fecha_registro)}</td>
-                      <td>{formatearFechaParaMostrar(deuda.fecha_vencimiento)}</td>
-                      <td className={deuda.pagado ? "estado-pagado" : "estado-pendiente"}>
-                        {deuda.pagado ? "Pagado" : "Pendiente"}
-                      </td>
-                     <td className="acciones" style={{
-                          border: '1px solid #94a3b8',
-                          padding: '10px',
-                          textAlign: 'center',
-                          verticalAlign: 'middle'
-                        }}>
-                        <div style={{ 
-                            display: 'flex', 
-                            flexDirection: 'row', 
-                            justifyContent: 'center', 
-                            alignItems: 'center', 
-                            gap: '8px', 
-                            flexWrap: 'nowrap'
-                          }}>
-                            <button 
-                              onClick={() => handleEdit(deuda)}
-                              disabled={tienePagos}
-                              title={tienePagos 
-                                ? "No se puede editar: tiene pagos registrados" 
-                                : "Editar deuda"
-                              }
-                              style={{
-                                margin: 0,
-                                padding: '6px 12px',
-                                border: 'none',
-                                borderRadius: '6px',
-                                cursor: tienePagos ? 'not-allowed' : 'pointer',
-                                fontSize: '0.8rem',
-                                color: '#fff',
-                                backgroundColor: tienePagos ? '#e0e0e0' : '#3399ff',
-                                flexShrink: 0,
-                                minWidth: '70px',
-                                whiteSpace: 'nowrap',
-                                opacity: tienePagos ? 0.6 : 1
-                              }}
-                              onMouseEnter={(e) => {
-                                if (!tienePagos) e.target.style.backgroundColor = '#0077cc';
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!tienePagos) e.target.style.backgroundColor = '#3399ff';
-                              }}
-                            >
-                              Editar
-                            </button>
-                            <button 
-                              onClick={() => handleDelete(deuda.id)}
-                              disabled={tienePagos}
-                              title={tienePagos 
-                                ? "No se puede eliminar: tiene pagos registrados" 
-                                : "Eliminar deuda"
-                              }
-                              style={{
-                                margin: 0,
-                                padding: '6px 12px',
-                                border: 'none',
-                                borderRadius: '6px',
-                                cursor: tienePagos ? 'not-allowed' : 'pointer',
-                                fontSize: '0.8rem',
-                                color: '#fff',
-                                backgroundColor: tienePagos ? '#e0e0e0' : '#ff4d4d',
-                                flexShrink: 0,
-                                minWidth: '70px',
-                                whiteSpace: 'nowrap',
-                                opacity: tienePagos ? 0.6 : 1
-                              }}
-                              onMouseEnter={(e) => {
-                                if (!tienePagos) e.target.style.backgroundColor = '#cc0000';
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!tienePagos) e.target.style.backgroundColor = '#ff4d4d';
-                              }}
-                            >
-                              Eliminar
-                            </button>
-                        </div>
-                      </td>
-                    </tr>
+              ) :
+                (
+                  deudas.map((deuda) => {
+                    // NUEVO: Calcular si la deuda tiene pagos
+                    // EXPLICACIÓN: Si monto_pagado > 0, significa que se hizo al menos un pago
+                    // ya sea parcial o total. En ese caso, no se puede editar ni eliminar.
+                    const tienePagos = parseFloat(deuda.monto_pagado || 0) > 0;
+                    return (
+                      <tr key={deuda.id}>
+                        <td>{deuda.descripcion}</td>
+                        <td>{formatearMontoParaMostrar(deuda.monto)}</td>
+                        <td>{formatearMontoParaMostrar(deuda.saldo_pendiente ?? deuda.monto)}</td>   {/* CAMBIAR ESTA LÍNEA */}
+                        <td>{formatearFechaParaMostrar(deuda.fecha_registro)}</td>
+                        <td>{formatearFechaParaMostrar(deuda.fecha_vencimiento)}</td>
+                        <td className={deuda.pagado ? "estado-pagado" : "estado-pendiente"}>
+                          {deuda.pagado ? "Pagado" : "Pendiente"}
+                        </td>
+                        <td className="acciones">
+                          <button 
+                            onClick={() => handleEdit(deuda)}
+                            disabled={tienePagos}
+                            title={tienePagos 
+                              ? "No se puede editar: tiene pagos registrados" 
+                              : "Editar deuda"
+                            }
+                            className="btn-editar"
+                          >
+                            Editar
+                          </button>
+                          <button 
+                            onClick={() => handleDelete(deuda.id)}
+                            disabled={tienePagos}
+                            title={tienePagos 
+                              ? "No se puede eliminar: tiene pagos registrados" 
+                              : "Eliminar deuda"
+                            }
+                            className="btn-eliminar"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  }
                   )
-                }                
-              )
-              )              
-            }
+                )
+              }
             </tbody>
           </table>
         </div>
@@ -909,20 +856,20 @@ const confirmarEliminar = async () => {
       <div className="formulario-deuda">
         <h2>{formTitle}</h2>
         <form onSubmit={handleSubmit}>
-           <label>
+          <label>
             Descripción
             <Select
               ref={selectDescripcionRef}
-              value={nuevaDeuda.descripcion_id 
+              value={nuevaDeuda.descripcion_id
                 ? descripciones.find(d => d.id === parseInt(nuevaDeuda.descripcion_id))
                   ? { value: nuevaDeuda.descripcion_id, label: descripciones.find(d => d.id === parseInt(nuevaDeuda.descripcion_id)).nombre }
                   : null
                 : null
               }
               onChange={(opcion) => {
-                setNuevaDeuda({ 
-                  ...nuevaDeuda, 
-                  descripcion_id: opcion ? opcion.value : '' 
+                setNuevaDeuda({
+                  ...nuevaDeuda,
+                  descripcion_id: opcion ? opcion.value : ''
                 });
               }}
               options={descripciones.map(d => ({
@@ -936,72 +883,72 @@ const confirmarEliminar = async () => {
               noOptionsMessage={() => "No se encontraron descripciones"}
               loadingMessage={() => "Cargando..."}
               styles={{
-              control: (base) => ({
-                ...base,
-                minHeight: '42px',
-                borderColor: '#ccc',
-                borderRadius: '6px',
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',  // ← NUEVO: fondo blanco semi-opaco
-                '&:hover': { borderColor: '#0088fe' }
-              }),
-              menu: (base) => ({
-                ...base,
-                zIndex: 9999,
-                backgroundColor: '#ffffff'  // ← NUEVO: fondo blanco del menú desplegable
-              }),
-              option: (base, state) => ({  // ← NUEVO: estilos de cada opción
-                ...base,
-                backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',  // Azul claro al pasar mouse
-                color: '#333333',  // Texto oscuro SIEMPRE visible
-                cursor: 'pointer',
-                padding: '10px 12px',  // Más espacio para tocar
-                '&:hover': {
-                  backgroundColor: '#bbdefb'  // Azul más intenso al hover
-                }
-              }),
-              singleValue: (base) => ({  // ← NUEVO: valor seleccionado visible
-                ...base,
-                color: '#333333'  // Texto oscuro cuando hay algo seleccionado
-              }),
-              placeholder: (base) => ({
-                ...base,
-                color: '#6c757d',
-                fontWeight: 400,
-                opacity: 1
-              })
-            }}
+                control: (base) => ({
+                  ...base,
+                  minHeight: '42px',
+                  borderColor: '#ccc',
+                  borderRadius: '6px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',  // ← NUEVO: fondo blanco semi-opaco
+                  '&:hover': { borderColor: '#0088fe' }
+                }),
+                menu: (base) => ({
+                  ...base,
+                  zIndex: 9999,
+                  backgroundColor: '#ffffff'  // ← NUEVO: fondo blanco del menú desplegable
+                }),
+                option: (base, state) => ({  // ← NUEVO: estilos de cada opción
+                  ...base,
+                  backgroundColor: state.isFocused ? '#e3f2fd' : '#ffffff',  // Azul claro al pasar mouse
+                  color: '#333333',  // Texto oscuro SIEMPRE visible
+                  cursor: 'pointer',
+                  padding: '10px 12px',  // Más espacio para tocar
+                  '&:hover': {
+                    backgroundColor: '#bbdefb'  // Azul más intenso al hover
+                  }
+                }),
+                singleValue: (base) => ({  // ← NUEVO: valor seleccionado visible
+                  ...base,
+                  color: '#333333'  // Texto oscuro cuando hay algo seleccionado
+                }),
+                placeholder: (base) => ({
+                  ...base,
+                  color: '#6c757d',
+                  fontWeight: 400,
+                  opacity: 1
+                })
+              }}
             />
           </label>
-        <label>
-          Monto
-          <input
-            type="text"
-            name="monto"
-            value={nuevaDeuda.monto}
-            onChange={(e) => {
-              const valorFormateado = formatearMontoInput(e.target.value);
-              setNuevaDeuda({ ...nuevaDeuda, monto: valorFormateado });
-            }}
-            onBlur={(e) => {
-              const valorSinFormato = convertirMontoParaMySQL(e.target.value);
-              const num = parseFloat(valorSinFormato);
-              if (e.target.value && (isNaN(num) || num <= 0 || num > 999999999.99)) {
-                alert('Ingrese un monto válido entre $0,01 y $999.999.999,99');
-                setNuevaDeuda({ ...nuevaDeuda, monto: '' });
-              }
-            }}
-            placeholder="Ej: 1.000,50"            
-          />
-        </label> 
+          <label>
+            Monto
+            <input
+              type="text"
+              name="monto"
+              value={nuevaDeuda.monto}
+              onChange={(e) => {
+                const valorFormateado = formatearMontoInput(e.target.value);
+                setNuevaDeuda({ ...nuevaDeuda, monto: valorFormateado });
+              }}
+              onBlur={(e) => {
+                const valorSinFormato = convertirMontoParaMySQL(e.target.value);
+                const num = parseFloat(valorSinFormato);
+                if (e.target.value && (isNaN(num) || num <= 0 || num > 999999999.99)) {
+                  alert('Ingrese un monto válido entre $0,01 y $999.999.999,99');
+                  setNuevaDeuda({ ...nuevaDeuda, monto: '' });
+                }
+              }}
+              placeholder="Ej: 1.000,50"
+            />
+          </label>
           <div className="fechas-container">
             <div className="fecha-input">
               <label>Fecha</label>
               <DatePicker
                 selected={nuevaDeuda.fecha_registro ? new Date(nuevaDeuda.fecha_registro + 'T00:00:00') : null}
                 onChange={(date) => {
-                  setNuevaDeuda({ 
-                    ...nuevaDeuda, 
-                    fecha_registro: date ? date.toISOString().split('T')[0] : '' 
+                  setNuevaDeuda({
+                    ...nuevaDeuda,
+                    fecha_registro: date ? date.toISOString().split('T')[0] : ''
                   });
                 }}
                 dateFormat="dd/MM/yyyy"
@@ -1017,8 +964,8 @@ const confirmarEliminar = async () => {
               <DatePicker
                 selected={nuevaDeuda.fecha_vencimiento ? new Date(nuevaDeuda.fecha_vencimiento + 'T00:00:00') : null}  // ← CAMBIAR
                 onChange={(date) => {
-                  setNuevaDeuda({ 
-                    ...nuevaDeuda, 
+                  setNuevaDeuda({
+                    ...nuevaDeuda,
                     fecha_vencimiento: date ? date.toISOString().split('T')[0] : ''  // ← CAMBIAR
                   });
                 }}
@@ -1030,7 +977,7 @@ const confirmarEliminar = async () => {
                 showPopperArrow={false}
               />
             </div>
-          </div>          
+          </div>
           <button type="submit">{nuevaDeuda.id ? "Actualizar" : "Agregar"}</button>
         </form>
       </div>
@@ -1062,7 +1009,7 @@ const confirmarEliminar = async () => {
           </div>
         </div>
       </div>
-      {/* Modal de confirmación de eliminación */}      
+      {/* Modal de confirmación de eliminación */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -1074,7 +1021,7 @@ const confirmarEliminar = async () => {
               <button onClick={confirmarEliminar} className="modal-btn-eliminar">
                 Eliminar
               </button>
-              <button 
+              <button
                 onClick={() => {
                   setShowDeleteModal(false);
                   setDeudaAEliminar(null);
