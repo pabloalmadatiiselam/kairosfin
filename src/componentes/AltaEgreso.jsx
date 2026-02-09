@@ -338,22 +338,24 @@ function AltaEgreso() {
   // useEffect(()=>{ fetchEgresos(1); }, []);
 
   // --- manejar búsqueda ---
- const handleBuscar = (e) => {
+  const handleBuscar = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-
+    
     // ✅ USAR VARIABLES LOCALES y luego actualizar estados
     let desde = fechaDesde;
     let hasta = fechaHasta;
     let mensajeInfo = "";
-
+    
     // ✅ CASO 1: Solo "De" → asume mismo día
     if (desde && !hasta) {
       hasta = desde;
+      setFechaHasta(desde);  // ← AGREGAR ESTA LÍNEA
       mensajeInfo = "📅 Búsqueda de un solo día";
     } 
     // ✅ CASO 2: Solo "A" → asume mismo día
     else if (!desde && hasta) {
       desde = hasta;
+      setFechaDesde(hasta);  // ← AGREGAR ESTA LÍNEA
       mensajeInfo = "📅 Búsqueda de un solo día";
     } 
     // ✅ CASO 3: Ninguna fecha → búsqueda total
@@ -361,13 +363,15 @@ function AltaEgreso() {
       desde = fechaMinima || "";
       const hoy = new Date();
       hasta = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}`;
+      setFechaDesde(desde);  // ← AGREGAR ESTA LÍNEA
+      setFechaHasta(hasta);  // ← AGREGAR ESTA LÍNEA
       mensajeInfo = "📅 Búsqueda total";
     }
     // ✅ CASO 4: Ambas fechas completas
     else {
       mensajeInfo = "Búsqueda realizada";
     }
-
+    
     // ✅ VALIDAR LÍMITE DE 365 DÍAS
     if (desde && hasta) {
       const fechaDesdeObj = new Date(desde);
@@ -388,16 +392,16 @@ function AltaEgreso() {
         return;
       }
     }
-
-    // ✅ ACTUALIZAR ESTADOS ANTES DE LLAMAR A fetchEgresos
-    setFechaDesde(desde);
-    setFechaHasta(hasta);
+    
+    // ✅ ACTUALIZAR ESTADOS (estos ya no son necesarios porque se actualizaron arriba)
+    // setFechaDesde(desde);  // ← QUITAR ESTA LÍNEA (ya se hizo arriba)
+    // setFechaHasta(hasta);  // ← QUITAR ESTA LÍNEA (ya se hizo arriba)
     setPage(1);
     setBusquedaRealizada(true);
     setError("");
     setMensajeIzquierda(mensajeInfo);
     setMensajeDerecha("");
-
+    
     // ✅ LLAMAR A fetchEgresos con las fechas calculadas
     resetForm();
     fetchEgresos(1);
