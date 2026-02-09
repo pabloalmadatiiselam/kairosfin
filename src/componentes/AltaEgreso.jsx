@@ -88,6 +88,8 @@ function AltaEgreso() {
   // Ref para el Select de descripción
   const selectDescripcionRef = useRef(null);
 
+  const MAX_DAYS = 365;  // ← AGREGAR ESTA LÍNEA
+
   // Autofocus al montar el componente
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -336,14 +338,14 @@ function AltaEgreso() {
   // useEffect(()=>{ fetchEgresos(1); }, []);
 
   // --- manejar búsqueda ---
-  const handleBuscar = (e) => {
+ const handleBuscar = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    
+
     // ✅ USAR VARIABLES LOCALES y luego actualizar estados
     let desde = fechaDesde;
     let hasta = fechaHasta;
     let mensajeInfo = "";
-    
+
     // ✅ CASO 1: Solo "De" → asume mismo día
     if (desde && !hasta) {
       hasta = desde;
@@ -357,7 +359,6 @@ function AltaEgreso() {
     // ✅ CASO 3: Ninguna fecha → búsqueda total
     else if (!desde && !hasta) {
       desde = fechaMinima || "";
-      // ✅ FIX: Usar fecha local en vez de UTC
       const hoy = new Date();
       hasta = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}`;
       mensajeInfo = "📅 Búsqueda total";
@@ -366,12 +367,19 @@ function AltaEgreso() {
     else {
       mensajeInfo = "Búsqueda realizada";
     }
-    
-    // ✅ Validar orden de fechas
+
+    // ✅ VALIDAR LÍMITE DE 365 DÍAS
     if (desde && hasta) {
       const fechaDesdeObj = new Date(desde);
       const fechaHastaObj = new Date(hasta);
       const diffDays = Math.ceil((fechaHastaObj - fechaDesdeObj) / (1000 * 60 * 60 * 24));
+
+      if (diffDays > MAX_DAYS) {
+        setMensajeIzquierda(`⚠️ Rango muy amplio: ${diffDays} días (máximo: ${MAX_DAYS} días)`);
+        setError("");
+        setMensajeDerecha("");
+        return;
+      }
 
       if (diffDays < 0) {
         setMensajeIzquierda("⚠️ La fecha 'A' debe ser posterior a 'De'");
@@ -380,7 +388,7 @@ function AltaEgreso() {
         return;
       }
     }
-    
+
     // ✅ ACTUALIZAR ESTADOS ANTES DE LLAMAR A fetchEgresos
     setFechaDesde(desde);
     setFechaHasta(hasta);
@@ -389,10 +397,10 @@ function AltaEgreso() {
     setError("");
     setMensajeIzquierda(mensajeInfo);
     setMensajeDerecha("");
-    
+
     // ✅ LLAMAR A fetchEgresos con las fechas calculadas
     resetForm();
-    fetchEgresos(1);  // ← Ahora usa los estados actualizados
+    fetchEgresos(1);
   };
 
   // --- limpiar filtros ---
