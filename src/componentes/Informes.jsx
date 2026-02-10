@@ -910,27 +910,6 @@ const totales = calcularTotales();
                   outerRadius={50}
                   fill="#8884d8"
                   dataKey="value"
-                  labelLine={false}
-                  label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
-                    const RADIAN = Math.PI / 180;
-                    const radius = outerRadius + 5;
-                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-                    const color = COLORS[index]; // Obtiene el color según el índice
-                    return (
-                      <text 
-                        x={x} 
-                        y={y} 
-                        fill={color}
-                        textAnchor={x > cx ? 'start' : 'end'} 
-                        dominantBaseline="central"
-                        fontSize="11"
-                        fontWeight="bold"
-                      >
-                        ${value.toLocaleString('es-AR')}
-                      </text>
-                    );
-                  }}
                 >
                   {datosTorta.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
