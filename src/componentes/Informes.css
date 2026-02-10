@@ -332,8 +332,8 @@
 /* Contenedores de gráficos individuales */
 .grafico-container {
   flex: 1;
-  min-height: 155px;   /* ← REDUCIDO de 170px */
-  max-height: 170px;   /* ← REDUCIDO de 185px */
+  min-height: 185px;   /* ← AUMENTAR de 155px a 185px */
+  max-height: none;    /* ← CAMBIAR de 170px a none (sin límite) */
   display: flex;
   flex-direction: column;
   background-color: #fafafa;
@@ -845,8 +845,8 @@
   }
 
   .grafico-container {
-    min-height: 180px;
-    max-height: 220px;
+    min-height: 250px;   /* ← AUMENTAR de 180px a 250px */
+    max-height: none;    /* ← CAMBIAR de 220px a none */
   }
 
   .titulo-grafico {
