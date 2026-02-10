@@ -961,8 +961,8 @@ const totales = calcularTotales();
                 <Legend />
                {ultimoReporteConsultado === 'deudas_todas' ? (
                 <>
-                  <Bar dataKey="pagadas" stackId="a" fill="#4CAF50" name="Pagadas" />
-                  <Bar dataKey="pendientes" stackId="a" fill="#F44336" name="Pendientes"/>                     
+                  <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />
+                  <Bar dataKey="pendientes" fill="#F44336" name="Pendientes"/>                     
                 </>
                 ) : (
                   <Bar 
