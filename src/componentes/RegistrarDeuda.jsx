@@ -462,7 +462,7 @@ function RegistrarDeuda() {
   // --- Filtros ---
   const handleBuscar = (e) => {
     e.preventDefault();
-    // AGREGAR después de e.preventDefault(); al inicio de handleBuscar:
+    
     let desde = inputDesde;
     let hasta = inputHasta;
     let mensajeInfo = "";
@@ -478,12 +478,13 @@ function RegistrarDeuda() {
       mensajeInfo = "📅 Búsqueda de un solo día";
     } else if (!desde && !hasta) {
       desde = fechaMinima || "";
-      // ✅ FIX: Usar fecha local en vez de UTC
       const hoy = new Date();
       hasta = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}`;
       setInputDesde(desde);
       setInputHasta(hasta);
       mensajeInfo = "📅 Búsqueda total";
+    } else {
+      mensajeInfo = "Búsqueda realizada";  // ← CASO 4: Ambas fechas
     }
 
     // ✅ VALIDAR LÍMITE DE DÍAS
@@ -506,6 +507,7 @@ function RegistrarDeuda() {
         return;
       }
     }
+
     // CAMBIAR las líneas de setFilter por:
     setFilterDesde(desde);
     setFilterHasta(hasta);
@@ -520,14 +522,11 @@ function RegistrarDeuda() {
     setMensajeDerecha("");
     setBusquedaRealizada(true);
 
-    // ✅ PRIMERO: Guardar el mensaje en una variable temporal
-    const mensajeParaMostrar = mensajeInfo;
-
-    // ✅ SEGUNDO: Ejecutar la búsqueda
-    fetchDeudas(1, desde, hasta, inputDescripcion).then(() => {
-      // ✅ TERCERO: Restaurar el mensaje DESPUÉS de que termine fetchDeudas
-      setMensajeIzquierda(mensajeParaMostrar);
-    });
+    // ✅ EJECUTAR búsqueda
+    fetchDeudas(1, desde, hasta, inputDescripcion);
+    
+    // ✅ ESTABLECER mensaje INMEDIATAMENTE (no esperar)
+    setMensajeIzquierda(mensajeInfo);
   };
 
   const handleLimpiarFiltros = () => {
