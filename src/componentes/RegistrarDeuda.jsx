@@ -506,7 +506,6 @@ function RegistrarDeuda() {
         return;
       }
     }
-
     // CAMBIAR las líneas de setFilter por:
     setFilterDesde(desde);
     setFilterHasta(hasta);
@@ -520,11 +519,15 @@ function RegistrarDeuda() {
     setError("");
     setMensajeDerecha("");
     setBusquedaRealizada(true);
-    // ✅ Mantener el mensaje DESPUÉS de la búsqueda
-    setTimeout(() => {
-      setMensajeIzquierda(mensajeInfo);
-    }, 100);
-    fetchDeudas(1, desde, hasta, inputDescripcion);
+
+    // ✅ PRIMERO: Guardar el mensaje en una variable temporal
+    const mensajeParaMostrar = mensajeInfo;
+
+    // ✅ SEGUNDO: Ejecutar la búsqueda
+    fetchDeudas(1, desde, hasta, inputDescripcion).then(() => {
+      // ✅ TERCERO: Restaurar el mensaje DESPUÉS de que termine fetchDeudas
+      setMensajeIzquierda(mensajeParaMostrar);
+    });
   };
 
   const handleLimpiarFiltros = () => {
