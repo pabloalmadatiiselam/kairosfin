@@ -518,10 +518,13 @@ function RegistrarDeuda() {
     setListCleared(false);
     resetForm();
     setError("");
-    setMensajeIzquierda(mensajeInfo); // ← SOLO ESTA LÍNEA (ya la pusiste arriba)
     setMensajeDerecha("");
     setBusquedaRealizada(true);
-    fetchDeudas(1, desde, hasta, inputDescripcion);  // ← AGREGAR ESTA LÍNEA
+    // ✅ Mantener el mensaje DESPUÉS de la búsqueda
+    setTimeout(() => {
+      setMensajeIzquierda(mensajeInfo);
+    }, 100);
+    fetchDeudas(1, desde, hasta, inputDescripcion);
   };
 
   const handleLimpiarFiltros = () => {
@@ -996,7 +999,7 @@ function RegistrarDeuda() {
           </div>
 
           {/* ✅ CENTRO: Mensaje neutro cuando no hay actividad */}
-          {!mensajeIzquierda && !mensajeDerecha && !error && (
+          {!mensajeIzquierda && !mensajeDerecha && !error && !busquedaRealizada && (
             <div className="estado-centro">
               <span className="mensaje-neutro">📌 No hay operaciones recientes</span>
             </div>
