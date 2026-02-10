@@ -343,6 +343,12 @@
   overflow: hidden;
 }
 
+/* Altura extra para gráfico de torta (primer gráfico) */
+.graficos-wrapper .grafico-container:first-child {
+  min-height: 195px;   /* ← MÁS ALTO que el segundo */
+  max-height: 205px;
+}
+
 .titulo-grafico {
   margin: 0 0 2px 0;    /* ← REDUCIDO de 3px */
   font-size: 0.82rem;   /* ← REDUCIDO de 0.88rem */
@@ -890,6 +896,12 @@
 
   .mensaje-inicial p {
     font-size: 0.95rem;
+  }
+
+  /* Altura extra para torta en móvil */
+  .graficos-wrapper .grafico-container:first-child {
+    min-height: 260px;   /* ← MÁS ALTO en móvil */
+    max-height: 280px;
   }
 }
 
