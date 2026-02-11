@@ -921,7 +921,11 @@ const totales = calcularTotales();
                 <Legend 
                   verticalAlign="bottom" 
                   height={36}
-                  wrapperStyle={{ paddingTop: '30px' }}
+                  wrapperStyle={{ paddingTop: '10px' }}
+                  formatter={(value, entry) => {
+                    const monto = entry.payload.value;
+                    return `${value}: $${monto.toLocaleString('es-AR')}`;
+                  }}
                 />
               </PieChart>
             </ResponsiveContainer>
