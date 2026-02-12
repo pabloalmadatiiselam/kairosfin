@@ -49,7 +49,7 @@ class Deuda(Base):
     monto = Column(DECIMAL(10, 2), nullable=False)
     fecha_registro = Column(Date, nullable=False)
     fecha_vencimiento = Column(Date, nullable=True)
-    pagado = Column(Boolean, default=False)
+    pagado = Column(Integer, default=0)  # ← CAMBIO: Integer en lugar de Boolean
     monto_pagado = Column(DECIMAL(10, 2), default=Decimal('0.00'))
     saldo_pendiente = Column(DECIMAL(10, 2), nullable=True)
     

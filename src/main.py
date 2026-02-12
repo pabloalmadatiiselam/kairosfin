@@ -363,11 +363,20 @@ def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
 
         # 5. Actualizar deuda (si aplica)
         if deuda_id and deuda_saldo_antes is not None:
+            # IMPORTANTE: Usar el objeto deuda que ya tenemos del paso 3
             deuda.monto_pagado = (deuda.monto_pagado or Decimal('0.00')) + monto_pago
             deuda.saldo_pendiente = deuda.saldo_pendiente - monto_pago
+            
+            # CRÍTICO: Redondear para evitar problemas de precisión
+            deuda.saldo_pendiente = deuda.saldo_pendiente.quantize(Decimal('0.01'))
+            
+            # VERIFICAR si la deuda quedó totalmente pagada
             if deuda.saldo_pendiente <= Decimal('0.00'):
                 deuda.saldo_pendiente = Decimal('0.00')
-                deuda.pagado = True  # ← CORREGIDO: era "esta_pagada", ahora "pagado"
+                deuda.pagado = 1  # ← CAMBIO CRÍTICO: usar 1 en lugar de True
+            
+            # DEBUG: Imprimir para verificar
+            print(f"DEBUG - Deuda {deuda.id}: saldo_pendiente={deuda.saldo_pendiente}, pagado={deuda.pagado}")
 
         # 6. Confirmar
         db.commit()
