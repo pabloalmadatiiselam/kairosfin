@@ -65,12 +65,12 @@ class Deuda(Base):
         return {
             "id": self.id,
             "descripcion_id": self.descripcion_id,
-            "monto": str(self.monto),
+            "monto": float(self.monto),  # ✅ CAMBIO
             "fecha_registro": self.fecha_registro.isoformat(),
             "fecha_vencimiento": self.fecha_vencimiento.isoformat() if self.fecha_vencimiento else None,
             "pagado": self.pagado,
-            "monto_pagado": str(self.monto_pagado),
-            "saldo_pendiente": str(self.saldo_pendiente) if self.saldo_pendiente is not None else None,
+            "monto_pagado": float(self.monto_pagado or 0),  # ✅ CAMBIO
+            "saldo_pendiente": float(self.saldo_pendiente or 0),  # ✅ CAMBIO
             # Incluir datos de la descripción relacionada
             "descripcion": self.descripcion.nombre if self.descripcion else None,
         }
