@@ -698,7 +698,7 @@ def obtener_deudas_no_pagadas(
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
-    ).filter(models.Deuda.pagado == False)
+    ).filter(models.Deuda.pagado.is_(False))
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -733,7 +733,7 @@ def obtener_deudas_pagadas(
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
-    ).filter(models.Deuda.pagado == True)
+    ).filter(models.Deuda.pagado.is_(True))
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -823,9 +823,9 @@ def get_deudas_paginadas(
 
     # Filtro por estado
     if estado == "pagados":
-        query = query.filter(models.Deuda.pagado == True)
+        query = query.filter(models.Deuda.pagado.is_(True))
     elif estado == "pendientes": 
-        query = query.filter(models.Deuda.pagado == False)
+        query = query.filter(models.Deuda.pagado.is_(False))
 
     # Ordenar por fecha_registro DESC y por id DESC (más recientes primero)
     query = query.order_by(models.Deuda.fecha_registro.desc(), models.Deuda.id.desc())
