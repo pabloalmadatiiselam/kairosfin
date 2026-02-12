@@ -655,7 +655,7 @@ function RegistrarDeuda() {
                 ]}
                 placeholder="Todas"
                 isSearchable={true}
-                isClearable={true} // ✅ CAMBIO: Permitir limpiar la selección
+                isClearable={false} // ✅ CAMBIO: Permitir limpiar la selección
                 noOptionsMessage={() => "No hay descripciones"}
                 styles={{
                   control: (base) => ({
