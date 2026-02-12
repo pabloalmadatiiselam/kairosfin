@@ -985,15 +985,16 @@ def crear_descripcion(descripcion: DescripcionCreate, db: Session = Depends(get_
     Crea una nueva descripción en la base de datos.
     """
     try:
-        # ✅ NUEVA VALIDACIÓN: Verificar si ya existe una descripción con ese nombre
+        # ✅ VALIDACIÓN MODIFICADA: Verificar nombre duplicado SOLO si coincide el tipo
         descripcion_existente = db.query(models.Descripcion).filter(
-            models.Descripcion.nombre.ilike(descripcion.nombre.strip())
+            models.Descripcion.nombre.ilike(descripcion.nombre.strip()),
+            models.Descripcion.tipo == descripcion.tipo  # ← NUEVA LÍNEA: filtrar también por tipo
         ).first()
-        
+
         if descripcion_existente:
             raise HTTPException(
                 status_code=400, 
-                detail=f"Ya existe una descripción con el nombre '{descripcion.nombre}'"
+                detail=f"Ya existe una descripción '{descripcion.nombre}' de tipo '{descripcion.tipo}'"
             )
         
         # Crear instancia del modelo

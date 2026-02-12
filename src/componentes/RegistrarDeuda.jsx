@@ -640,7 +640,8 @@ function RegistrarDeuda() {
                   : null
                 }
                 onChange={(opcion) => {
-                  setInputDescripcion(opcion ? opcion.value : '');
+                  // ✅ CAMBIO: Si se limpia (opcion === null), volver a "Todas"
+                  setInputNombreId(opcion ? opcion.value : "");
                 }}
                 options={descripciones.map(d => ({
                   value: d.id,
@@ -648,13 +649,13 @@ function RegistrarDeuda() {
                 }))}
                 placeholder="Todas"
                 isSearchable={true}
-                isClearable={false}
+                isClearable={true} // ✅ CAMBIO: Permitir limpiar la selección
                 noOptionsMessage={() => "No hay descripciones"}
                 styles={{
                   control: (base) => ({
                     ...base,
                     minHeight: '30px',
-                    minWidth: '105px',  /* ← REDUCIR de 125px a 115px */
+                    minWidth: '180px',  /* ← REDUCIR de 125px a 115px */
                     fontSize: '0.65rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',

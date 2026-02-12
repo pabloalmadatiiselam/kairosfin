@@ -266,6 +266,7 @@ function Descripciones() {
               errorMsg = errorData.detail;
               
               if (errorMsg.includes("Ya existe")) {
+                // ✅ CAMBIO: El mensaje ya viene con el tipo desde el backend
                 setMensajeDerecha(errorMsg + " ⚠️");
                 setError("");
                 setMensajeIzquierda("");
@@ -279,7 +280,8 @@ function Descripciones() {
           throw new Error(errorMsg);
         }
 
-        setMensajeDerecha(`Descripción agregada: ${nuevaDescripcion.nombre} ✅`);
+        // ✅ CAMBIO: Mostrar también el TIPO en el mensaje de éxito
+        setMensajeDerecha(`Descripción agregada: ${nuevaDescripcion.nombre} (${nuevaDescripcion.tipo}) ✅`);
         setMensajeIzquierda("");
         setError("");
 
