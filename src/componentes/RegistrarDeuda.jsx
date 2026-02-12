@@ -633,20 +633,26 @@ function RegistrarDeuda() {
             <label className="filtro-label" title="Filtrar por descripción">
               Desc:
               <Select
-                value={inputDescripcion
-                  ? descripciones.find(d => d.id === parseInt(inputDescripcion))
-                    ? { value: inputDescripcion, label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre }
-                    : null
-                  : null
+                value={
+                  inputDescripcion === "" || inputDescripcion === null
+                    ? { value: "", label: "Todas" }  // ← CAMBIO: Mostrar "Todas" por defecto
+                    : descripciones.find(d => d.id === parseInt(inputDescripcion))
+                      ? { 
+                          value: String(descripciones.find(d => d.id === parseInt(inputDescripcion)).id), 
+                          label: descripciones.find(d => d.id === parseInt(inputDescripcion)).nombre 
+                        }
+                      : { value: "", label: "Todas" }
                 }
                 onChange={(opcion) => {
-                  // ✅ CAMBIO: Si se limpia (opcion === null), volver a "Todas"
-                  setInputNombreId(opcion ? opcion.value : "");
+                  setInputDescripcion(opcion && opcion.value !== "" ? String(opcion.value) : '');  // ← CAMBIO: Convertir a string
                 }}
-                options={descripciones.map(d => ({
-                  value: d.id,
-                  label: d.nombre
-                }))}
+                options={[
+                  { value: "", label: "Todas" },  // ← CAMBIO: Agregar opción "Todas"
+                  ...descripciones.map(d => ({
+                    value: String(d.id),  // ← CAMBIO: Convertir ID a string
+                    label: d.nombre
+                  }))
+                ]}
                 placeholder="Todas"
                 isSearchable={true}
                 isClearable={true} // ✅ CAMBIO: Permitir limpiar la selección
@@ -655,7 +661,7 @@ function RegistrarDeuda() {
                   control: (base) => ({
                     ...base,
                     minHeight: '30px',
-                    minWidth: '180px',  /* ← REDUCIR de 125px a 115px */
+                    minWidth: '140px',  /* ← REDUCIR de 125px a 115px */
                     fontSize: '0.65rem',
                     borderColor: '#d0d7dd',
                     borderRadius: '4px',
