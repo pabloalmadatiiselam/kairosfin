@@ -131,7 +131,7 @@ h1.titulo-principal {
 .filtros-container {
   margin-bottom: 12px;
 }
-
+/*
 .filtros-fila-1 {
   display: flex;
   align-items: center;
@@ -139,6 +139,14 @@ h1.titulo-principal {
   margin-bottom: 10px;
   flex-wrap: nowrap;
   padding-left: 8px;
+}
+*/
+.filtros-fila-1 {
+  display: grid;
+  grid-template-columns: auto auto auto auto 1fr;  /* ← CAMBIO: Agregar 1fr al final */
+  gap: 12px;
+  align-items: center;
+  width: 100%;  /* ← AGREGAR */
 }
 
 .filtros-fila-2 {
@@ -224,12 +232,19 @@ h1.titulo-principal {
 }
 
 /* Botones de filtro */
+/*
 .botones-filtro {
   display: flex;
   gap: 4px;
   margin-left: auto;
   flex-shrink: 0;
   white-space: nowrap;
+}
+*/
+.botones-filtro {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;  /* ← AGREGAR: Empujar botones a la derecha */
 }
 
 .botones-filtro button {
