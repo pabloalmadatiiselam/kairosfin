@@ -729,7 +729,11 @@ def obtener_deudas_pagadas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
-    query = db.query(models.Deuda).filter(models.Deuda.pagado == True)
+    # ✅ CORRECCIÓN: Agregar JOIN con Descripcion
+    query = db.query(models.Deuda).join(
+        models.Descripcion,
+        models.Deuda.descripcion_id == models.Descripcion.id
+    ).filter(models.Deuda.pagado == True)
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -751,7 +755,11 @@ def obtener_deudas_todas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
-    query = db.query(models.Deuda)
+    # ✅ CORRECCIÓN: Agregar JOIN con Descripcion
+    query = db.query(models.Deuda).join(
+        models.Descripcion,
+        models.Deuda.descripcion_id == models.Descripcion.id
+    )
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
