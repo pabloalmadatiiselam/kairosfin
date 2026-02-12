@@ -362,25 +362,55 @@ def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
         db.add(nuevo_egreso)
 
         # 5. Actualizar deuda (si aplica)
-        if deuda_id and deuda_saldo_antes is not None:
+        #if deuda_id and deuda_saldo_antes is not None:
             # IMPORTANTE: Usar el objeto deuda que ya tenemos del paso 3
-            deuda.monto_pagado = (deuda.monto_pagado or Decimal('0.00')) + monto_pago
-            deuda.saldo_pendiente = deuda.saldo_pendiente - monto_pago
+            #deuda.monto_pagado = (deuda.monto_pagado or Decimal('0.00')) + monto_pago
+            #deuda.saldo_pendiente = deuda.saldo_pendiente - monto_pago
             
             # CRÍTICO: Redondear para evitar problemas de precisión
-            deuda.saldo_pendiente = deuda.saldo_pendiente.quantize(Decimal('0.01'))
+            #deuda.saldo_pendiente = deuda.saldo_pendiente.quantize(Decimal('0.01'))
             
             # VERIFICAR si la deuda quedó totalmente pagada
-            if deuda.saldo_pendiente <= Decimal('0.00'):
-                deuda.saldo_pendiente = Decimal('0.00')
-                deuda.pagado = 1  # ← CAMBIO CRÍTICO: usar 1 en lugar de True
+            #if deuda.saldo_pendiente <= Decimal('0.00'):
+                #deuda.saldo_pendiente = Decimal('0.00')
+                #deuda.pagado = 1  # ← CAMBIO CRÍTICO: usar 1 en lugar de True
             
             # DEBUG: Imprimir para verificar
-            print(f"DEBUG - Deuda {deuda.id}: saldo_pendiente={deuda.saldo_pendiente}, pagado={deuda.pagado}")
+            #print(f"DEBUG - Deuda {deuda.id}: saldo_pendiente={deuda.saldo_pendiente}, pagado={deuda.pagado}")
+
+        # 5. Actualizar deuda (si aplica)
+        if deuda_id:
+            # RE-CONSULTAR la deuda para asegurar que tenemos el objeto actualizado
+            deuda = db.query(models.Deuda).filter(models.Deuda.id == deuda_id).first()
+            if deuda:
+                # Actualizar monto_pagado
+                monto_pagado_anterior = deuda.monto_pagado or Decimal('0.00')
+                deuda.monto_pagado = (monto_pagado_anterior + monto_pago).quantize(Decimal('0.01'))
+                
+                # Recalcular saldo_pendiente
+                monto_total = Decimal(str(deuda.monto))
+                deuda.saldo_pendiente = (monto_total - deuda.monto_pagado).quantize(Decimal('0.01'))
+                
+                # Marcar como pagado si saldo <= 0
+                if deuda.saldo_pendiente <= Decimal('0.00'):
+                    deuda.saldo_pendiente = Decimal('0.00')
+                    deuda.pagado = True
+                else:
+                    deuda.pagado = False
+                
+                # DEBUG: Imprimir valores
+                print(f"🔍 DEBUG EGRESO:")
+                print(f"   Deuda ID: {deuda.id}")
+                print(f"   Monto total deuda: {monto_total}")
+                print(f"   Monto pagado anterior: {monto_pagado_anterior}")
+                print(f"   Pago actual: {monto_pago}")
+                print(f"   Nuevo monto_pagado: {deuda.monto_pagado}")
+                print(f"   Nuevo saldo_pendiente: {deuda.saldo_pendiente}")
+                print(f"   Estado pagado: {deuda.pagado}")
 
         # 6. Confirmar
         db.commit()
-        db.refresh(nuevo_egreso)
+        db.refresh(nuevo_egreso)    
 
         # 7. Responder
         return {
