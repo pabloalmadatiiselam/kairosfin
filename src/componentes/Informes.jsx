@@ -594,13 +594,12 @@ function Informes() {
         agrupado[mesAnio] = { mes: mesAnio, total: 0, pagadas: 0, pendientes: 0 };
       }
       const monto = Number(d.monto);
-      agrupado[mesAnio].total += monto;
+      const montoPagado = Number(d.monto_pagado || 0);  // ← CAMBIO
+      const saldoPendiente = Number(d.saldo_pendiente || 0);  // ← CAMBIO
       
-      if (d.pagado) {
-        agrupado[mesAnio].pagadas += monto;
-      } else {
-        agrupado[mesAnio].pendientes += Number(d.saldo_pendiente || monto);
-      }
+      agrupado[mesAnio].total += monto;
+      agrupado[mesAnio].pagadas += montoPagado;  // ← CAMBIO
+      agrupado[mesAnio].pendientes += saldoPendiente;  // ← CAMBIO
     });
     return Object.values(agrupado).sort((a, b) => a.mes.localeCompare(b.mes));
   };
@@ -610,17 +609,17 @@ function Informes() {
     let pagadas = 0;
     let pendientes = 0;
     datos.forEach(d => {
-      if (d.pagado) {
-        pagadas += Number(d.monto);
-      } else {
-        pendientes += Number(d.saldo_pendiente || d.monto);
-      }
+      const montoPagado = Number(d.monto_pagado || 0);  // ← CAMBIO
+      const saldoPendiente = Number(d.saldo_pendiente || 0);  // ← CAMBIO
+      
+      pagadas += montoPagado;  // ← CAMBIO: sumar SIEMPRE lo pagado
+      pendientes += saldoPendiente;  // ← CAMBIO: sumar SIEMPRE lo pendiente
     });
     return [
       { name: 'Pagadas', value: pagadas },
       { name: 'Pendientes', value: pendientes }
     ];
-  };  
+  };
 
   const COLORS = ['#4CAF50', '#F44336'];
 
@@ -639,13 +638,12 @@ const calcularTotales = () => {
 
     datos.forEach(d => {
       const monto = Number(d.monto);
-      totalGeneral += monto;
+      const montoPagado = Number(d.monto_pagado || 0);  // ← CAMBIO
+      const saldoPendiente = Number(d.saldo_pendiente || 0);  // ← CAMBIO
       
-      if (d.pagado) {
-        totalPagado += monto;
-      } else {
-        totalPendiente += Number(d.saldo_pendiente || monto);
-      }
+      totalGeneral += monto;
+      totalPagado += montoPagado;  // ← CAMBIO: sumar SIEMPRE lo pagado
+      totalPendiente += saldoPendiente;  // ← CAMBIO: sumar SIEMPRE lo pendiente
     });
 
     return { totalGeneral, totalPagado, totalPendiente };
@@ -668,11 +666,11 @@ const calcularTotales = () => {
     return { totalIngresos, totalEgresos, saldo };
   }
 
-  return null;
-};
+    return null;
+  };
 
-// Calcular totales
-const totales = calcularTotales(); 
+  // Calcular totales
+  const totales = calcularTotales(); 
 
   // Cálculos de paginación
   const totalItems = datos.length;
