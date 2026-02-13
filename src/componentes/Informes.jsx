@@ -948,16 +948,19 @@ const calcularTotales = () => {
                   formatter={(value) => `$${Number(value).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                 />
                 <Legend />
-              {ultimoReporteConsultado === 'deudas_todas' ? (
-                <>
+                {ultimoReporteConsultado === 'deudas_todas' ? (
+                  <>
+                    <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />
+                    <Bar dataKey="pendientes" fill="#F44336" name="Pendientes" />                     
+                  </>
+                ) : ultimoReporteConsultado === 'deudas_pagadas' ? (
                   <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />
-                  <Bar dataKey="pendientes" fill="#F44336" name="Pendientes"/>                     
-                </>
-              ) : ultimoReporteConsultado === 'deudas_pagadas' ? (
-                <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />  
-              ) : (
-                <Bar dataKey="pendientes" fill="#F44336" name="Pendientes" />  
-              )}
+                ) : (
+                  <>
+                    <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />
+                    <Bar dataKey="pendientes" fill="#F44336" name="Pendientes" />
+                  </>
+                )}
               </BarChart>
             </ResponsiveContainer>
           </div>

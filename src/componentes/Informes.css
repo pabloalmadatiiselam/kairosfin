@@ -672,6 +672,14 @@
   padding-right: 32px !important;  /* Espacio para la X */
 }
 
+/* ← AGREGAR ESTAS REGLAS */
+.tabla-deudas th:nth-child(6),
+.tabla-deudas td:nth-child(6) {
+  background-color: inherit !important;
+  color: inherit !important;
+  border: 1px solid #ddd !important;
+}
+
 
 /* ============================================
    RESPONSIVE DESIGN - INFORMES
