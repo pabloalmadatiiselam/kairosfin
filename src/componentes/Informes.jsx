@@ -288,12 +288,14 @@ function Informes() {
     let filas = [];
 
     if (esReporteDeudas) {
-      columnas = ['Estado', 'Fecha', 'Descripción', 'Monto', 'Vencimiento'];
+      columnas = ['Estado', 'Fecha', 'Descripción', 'Monto', 'Pagado', 'Pendiente', 'Venc.'];
       filas = datos.map(d => [
         d.pagado ? 'Pagado' : 'Pendiente',
         d.fecha_registro || '-',
         d.descripcion || '-',
         `$${Number(d.monto).toLocaleString('es-AR')}`,
+        `$${Number(d.monto_pagado || 0).toLocaleString('es-AR')}`,
+        `$${Number(d.saldo_pendiente || 0).toLocaleString('es-AR')}`,
         d.fecha_vencimiento || '-'
       ]);
     } else if (esReporteMovimientos) {
@@ -315,11 +317,13 @@ function Informes() {
       headStyles: { fillColor: [0, 123, 255], fontSize: 9, fontStyle: 'bold' },
       bodyStyles: { fontSize: 8 },
       columnStyles: {
-        0: { cellWidth: 25 },
-        1: { cellWidth: 28 },
-        2: { cellWidth: 60 },
-        3: { cellWidth: 25, halign: 'right' },
-        4: { cellWidth: 28 }
+        0: { cellWidth: 20 },
+        1: { cellWidth: 23 },
+        2: { cellWidth: 40 },
+        3: { cellWidth: 22, halign: 'right' },
+        4: { cellWidth: 22, halign: 'right' },
+        5: { cellWidth: 22, halign: 'right' },
+        6: { cellWidth: 21 }
       },
       margin: { left: 20, right: 20 }
     });
@@ -733,6 +737,8 @@ const totales = calcularTotales();
               <th>Fecha</th>
               <th>Descripción</th>
               <th>Monto</th>
+              <th>Pagado</th>
+              <th>Pendiente</th>
               <th>Venc.</th>
             </tr>
           </thead>
@@ -743,6 +749,8 @@ const totales = calcularTotales();
                 <td>{formatearFechaTabla(fila.fecha_registro)}</td>
                 <td>{fila.descripcion || '-'}</td>
                 <td>${Number(fila.monto).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td>${Number(fila.monto_pagado || 0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td>${Number(fila.saldo_pendiente || 0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                 <td>{formatearFechaTabla(fila.fecha_vencimiento)}</td>
               </tr>
             ))}
