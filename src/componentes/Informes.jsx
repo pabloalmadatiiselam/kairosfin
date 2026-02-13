@@ -948,18 +948,16 @@ const calcularTotales = () => {
                   formatter={(value) => `$${Number(value).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                 />
                 <Legend />
-               {ultimoReporteConsultado === 'deudas_todas' ? (
+              {ultimoReporteConsultado === 'deudas_todas' ? (
                 <>
                   <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />
                   <Bar dataKey="pendientes" fill="#F44336" name="Pendientes"/>                     
                 </>
-                ) : (
-                  <Bar 
-                    dataKey="total" 
-                    fill={ultimoReporteConsultado === 'deudas_pagadas' ? '#4CAF50' : '#F44336'} 
-                    name="Monto Deudas" 
-                  />
-                )}
+              ) : ultimoReporteConsultado === 'deudas_pagadas' ? (
+                <Bar dataKey="pagadas" fill="#4CAF50" name="Pagadas" />  
+              ) : (
+                <Bar dataKey="pendientes" fill="#F44336" name="Pendientes" />  
+              )}
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -1179,7 +1177,11 @@ const calcularTotales = () => {
         </>
       ) : (
         <div className="mensaje-inicial">
-          <p>Seleccioná los parámetros y hacé clic en "Consultar" para generar el informe.</p>
+          {ultimoReporteConsultado === 'deudas_pagadas' ? (
+            <p>No hay deudas totalmente pagadas en el período seleccionado con el filtro aplicado.</p>
+          ) : (
+            <p>Seleccioná los parámetros y hacé clic en "Consultar" para generar el informe.</p>
+          )}
         </div>
       )}
       
@@ -1227,13 +1229,19 @@ const calcularTotales = () => {
                       </>
                     ) : (
                       <>
-                        <strong>Total Pendiente:</strong>
+                        {/* ← CAMBIO: Mostrar AMBOS montos en deudas pendientes */}
+                        <strong>Total:</strong>
+                        <span className="barra-monto">${totales.totalGeneral.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span className="barra-separador-mini">|</span>
+                        <strong>Pagado:</strong>
+                        <span className="barra-monto barra-monto-positivo">${totales.totalPagado.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span className="barra-separador-mini">|</span>
+                        <strong>Pendiente:</strong>
                         <span className="barra-monto barra-monto-negativo">${totales.totalPendiente.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                       </>
                     )}
                   </>
                 )}
-                
                 {esReporteMovimientos && (
                   <>
                     {ultimoReporteConsultado === 'ing_egr' ? (
