@@ -734,6 +734,7 @@ def obtener_deudas_no_pagadas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
+    db.expire_all()  # ← AGREGAR ESTA LÍNEA
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
@@ -768,6 +769,7 @@ def obtener_deudas_pagadas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
+    db.expire_all()  # ← AGREGAR ESTA LÍNEA
     # ✅ CORRECCIÓN: Agregar JOIN con Descripcion
     query = db.query(models.Deuda).join(
         models.Descripcion,
@@ -794,6 +796,7 @@ def obtener_deudas_todas(
     descripcion: str = Query(None),  # ← AGREGAR
     db: Session = Depends(get_db)
 ):
+    db.expire_all()  # ← AGREGAR ESTA LÍNEA
     # ✅ CORRECCIÓN: Agregar JOIN con Descripcion
     query = db.query(models.Deuda).join(
         models.Descripcion,
