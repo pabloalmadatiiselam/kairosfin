@@ -673,8 +673,10 @@
 }
 
 /* ✅ SOLUCIÓN DEFINITIVA: Estilos específicos para tabla de deudas (7 columnas) */
+/* Forzar tabla más ancha con scroll horizontal */
 .tabla-deudas {
-  width: 100%;
+  width: 920px !important;  /* Suma de todas las columnas */
+  min-width: 920px !important;
   border-collapse: collapse !important;
 }
 
@@ -704,20 +706,23 @@
   background-color: #f1f1f1 !important;
 }
 
-/* Anchos y alineaciones específicas para las 7 columnas */
+/* Anchos y alineaciones específicas para las 7 columnas - MÁS ANCHAS */
 .tabla-deudas th:nth-child(1), .tabla-deudas td:nth-child(1) { 
-  width: 14% !important; 
+  width: 110px !important;  /* Estado - más ancho para "Pendiente" completo */
+  min-width: 110px !important;
   text-align: center !important; 
 }
 
 .tabla-deudas th:nth-child(2), .tabla-deudas td:nth-child(2) { 
-  width: 15% !important; 
+  width: 110px !important;  /* Fecha - más ancho */
+  min-width: 110px !important;
   text-align: center !important; 
   font-size: 0.75rem !important;
 }
 
 .tabla-deudas th:nth-child(3), .tabla-deudas td:nth-child(3) { 
-  width: 28% !important; 
+  width: 200px !important;  /* Descripción - más ancho */
+  min-width: 200px !important;
   text-align: left !important;
   white-space: nowrap;
   overflow: hidden;
@@ -725,25 +730,29 @@
 }
 
 .tabla-deudas th:nth-child(4), .tabla-deudas td:nth-child(4) { 
-  width: 14% !important; 
+  width: 130px !important;  /* Monto - más ancho para "$500.000,00" */
+  min-width: 130px !important;
   text-align: right !important;
   white-space: nowrap;
 }
 
 .tabla-deudas th:nth-child(5), .tabla-deudas td:nth-child(5) { 
-  width: 14% !important; 
+  width: 130px !important;  /* Pagado - más ancho */
+  min-width: 130px !important;
   text-align: right !important;
   white-space: nowrap;
 }
 
 .tabla-deudas th:nth-child(6), .tabla-deudas td:nth-child(6) { 
-  width: 14% !important; 
+  width: 130px !important;  /* Pendiente - más ancho */
+  min-width: 130px !important;
   text-align: right !important;
   white-space: nowrap;
 }
 
 .tabla-deudas th:nth-child(7), .tabla-deudas td:nth-child(7) { 
-  width: 15% !important; 
+  width: 110px !important;  /* Venc. - más ancho */
+  min-width: 110px !important;
   text-align: center !important;
   font-size: 0.75rem !important;
 }
