@@ -155,7 +155,8 @@
 
 /* Columna izquierda: Tabla (45% del ancho) */
 .tabla-wrapper {
-  flex: 0 0 calc(45% - 9px); /* Restamos la mitad del gap (18px / 2) */
+  flex: 0 0 calc(45% - 9px);
+  max-width: calc(45% - 9px); /* ← AGREGAR: limita el ancho máximo */
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.08) 0%, rgba(15, 23, 42, 0.12) 100%);
@@ -166,6 +167,7 @@
   box-sizing: border-box;
   min-height: 385px;
   position: relative;
+  overflow: hidden; /* ← AGREGAR: evita que la tabla se desborde */
 }
 
 /* Columna derecha: Gráficos (55% del ancho) */
@@ -196,13 +198,15 @@
   padding-bottom: 5px; /* Reducido de 6px a 5px */
 }
 
-/* Contenedor de tabla sin scroll */
+/* Contenedor de tabla con scroll horizontal */
 .tabla-contenido {
   flex: 1;
-  overflow-x: auto;
+  overflow-x: auto !important; /* ← Forzar scroll */
+  overflow-y: hidden;
   border-radius: 8px;
   border: 1px solid #94a3b8;
-  box-sizing: border-box !important; /* ← AGREGAR ESTA LÍNEA */
+  box-sizing: border-box !important;
+  max-width: 100%; /* ← AGREGAR: no exceder contenedor */
 }
 
 /* Estilos de la tabla */
