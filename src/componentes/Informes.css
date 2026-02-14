@@ -674,7 +674,7 @@
 
 /* ✅ SOLUCIÓN DEFINITIVA: Estilos específicos para tabla de deudas (7 columnas) */
 /* Forzar tabla más ancha con scroll horizontal */
-.tabla-deudas {
+ .tabla-deudas{
   width: 1000px !important;
   min-width: 1000px !important;
   table-layout: auto !important;  /* ← CRÍTICO: permite anchos reales */
