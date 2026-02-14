@@ -673,11 +673,11 @@
 }
 
 /* ✅ SOLUCIÓN DEFINITIVA: Estilos específicos para tabla de deudas (7 columnas) */
-/* Forzar tabla más ancha con scroll horizontal */
- .tabla-deudas{
-  width: 1000px !important;
-  min-width: 1000px !important;
-  table-layout: auto !important;  /* ← CRÍTICO: permite anchos reales */
+/* Tabla con scroll interno manteniendo layout de 2 columnas */
+.tabla-deudas {
+  width: 100% !important;  /* ← VOLVER a 100% */
+  min-width: 1000px !important;  /* ← Esto activa el scroll */
+  table-layout: auto !important;
   border-collapse: collapse !important;
 }
 
@@ -905,9 +905,17 @@
     -webkit-overflow-scrolling: touch;
     padding: 8px;
   }
-
+  /*
   .tabla-contenido {
     overflow-x: visible;
+  }
+  */
+  .tabla-contenido {
+  flex: 1;
+  overflow-x: auto;  /* ← CRÍTICO: esto activa el scroll horizontal */
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
+  box-sizing: border-box !important;
   }
 
   .tabla-contenido table {
