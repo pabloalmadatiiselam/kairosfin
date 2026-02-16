@@ -112,7 +112,7 @@ def crear_movimiento(movimiento: MovimientoCreate, db: Session = Depends(get_db)
 
             # Marcar pagado si saldo pendiente <= 0
             if deuda.saldo_pendiente <= Decimal('0.00'):
-                deuda.pagado = True
+                deuda.pagado = 1  # ← CORRECTO: Usar 1 en lugar de True
                 deuda.saldo_pendiente = Decimal('0.00')
 
     db.commit()
@@ -394,9 +394,9 @@ def crear_egreso(movimiento: MovimientoCreate, db: Session = Depends(get_db)):
                 # Marcar como pagado si saldo <= 0
                 if deuda.saldo_pendiente <= Decimal('0.00'):
                     deuda.saldo_pendiente = Decimal('0.00')
-                    deuda.pagado = True
+                    deuda.pagado = 1  # ← CORRECTO
                 else:
-                    deuda.pagado = False
+                    deuda.pagado = 0  # ← CORRECTO
                 
                 # DEBUG: Imprimir valores
                 print(f"🔍 DEBUG EGRESO:")
@@ -609,10 +609,10 @@ def actualizar_egreso(egreso_id: int, movimiento: MovimientoUpdate, db: Session 
             # PASO 5.4: Actualizar estado de pagado
             # EXPLICACIÓN: Si saldo_pendiente <= 0, la deuda está totalmente pagada
             if deuda.saldo_pendiente <= Decimal('0.00'):
-                deuda.pagado = True
-                deuda.saldo_pendiente = Decimal('0.00')  # Asegurar que quede en 0
+                deuda.pagado = 1  # ← CORRECTO
+                deuda.saldo_pendiente = Decimal('0.00')
             else:
-                deuda.pagado = False  # Vuelve a pendiente si quedó saldo
+                deuda.pagado = 0  # ← CORRECTO
     
     # PASO 6: Confirmar cambios en base de datos
     db.commit()
@@ -671,7 +671,7 @@ def delete_egreso(id: int, db: Session = Depends(get_db)):
             
             # Actualizar estado - Si queda saldo, vuelve a pendiente
             if deuda.saldo_pendiente > Decimal('0.00'):
-                deuda.pagado = False
+                deuda.pagado = 0  # ← CORRECTO
     
     # PASO 3: Eliminar el egreso
     db.delete(egreso)
