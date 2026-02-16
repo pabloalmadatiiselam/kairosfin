@@ -1599,12 +1599,12 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
 
     # Deudas anuales - torta (pagadas vs pendientes) - SIN CAMBIOS
     deudas_pendientes = db.query(func.sum(models.Deuda.saldo_pendiente)).filter(
-        models.Deuda.pagado == False,
+        models.Deuda.pagado == 0,
         extract('year', models.Deuda.fecha_registro) == anio
     ).scalar() or 0
 
     deudas_pagadas = db.query(func.sum(models.Deuda.monto)).filter(
-        models.Deuda.pagado == True,
+        models.Deuda.pagado == 1,
         extract('year', models.Deuda.fecha_registro) == anio
     ).scalar() or 0
 
@@ -1614,7 +1614,7 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
         func.sum(models.Deuda.saldo_pendiente)
     ).filter(
         extract('year', models.Deuda.fecha_registro) == anio,
-        models.Deuda.pagado == False
+        models.Deuda.pagado == 0
     ).group_by("mes").order_by("mes").all()
 
     deudas_mensuales_pagadas = db.query(
@@ -1622,7 +1622,7 @@ def resumen_general(anio: int, db: Session = Depends(get_db)):
         func.sum(models.Deuda.monto)
     ).filter(
         extract('year', models.Deuda.fecha_registro) == anio,
-        models.Deuda.pagado == True
+        models.Deuda.pagado == 1
     ).group_by("mes").order_by("mes").all()
 
     return {
