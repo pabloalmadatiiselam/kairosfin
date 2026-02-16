@@ -738,7 +738,7 @@ def obtener_deudas_no_pagadas(
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
-    ).filter(models.Deuda.pagado.is_(False))
+    ).filter(models.Deuda.pagado== 0)
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -774,7 +774,7 @@ def obtener_deudas_pagadas(
     query = db.query(models.Deuda).join(
         models.Descripcion,
         models.Deuda.descripcion_id == models.Descripcion.id
-    ).filter(models.Deuda.pagado.is_(True))
+    ).filter(models.Deuda.pagado== 1)
 
     if desde:
         query = query.filter(models.Deuda.fecha_registro >= desde)
@@ -865,9 +865,9 @@ def get_deudas_paginadas(
 
     # Filtro por estado
     if estado == "pagados":
-        query = query.filter(models.Deuda.pagado.is_(True))
+        query = query.filter(models.Deuda.pagado== 1)
     elif estado == "pendientes": 
-        query = query.filter(models.Deuda.pagado.is_(False))
+        query = query.filter(models.Deuda.pagado== 0)
 
     # Ordenar por fecha_registro DESC y por id DESC (más recientes primero)
     query = query.order_by(models.Deuda.fecha_registro.desc(), models.Deuda.id.desc())
@@ -1016,7 +1016,7 @@ def get_descripciones_por_tipo(
     
     descripciones = db.query(models.Descripcion).filter(
         models.Descripcion.tipo == tipo,
-        models.Descripcion.activa == True
+        models.Descripcion.activa == 1
     ).order_by(models.Descripcion.nombre).all()
     
     # ✅ NUEVA LÓGICA: Devolver solo nombres si se solicita
@@ -1326,7 +1326,7 @@ def obtener_descripciones_activas(
         Lista de descripciones activas
     """
     try:
-        query = db.query(models.Descripcion).filter(models.Descripcion.activa == True)
+        query = db.query(models.Descripcion).filter(models.Descripcion.activa == 1)
         
         if tipo:
             query = query.filter(models.Descripcion.tipo == tipo)
