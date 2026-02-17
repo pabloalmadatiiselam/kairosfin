@@ -1,8 +1,10 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+// Lazy load para que cargue más rápido
+const ResumenGeneral = lazy(() => import("./componentes/ResumenGeneral"));
 import BarraNavegacion from "./componentes/BarraNavegacion";
 import PiePagina from "./componentes/PiePagina";
-import ResumenGeneral from "./componentes/ResumenGeneral";
 import AltaIngreso from "./componentes/AltaIngreso";
 import AltaEgreso from "./componentes/AltaEgreso";
 import RegistrarDeuda from "./componentes/RegistrarDeuda";
@@ -45,14 +47,16 @@ function App() {
                   
                   {/* Contenido principal */}
                   <div style={{ flex: 1, minHeight: 'calc(100vh - 150px)' }}>
-                    <Routes>
-                      <Route path="/" element={<ResumenGeneral />} />
-                      <Route path="/alta-ingreso" element={<AltaIngreso />} />
-                      <Route path="/alta-egreso" element={<AltaEgreso />} />
-                      <Route path="/registrar-deuda" element={<RegistrarDeuda />} />
-                      <Route path="/descripciones" element={<Descripciones />} />
-                      <Route path="/informes" element={<Informes />} />
-                    </Routes>
+                    <Suspense fallback={<div style={{padding: '40px', textAlign: 'center'}}>Cargando...</div>}>
+                      <Routes>
+                        <Route path="/" element={<ResumenGeneral />} />
+                        <Route path="/alta-ingreso" element={<AltaIngreso />} />
+                        <Route path="/alta-egreso" element={<AltaEgreso />} />
+                        <Route path="/registrar-deuda" element={<RegistrarDeuda />} />
+                        <Route path="/descripciones" element={<Descripciones />} />
+                        <Route path="/informes" element={<Informes />} />
+                      </Routes>
+                    </Suspense>  
                   </div>
                   
                   {/* Pie de página */}
