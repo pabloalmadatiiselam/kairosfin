@@ -18,7 +18,7 @@ const Login = () => {
     const success = login(password);
 
     if (success) {
-      navigate('/inicio');
+      navigate('/');
     } else {
       setError('Contraseña incorrecta');
       setPassword('');
